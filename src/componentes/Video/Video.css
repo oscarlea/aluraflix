@@ -1,0 +1,34 @@
+.videos {
+    /* background-color: black; */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.video {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 2px solid;
+/*     box-sizing: border-box; */
+
+    max-width: 324px;
+    max-height: 182px;
+}
+
+.video img{
+    width: 100%;
+    position: relative;
+}
+
+.video iframe{
+    /*width: 100%;
+    height: 100%;
+     position: absolute; */
+}
+
+.eliminar{
+    position: absolute;
+    right: -15px;
+    top: -15px;
+}

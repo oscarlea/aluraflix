@@ -1,0 +1,29 @@
+.header {
+    display: flex;
+    justify-content: center;
+    
+    background-color: #000;
+    width: 100%;
+    max-width: 1440px;
+    border-bottom: 2px solid #2A7AE4;
+}
+
+.header img {
+    position: relative;
+    width: 105.21px;
+    height: 25px;
+    padding: 8px;
+}
+
+.header button{
+    position: absolute;
+    right: 15%;
+}
+
+@media (max-width: 768px) {
+
+    .header button{
+        display: none;
+    }
+
+}

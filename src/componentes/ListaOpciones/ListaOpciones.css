@@ -1,0 +1,18 @@
+.lista-opciones label{
+    display: block;
+    font-size: 16px;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 8px;
+}
+
+.lista-opciones select{
+    width: 100%;
+    color: #E5E5E5;
+    background: #53585D;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.06);
+    padding: 24px;
+    border: none;
+    outline-color: #6278F7;
+    font-size: 16px;
+}

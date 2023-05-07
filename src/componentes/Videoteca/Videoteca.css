@@ -1,6 +1,10 @@
-.App {
+.videoteca {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.videoteca img {
+    position: absolute;
+    right: 20%;
 }

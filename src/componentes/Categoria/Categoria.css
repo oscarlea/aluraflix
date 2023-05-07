@@ -1,0 +1,52 @@
+.contenedor {
+    display: flex;
+    flex-direction: column;
+
+    background-color: black;
+    padding: 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1440px;
+
+}
+
+.categoria {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.categoria h3 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #F5F5F5;
+
+    border-radius: 4px;
+    width: 85px;
+    height: 33px;
+
+    margin: 0;
+}
+
+.categoria h4 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 14px;
+    color: #F5F5F5;
+
+    margin: 0;
+}
+
+.input-color{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
