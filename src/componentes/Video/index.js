@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./Video.css";
-import { AiFillCloseCircle } from "react-icons/ai"
+import { TiDelete } from "react-icons/ti"
 
 const Video = (props) => {
-    const { videoID, titulo } = props.datos;
+    const { id, videoID, titulo} = props.datos;
     const { colorPrimario, eliminarVideo } = props;
 
     const [isPlaying, setIsPlaying] = useState(false);
@@ -18,7 +18,7 @@ const Video = (props) => {
 
         <div className="video" onClick={handleClick} style={{ borderColor: colorPrimario }}   >
 
-            <AiFillCloseCircle className="eliminar" onClick={(event) => eliminarVideo(event, videoID)} />
+            <TiDelete className="eliminar" onClick={(event) => eliminarVideo(event, id)} />
 
             {mostrarImg && <img src={`https://img.youtube.com/vi/${videoID}/mqdefault.jpg`} alt={titulo} />}
 

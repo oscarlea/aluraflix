@@ -1,6 +1,6 @@
-/* import logo from './logo.svg'; */
-import './App.css'; 
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import './App.css'; 
 import Header from './componentes/Header';
 import Formulario from './componentes/Formulario/Formulario';
 import Categoria from './componentes/Categoria';
@@ -11,6 +11,7 @@ function App() {
 
   const [mostrarFormulario, actualizarMostrar] = useState(false)
   const [videoList, actualizarVideos] = useState([{
+    id : uuidv4(),
     categoria: "Data Science",
     titulo: "Titulo 1",
     descripcion: "Descripcion 1",
@@ -18,6 +19,7 @@ function App() {
     videoID: "xD3MIKd_9qY"
   },
   {
+    id : uuidv4(),
     categoria: "Front End",
     titulo: "Titulo 2",
     descripcion: "Descripcion 2",
@@ -25,6 +27,7 @@ function App() {
     videoID: "veEqYQlfNx8"
   },
   {
+    id : uuidv4(),
     categoria: "Front End",
     titulo: "Titulo 3",
     descripcion: "Descripcion 3",
@@ -32,6 +35,7 @@ function App() {
     videoID: "em_Vh7ZGrnw"
   },
   {
+    id : uuidv4(),
     categoria: "UX y Diseño",
     titulo: "Titulo 4",
     descripcion: "Descripcion 4",
@@ -39,6 +43,7 @@ function App() {
     videoID: "jy0IgvV42es"
   },
   {
+    id : uuidv4(),
     categoria: "UX y Diseño",
     titulo: "5 simple tips to making responsive layouts the easy way",
     descripcion: "Descripcion 4",
@@ -46,6 +51,7 @@ function App() {
     videoID: "VQraviuwbzU"
   },
   {
+    id : uuidv4(),
     categoria: "UX y Diseño",
     titulo: "Curso de React [2023]: De cero hasta crear tus primeros componentes con estado",
     descripcion: "Descripcion sdf sdf sdfs df sdfs df sdfsdf",
@@ -53,41 +59,47 @@ function App() {
     videoID: "7iobxzd_2wY"
   },
   {
+    id : uuidv4(),
     categoria:"Back End",
-  descripcion:"sd fsdf",
-  titulo:"s dfsfs",
-  videoUrl: "https://youtu.be/PhdEaEYwlHw",
-  videoID:"PhdEaEYwlHw"
+    descripcion:"sd fsdf",
+    titulo:"s dfsfs",
+    videoUrl: "https://youtu.be/PhdEaEYwlHw",
+    videoID:"PhdEaEYwlHw"
 }
   
 ])
 
 const [categorias, actualizarCategorias] = useState([
   {
+    id : uuidv4(),
     nombre: "Back End",
     colorPrimario: "#57C278",
     colorSecundario: "#D9F7E9",
     descripcion: "Todos los video que estoy usando para estudiar Back End."
   },
   {
+    id : uuidv4(),
     nombre: "Front End",
     colorPrimario: "#82CFFA",
     colorSecundario: "#E8F8FF",
     descripcion: "Todos los video que estoy usando para estudiar Front End "
   },
   {
+    id : uuidv4(),
     nombre: "Data Science",
     colorPrimario: "#A6D157",
     colorSecundario: "#F0F8E2",
     descripcion: "Cosas de React y Python que vengo aprendiendo"
   },
   {
+    id : uuidv4(),
     nombre: "Devops",
     colorPrimario: "#E06B69",
     colorSecundario: "#FDE7E8",
     descripcion: "Yoquese"
   },
   {
+    id : uuidv4(),
     nombre: "UX y Diseño",
     colorPrimario: "#DB6EBF",
     colorSecundario: "#FAE9F5",
@@ -107,17 +119,19 @@ const [categorias, actualizarCategorias] = useState([
   }
 
     //Eliminar Video
-    const eliminarVideo = (event, videoID) => {
+    const eliminarVideo = (event, id) => {
       event.stopPropagation();
-      console.log("Eliminar video", videoID)
+      console.log("Eliminar video", id)
+      const videosActualizados = videoList.filter((videoList) => videoList.id !== id)
+      actualizarVideos(videosActualizados)
     }
 
 
     //Actualizar color de la categoria
-    const actualizarColor = (color, nombre) => {
-      console.log("Actualizar: ", color, nombre)
+    const actualizarColor = (color, id) => {
+      console.log("Actualizar: ", color, id)
       const categoriasActualizadas = categorias.map((categoria) => {
-        if (categoria.nombre === nombre) {
+        if (categoria.id === id) {
           categoria.colorPrimario = color
         }
   
@@ -125,6 +139,12 @@ const [categorias, actualizarCategorias] = useState([
       })
   
       actualizarCategorias(categoriasActualizadas)
+    }
+
+    const registrarCategoria = (nuevaCategoria) => {
+      console.log(nuevaCategoria)
+      actualizarCategorias([...categorias, {...nuevaCategoria, id: uuidv4()}])
+
     }
 
 
@@ -137,6 +157,7 @@ const [categorias, actualizarCategorias] = useState([
         mostrarFormulario && <Formulario
           categorias={categorias.map((categoria) => categoria.nombre)}
           registrarVideo={registrarVideo}
+          registrarCategoria={registrarCategoria}
         />
       }
 

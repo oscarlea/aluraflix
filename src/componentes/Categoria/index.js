@@ -4,7 +4,7 @@ import hexToRgba from 'hex-to-rgba';
 
 const Categoria = (props) => {
     //Destructuracion
-    const { colorPrimario, nombre, descripcion } = props.datos
+    const { colorPrimario, nombre, descripcion, id } = props.datos
     const { videoList, eliminarVideo, actualizarColor } = props
     const obj = {
         backgroundColor: hexToRgba(colorPrimario, 0.6)
@@ -23,7 +23,7 @@ const Categoria = (props) => {
                         className="input-color"
                         value={colorPrimario}
                         onChange={(evento) => {
-                            actualizarColor(evento.target.value, nombre)
+                            actualizarColor(evento.target.value, id)
                         }}
                     />
                     <h3 style={estiloNombre} >{nombre}</h3>
