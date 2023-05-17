@@ -1,15 +1,18 @@
 import { useState } from "react"
+import { v4 as uuidv4 } from 'uuid';
 import "./Formulario.css"
 import Campo from "../Campo"
 import ListaOpciones from "../ListaOpciones"
 import Boton from "../Boton"
+import axios from 'axios';
+
+//import URLParse from "url-parse"   // eliminar-desinstalar
+//import { parser } from 'html-metadata-parser'; // eliminar-desinstalar
 
 const Formulario = (props) => {
 
     // Videos
     const [categoria, actualizarCategoria] = useState("")
-    const [titulo, actualizarTitulo] = useState("")
-    const [descripcion, actualizarDescripcion] = useState("")
     const [videoUrl, actualizarVideoUrl] = useState("");
     // categorias
     const [nombre, actualizarNombre] = useState("")
@@ -18,39 +21,45 @@ const Formulario = (props) => {
 
     const [mostrarSegundoFormulario, setMostrarSegundoFormulario] = useState(false);
 
-
-    
     const { registrarVideo, registrarCategoria } = props
-  
 
-    const nuevoVideo = (e) => {
-        e.preventDefault()
-        console.log("Manejar el envio")
+    const nuevoVideo = async (e) => {
+        e.preventDefault();
+        console.log("Manejar el envio");
         const videoID = getVideoId(videoUrl);
-        let datosAEnviar = {
+        const id = uuidv4();
+        const datosAEnviar = {
+            id,
             categoria,
-            descripcion,
-            titulo,
+            titulo: "",
             videoUrl,
+            thumbnail_url: "",
             videoID
-        }
-        registrarVideo(datosAEnviar)
-    }
+        };
+        const videoInfo = await getVideoInfo(videoUrl);
+        datosAEnviar.titulo = videoInfo.title;
+        datosAEnviar.thumbnail_url = videoInfo.thumbnail_url;
+        console.log(videoInfo)
+        registrarVideo(datosAEnviar);
+    };
+
+    const getVideoInfo = async (url) => {
+        const response = await axios.get(`https://www.youtube.com/oembed?url=${url}&format=json`);
+        return response.data;
+    };
+
+    const getVideoId = (url) => {
+        const match = url.match(/youtube\.com\/watch\?v=(\w+)/);
+        return match ? match[1] : "";
+    };
 
     const nuevaCategoria = (e) => {
         e.preventDefault()
-        registrarCategoria({nombre: nombre, colorPrimario: color, descripcion: descripcionC})
+        registrarCategoria({ nombre: nombre, colorPrimario: color, descripcion: descripcionC })
     }
-
-    function getVideoId(url) {
-        const match = url.match(/youtube\.com\/watch\?v=(\w+)/);
-        return match ? match[1] : "";
-    }
-
-
 
     return <section className="formulario">
-        
+
         <form onSubmit={nuevoVideo} >
             <h2>Nuevo Video</h2>
             <ListaOpciones
@@ -58,20 +67,19 @@ const Formulario = (props) => {
                 actualizarCategoria={actualizarCategoria}
                 categorias={props.categorias}
             />
-            <Campo
+            {/*              <Campo
                 titulo="Titulo"
                 placeholder="Ingresar titulo"
-                required
                 valor={titulo}
                 actualizarValor={actualizarTitulo}
-            />
-            <Campo
+            /> */}
+            {/*             <Campo
                 titulo="Descripcion"
                 placeholder="Ingresar descripcion"
                 required
                 valor={descripcion}
                 actualizarValor={actualizarDescripcion}
-            />
+            /> */}
             <Campo
                 titulo="URL del Video"
                 placeholder="URL del Video"
@@ -82,44 +90,44 @@ const Formulario = (props) => {
             <div className="button-container">
                 <Boton titulo="Guardar" />
                 <Boton titulo="Limpiar" disabled={true} />
-                <Boton titulo="Nueva Categoría" onClick={() => setMostrarSegundoFormulario(true)}  />
+                <Boton titulo="Nueva Categoría" onClick={() => setMostrarSegundoFormulario(true)} />
             </div>
         </form>
-        
-        {mostrarSegundoFormulario && 
-        
-        <form onSubmit={nuevaCategoria} >
-            <h2>Nueva categoria</h2>
-            <Campo
-                titulo="Nombre"
-                placeholder="Nombre de la categoría"
-                required
-                 valor={nombre}
-                actualizarValor={actualizarNombre} 
-            />
+
+        {mostrarSegundoFormulario &&
+
+            <form onSubmit={nuevaCategoria} >
+                <h2>Nueva categoria</h2>
+                <Campo
+                    titulo="Nombre"
+                    placeholder="Nombre de la categoría"
+                    required
+                    valor={nombre}
+                    actualizarValor={actualizarNombre}
+                />
                 <Campo
                     titulo="Descripción"
                     placeholder="Ingresar descripción"
                     required
                     valor={descripcionC}
                     actualizarValor={actualizarDescripcionC}
-            />
+                />
 
-            <Campo
-                titulo="Color"
-                placeholder="Ingresar color hexadecimal"
-                required
-                valor={color}
-                actualizarValor={actualizarColor}
-                type="color" 
-            />
+                <Campo
+                    titulo="Color"
+                    placeholder="Ingresar color hexadecimal"
+                    required
+                    valor={color}
+                    actualizarValor={actualizarColor}
+                    type="color"
+                />
 
-            <div className="button-container">
-                <Boton titulo="Guardar" />
-            </div>
+                <div className="button-container">
+                    <Boton titulo="Guardar" />
+                </div>
 
-        </form>
-}
+            </form>
+        }
 
     </section>
 }

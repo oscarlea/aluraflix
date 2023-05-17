@@ -7,8 +7,9 @@
     background-color: #000;
    
     flex-wrap: wrap;
-    margin: 80px 50px;
-
+    /* margin: 80px 50px; */
+    box-sizing: border-box;
+    padding: 2rem 1rem;
 
 }
 

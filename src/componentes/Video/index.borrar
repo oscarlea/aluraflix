@@ -3,7 +3,8 @@ import "./Video.css";
 import { TiDelete } from "react-icons/ti"
 
 const Video = (props) => {
-    const { id, videoID, titulo} = props.datos;
+    const { id, videoID, titulo, thumbnail_url} = props.datos;
+
     const { colorPrimario, eliminarVideo } = props;
 
     const [isPlaying, setIsPlaying] = useState(false);
@@ -20,8 +21,8 @@ const Video = (props) => {
 
             <TiDelete className="eliminar" onClick={(event) => eliminarVideo(event, id)} />
 
-            {mostrarImg && <img src={`https://img.youtube.com/vi/${videoID}/mqdefault.jpg`} alt={titulo} />}
-
+            {mostrarImg && <img src={thumbnail_url} alt={titulo} />}
+            
             {isPlaying && (
 
                 <iframe
@@ -33,6 +34,11 @@ const Video = (props) => {
                     allowFullScreen
                 ></iframe>
             )}
+
+            <div className="titulo" >
+                <span> {titulo} </span>
+            </div>
+
         </div>
 
     ); 

@@ -1,0 +1,113 @@
+{
+  "categorias": [
+
+        {
+      "id": "1",
+      "nombre": "Back End",
+      "colorPrimario": "#57C278",
+      "colorSecundario": "#D9F7E9",
+      "descripcion": "Todos los video que estoy usando para estudiar Back End."
+    },
+    {
+      "id": "2",
+      "nombre": "Front End",
+      "colorPrimario": "#82CFFA",
+      "colorSecundario": "#E8F8FF",
+      "descripcion": "Qui deserunt laborum in enim fugiat ex occaecat sint duis sunt ipsum cillum."
+    },
+    {
+      "id": "3",
+      "nombre": "Data Science",
+      "colorPrimario": "#A6D157",
+      "colorSecundario": "#F0F8E2",
+      "descripcion": "Enim dolor incididunt adipisicing sunt nulla excepteur."
+    },
+    {
+      "id": "4",
+      "nombre": "Devops",
+      "colorPrimario": "#E06B69",
+      "colorSecundario": "#FDE7E8",
+      "descripcion": "Yoquese"
+    },
+    {
+      "id": "5",
+      "nombre": "UX y Diseño",
+      "colorPrimario": "#DB6EBF",
+      "colorSecundario": "#FAE9F5",
+      "descripcion": "Quis elit tempor velit nisi do amet ipsum non non."
+    }
+  ],
+  "videos": [
+    {
+      "id": "4277c0ce-345a-4b7e-9021-e6501fbc584c",
+      "id_categoria": "2",
+      "titulo": "ONE Grupo 4: Mentoría React - Proyecto AluraFlix",
+      "videoUrl": "https://www.youtube.com/watch?v=uqzmL1Lzvjw",
+      "thumbnail_url": "https://i.ytimg.com/vi/uqzmL1Lzvjw/hqdefault.jpg",
+      "videoID": "uqzmL1Lzvjw"
+    },
+    {
+      "id": "uuidv4(20)",
+      "id_categoria": "3",
+      "titulo": "Titulo 1",
+      "descripcion": "Descripcion 1",
+      "videoUrl": "https://youtu.be/xD3MIKd_9qY",
+      "thumbnail_url": "https://i.ytimg.com/vi/xD3MIKd_9qY/hqdefault.jpg",
+      "videoID": "xD3MIKd_9qY"
+    },
+    {
+      "id": "26415b5d-a297-4956-acc3-7c45a19b464d",
+      "id_categoria": "2",
+      "titulo": "The problems with viewport units",
+      "descripcion": "Descripcion 2",
+      "videoUrl": "https://youtu.be/veEqYQlfNx8",
+      "thumbnail_url": "https://i.ytimg.com/vi/veEqYQlfNx8/hqdefault.jpg",
+      "videoID": "veEqYQlfNx8"
+    },
+    {
+      "id": "uuidv4(2222)",
+      "id_categoria": "2",
+      "titulo": "💥 Array.flat y Array.flatMap ¡Domina estos nuevos métodos de JavaScript!",
+      "descripcion": "Descripcion 3",
+      "videoUrl": "https://youtu.be/em_Vh7ZGrnw",
+      "thumbnail_url": "https://i.ytimg.com/vi/em_Vh7ZGrnw/hqdefault.jpg",
+      "videoID": "em_Vh7ZGrnw"
+    },
+    {
+      "id": "uuidv4(2323)",
+      "id_categoria": "5",
+      "titulo": "Titulo 4",
+      "descripcion": "Descripcion 4",
+      "videoUrl": "https://youtu.be/jy0IgvV42es",
+      "thumbnail_url": "https://i.ytimg.com/vi/em_Vh7ZGrnw/hqdefault.jpg",      
+      "videoID": "jy0IgvV42es"
+    },
+    {
+      "id": "uuidv4(2424)",
+      "id_categoria": "5",
+      "titulo": "5 simple tips to making responsive layouts the easy way",
+      "descripcion": "Descripcion 4",
+      "videoUrl": "https://youtu.be/VQraviuwbzU",
+      "thumbnail_url": "https://i.ytimg.com/vi/em_Vh7ZGrnw/hqdefault.jpg",      
+      "videoID": "VQraviuwbzU"
+    },
+    {
+      "id": "uuidv4(2525)",
+      "id_categoria": "5",
+      "titulo": "Curso de React [2023]: De cero hasta crear tus primeros componentes con estado",
+      "descripcion": "Descripcion sdf sdf sdfs df sdfs df sdfsdf",
+      "videoUrl": "https://youtu.be/7iobxzd_2wY",
+      "thumbnail_url": "https://i.ytimg.com/vi/em_Vh7ZGrnw/hqdefault.jpg",      
+      "videoID": "7iobxzd_2wY"
+    },
+    {
+      "id": "uuidv4(2626)",
+      "id_categoria": "1",
+      "descripcion": "sd fsdf",
+      "titulo": "s dfsfs",
+      "videoUrl": "https://youtu.be/PhdEaEYwlHw",
+      "thumbnail_url": "https://i.ytimg.com/vi/em_Vh7ZGrnw/hqdefault.jpg",      
+      "videoID": "PhdEaEYwlHw"
+    }
+  ]
+}

@@ -1,50 +1,55 @@
 import "./Categoria.css";
-import Video from "../Video";
-import hexToRgba from 'hex-to-rgba';
+import Video from "../Video/index.jsx";
+import { hexToRgba } from "../../api/api";
+import { Link } from 'react-router-dom';
 
 const Categoria = (props) => {
-    //Destructuracion
-    const { colorPrimario, nombre, descripcion, id } = props.datos
-    const { videoList, eliminarVideo, actualizarColor } = props
+    // Destructuración
+    const { colorPrimario, nombre, descripcion, id } = props.datos;
+    const { videoList, eliminarVideo, actualizarColor } = props;
     const obj = {
         backgroundColor: hexToRgba(colorPrimario, 0.6)
-    }
+    };
 
-    const estiloNombre = { background: colorPrimario }
+    const estiloNombre = { background: colorPrimario };
 
-    return <>
-        {
-            videoList.length > 0 &&
-            <section className="contenedor" >
+    return videoList.length > 0 &&
+        <div className="categoria" style={obj}>
 
-                <div className="categoria" style={obj}>
-                    <input
-                        type='color'
-                        className="input-color"
-                        value={colorPrimario}
-                        onChange={(evento) => {
-                            actualizarColor(evento.target.value, id)
-                        }}
-                    />
-                    <h3 style={estiloNombre} >{nombre}</h3>
-                    <h4>{descripcion}</h4>
+            <div className="categoria__titulo" style={estiloNombre}>
+                <input
+                    type="color"
+                    className="input-color"
+                    value={colorPrimario}
+                    onChange={(evento) => {
+                        actualizarColor(evento.target.value, id);
+                    }}
+                />
+                <h3>{nombre}</h3>
+                <h4>{descripcion}</h4>
+            </div>
 
-                <div className="videos">
-                    {
-                        videoList.map((video, videoID) => <Video
-                            datos={video}
-                            key={videoID}
-                            colorPrimario={colorPrimario}
-                            eliminarVideo={eliminarVideo}
-                        />)
-                    }
-                </div>
+            <div className="videos">
 
-                </div>
+                
 
-            </section>
-        }
-    </>
-}
+            {
+  videoList.map((video) => (
+    <Link to={`/videos/${video.id}`} key={video.id}>
+      <Video
+        datos={video}
+        colorPrimario={colorPrimario}
+        eliminarVideo={eliminarVideo}
+      />
+    </Link>
+  ))}
 
-export default Categoria
+
+                
+            </div>
+
+        </div>
+
+};
+
+export default Categoria;
