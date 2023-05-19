@@ -1,3 +1,7 @@
+html {
+    font-size: 10px;
+}
+
 .App {
     display: flex;
     flex-direction: column;
@@ -7,9 +11,25 @@
 
 body {
     font-family: "Roboto", sans-serif;
-
     max-width: 1440px;
     margin: 0 auto;
     /* padding: 20px; */
 }
+
+
+.contenedor_padding1rem {
+    padding: 1rem;
+}
+
+.contenedor_video {
+    padding: 2rem;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    left: 0;
+    right: 0;
+}
+
+
+
 

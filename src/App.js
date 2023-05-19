@@ -7,15 +7,15 @@ import Header from './componentes/Header';
 import Footer from './componentes/Footer';
 import Cosa from './pages/cosa'
 import Home from './pages/Home';
-import Video from './pages/Video';
+import VideoPlayer from './pages/VideoPlayer';
 import { buscar } from './api/api';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NoPage from './pages/noPage';
+import ListaCategorias from './componentes/ListaCategorias';
 
 function App() {
 
   const [mostrarFormulario, actualizarMostrar] = useState(false)
-  
   const [categorias, actualizarCategorias] = useState([]);
   const [videoList, actualizarVideos] = useState([]);
 
@@ -31,12 +31,10 @@ function App() {
     actualizarMostrar(!mostrarFormulario)
   }
 
-  const registrarVideo = (video) => {
-    console.log("Nuevo video", video)
-    //Spread operator
-    actualizarVideos([...videoList, video])
-    /* actualizarMostrar(true); */
-  }
+  const agregarNuevoVideo = (video) => {
+    actualizarVideos([...videoList, video]);
+  };
+
 
   //Eliminar Video
   const eliminarVideo = (event, id) => {
@@ -94,9 +92,11 @@ function App() {
               actualizarColor={actualizarColor}
               mostrarFormulario={mostrarFormulario}
               registrarCategoria={registrarCategoria}
-              registrarVideo={registrarVideo}
+              agregarNuevoVideo={agregarNuevoVideo}
             />} />
-          <Route path='/videos/:id' element={<Video />} />
+          <Route path='/videos' element={<Home />} />
+          <Route path='/videos/:id' element={<VideoPlayer />} />
+          <Route path='/categorias' element={<ListaCategorias />} />
           <Route path='/cosa' element={<Cosa />} />
           <Route path='*' element={<NoPage />} />
         </Routes>

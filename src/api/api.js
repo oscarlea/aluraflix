@@ -9,10 +9,20 @@ export const api = axios.create({
 //---
 
 export const buscar = async (url, setData) => {
-    const respuesta = await api.get(url)
-    setData(respuesta.data)
+    const response = await api.get(url)
+    setData(response.data)
 }
 
+
+export const registrarVideo = async (video) => {
+  try {
+    const response = await api.post("/videos", video);
+    console.log("Nuevo video registrado:", response.data);
+    // Realizar otras acciones después de grabar el video en el servidor JSON
+  } catch (error) {
+    console.error("Error al registrar el video:", error);
+  }
+};
 //----
 
 export const hexToRgba = (hex, alpha) => {
@@ -30,26 +40,6 @@ export const hexToRgba = (hex, alpha) => {
   };
   
 //----
-/* 
-  export const obtenerVideosPorCategoria = async () => {
-    const videosRespuesta = await api.get("/videos");
-    const categoriasRespuesta = await api.get("/categorias");
-  
-    const categoriasConVideos = categoriasRespuesta.data.filter((categoria) => {
-      return videosRespuesta.data.some((video) => {
-        return video.categoria === categoria.nombre;
-      });
-    });
-  
-    return categoriasConVideos.map((categoria) => {
-      const videos = videosRespuesta.data.filter(
-        (video) => video.categoria === categoria.nombre
-      );
-      return {
-        ...categoria,
-        videos: videos,
-      };
-    });
-  };
-   */
+ 
+
   

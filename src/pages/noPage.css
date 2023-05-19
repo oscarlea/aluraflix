@@ -1,0 +1,27 @@
+body {
+    background-color: black;
+    color: #fff;
+   
+}
+
+
+.error-container {
+   /*  display: flex; */
+/*     justify-content: center; */
+  /*   align-items: center; */
+  padding-top: 25%;
+}
+
+
+.error-container h1 {
+ /*    margin: 0; */
+    font-size: 130px;
+    font-weight: 300;
+}
+
+
+
+
+
+
+

@@ -6,22 +6,25 @@ import ListaOpciones from "../ListaOpciones"
 import Boton from "../Boton"
 import axios from 'axios';
 
+import { registrarVideo } from '../../api/api';
+
 //import URLParse from "url-parse"   // eliminar-desinstalar
 //import { parser } from 'html-metadata-parser'; // eliminar-desinstalar
 
 const Formulario = (props) => {
 
     // Videos
-    const [categoria, actualizarCategoria] = useState("")
+    const [id_categoria, actualizarIdCategoria] = useState("")
     const [videoUrl, actualizarVideoUrl] = useState("");
     // categorias
+
     const [nombre, actualizarNombre] = useState("")
     const [color, actualizarColor] = useState("")
     const [descripcionC, actualizarDescripcionC] = useState("")
 
     const [mostrarSegundoFormulario, setMostrarSegundoFormulario] = useState(false);
 
-    const { registrarVideo, registrarCategoria } = props
+    const {  registrarCategoria, agregarNuevoVideo } = props
 
     const nuevoVideo = async (e) => {
         e.preventDefault();
@@ -30,17 +33,21 @@ const Formulario = (props) => {
         const id = uuidv4();
         const datosAEnviar = {
             id,
-            categoria,
+            id_categoria,
             titulo: "",
             videoUrl,
             thumbnail_url: "",
+            author_name: "",
             videoID
         };
         const videoInfo = await getVideoInfo(videoUrl);
         datosAEnviar.titulo = videoInfo.title;
         datosAEnviar.thumbnail_url = videoInfo.thumbnail_url;
-        console.log(videoInfo)
+        datosAEnviar.author_name = videoInfo.author_name;
+        console.log("videoInfo..:", videoInfo)
+        console.log("datosAEnviar..: ", datosAEnviar)
         registrarVideo(datosAEnviar);
+        agregarNuevoVideo(datosAEnviar);
     };
 
     const getVideoInfo = async (url) => {
@@ -63,23 +70,10 @@ const Formulario = (props) => {
         <form onSubmit={nuevoVideo} >
             <h2>Nuevo Video</h2>
             <ListaOpciones
-                valor={categoria}
-                actualizarCategoria={actualizarCategoria}
+                valor={id_categoria}
+                actualizarIdCategoria={actualizarIdCategoria}
                 categorias={props.categorias}
             />
-            {/*              <Campo
-                titulo="Titulo"
-                placeholder="Ingresar titulo"
-                valor={titulo}
-                actualizarValor={actualizarTitulo}
-            /> */}
-            {/*             <Campo
-                titulo="Descripcion"
-                placeholder="Ingresar descripcion"
-                required
-                valor={descripcion}
-                actualizarValor={actualizarDescripcion}
-            /> */}
             <Campo
                 titulo="URL del Video"
                 placeholder="URL del Video"

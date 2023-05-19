@@ -1,8 +1,7 @@
 import Categoria from "../componentes/Categoria/index.js";
 import Formulario from "../componentes/Formulario/Formulario.js";
 
-const Home = ({ categorias, videoList, eliminarVideo, actualizarColor, mostrarFormulario, registrarCategoria, registrarVideo }) => {
-
+const Home = ({ categorias, videoList, eliminarVideo, actualizarColor, mostrarFormulario, registrarCategoria, agregarNuevoVideo }) => {
 
   return (
 
@@ -10,9 +9,12 @@ const Home = ({ categorias, videoList, eliminarVideo, actualizarColor, mostrarFo
 
       {
         mostrarFormulario && <Formulario
-          categorias={categorias.map((categoria) => categoria.nombre)}
-          registrarVideo={registrarVideo}
-          registrarCategoria={registrarCategoria}
+        categorias={categorias.map((categoria) => ({
+          id: categoria.id,
+          nombre: categoria.nombre,
+        }))}
+        agregarNuevoVideo={agregarNuevoVideo}
+        registrarCategoria={registrarCategoria}
         />
       }
 
