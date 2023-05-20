@@ -1,7 +1,7 @@
-import "./Video.css";
+import "./VideoDetalle.css";
 import { TiDelete } from "react-icons/ti"
 
-const Video = (props) => {
+const VideoDetalle = (props) => {
     const { id, titulo, thumbnail_url, author_name } = props.datos;
     const { colorPrimario, eliminarVideo } = props;
 
@@ -28,4 +28,4 @@ const Video = (props) => {
 
 }
 
-export default Video
+export default VideoDetalle

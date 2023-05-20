@@ -1,11 +1,14 @@
 import Categoria from "../componentes/Categoria/index.js";
 import Formulario from "../componentes/Formulario/Formulario.js";
+import ListaCategorias from "../componentes/ListaCategorias.jsx"
 
-const Home = ({ categorias, videoList, eliminarVideo, actualizarColor, mostrarFormulario, registrarCategoria, agregarNuevoVideo }) => {
+const Home = ({ categorias, videoList, eliminarVideo, actualizarColor, mostrarFormulario, agregarNuevoVideo }) => {
 
   return (
 
     <main className="contenedor">
+
+      <ListaCategorias />
 
       {
         mostrarFormulario && <Formulario
@@ -14,7 +17,7 @@ const Home = ({ categorias, videoList, eliminarVideo, actualizarColor, mostrarFo
           nombre: categoria.nombre,
         }))}
         agregarNuevoVideo={agregarNuevoVideo}
-        registrarCategoria={registrarCategoria}
+        /* registrarCategoria={registrarCategoria} */
         />
       }
 

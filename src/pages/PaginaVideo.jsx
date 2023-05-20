@@ -1,19 +1,19 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { buscar } from "../api/api";
+import { useState, useEffect } from "react"
+import { useParams, useNavigate } from "react-router-dom"
+import { buscar } from "../api/api"
 import ReactPlayer from "react-player";
-import './VideoPlayer.css'
+import './PaginaVideo.css'
 
-const Video = () => {
-    const [video, setVideo] = useState({});
-    const { id } = useParams();
-    const navigate = useNavigate();
+const PaginaVideo = ({ url }) => {
+    const [video, setData] = useState({})
+    const { id } = useParams()
+    const navigate = useNavigate()
 
     useEffect(() => {
-        buscar(`/videos/${id}`, setVideo).catch(() => {
-            navigate("/not-found");
-        });
-    }, [id, navigate]);
+        buscar(`/videos/${id}`, setData).catch(() => {
+            navigate("/not-found")
+        })
+    }, [id, navigate])
 
     return (
 
@@ -38,6 +38,6 @@ const Video = () => {
         </div>
 
     );
-};
+}
 
-export default Video;
+export default PaginaVideo

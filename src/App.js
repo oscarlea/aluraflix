@@ -7,11 +7,11 @@ import Header from './componentes/Header';
 import Footer from './componentes/Footer';
 import Cosa from './pages/cosa'
 import Home from './pages/Home';
-import VideoPlayer from './pages/VideoPlayer';
 import { buscar } from './api/api';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NoPage from './pages/noPage';
-import ListaCategorias from './componentes/ListaCategorias';
+import PaginaCategoria from './pages/PaginaCategoria';
+import PaginaVideo from './pages/PaginaVideo';
 
 function App() {
 
@@ -95,8 +95,8 @@ function App() {
               agregarNuevoVideo={agregarNuevoVideo}
             />} />
           <Route path='/videos' element={<Home />} />
-          <Route path='/videos/:id' element={<VideoPlayer />} />
-          <Route path='/categorias' element={<ListaCategorias />} />
+          <Route path='/videos/:id' element={<PaginaVideo />} />
+          <Route path='/categoria/:id/*' element={<PaginaCategoria />} />
           <Route path='/cosa' element={<Cosa />} />
           <Route path='*' element={<NoPage />} />
         </Routes>

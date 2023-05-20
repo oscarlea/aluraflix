@@ -4,18 +4,26 @@ import { buscar } from "../api/api";
 
 const ListaCategorias = () => {
 
-    const [categories, setCategories] = useState([]);
+    const [categorias, setData] = useState([]);
 
     useEffect(() => {
-        buscar(`/categorias`, setCategories)
+        buscar(`/categorias`, setData)
     }, [])
 
     return (
-        <ul>
+        <ul className='lista__categorias'>
             {
-                categories.map(categoria => (
-                    <Link to={`/categoria/${categoria.id}`} key={categoria.id}>
-                        <li> {categoria.nombre} </li>
+                categorias.map(categoria => (
+                    <Link to={`/categoria/${categoria.id}`} key={categoria.id} className='categoria__link' >
+
+                        <div className='categoria' >
+                            <div className='categoria__encabezado' >
+                                <li className='categoria__titulo ct2' style={{ background: categoria.colorPrimario }}>
+                                    {categoria.nombre}
+                                </li>
+                            </div>
+                        </div>
+
                     </Link>
                 ))
             }
@@ -24,3 +32,4 @@ const ListaCategorias = () => {
 }
 
 export default ListaCategorias;
+

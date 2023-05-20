@@ -1,5 +1,5 @@
 import "./Categoria.css";
-import Video from "../Video/index.jsx";
+import Video from "../VideoDetalle/index.jsx";
 import { hexToRgba } from "../../api/api";
 import { Link } from 'react-router-dom';
 
@@ -33,7 +33,7 @@ const Categoria = (props) => {
         <div className="videos">
           {
             videoList.map((video) => (
-              <Link to={`/videos/${video.id}`} key={video.id}>
+              <Link to={`/videos/${video.id}`} key={video.id} className="video__link">
                 <Video
                   datos={video}
                   colorPrimario={colorPrimario}

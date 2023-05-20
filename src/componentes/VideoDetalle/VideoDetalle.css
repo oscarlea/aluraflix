@@ -5,6 +5,7 @@
     gap: 1rem;
 }
 
+
 .video {
     position: relative;
     width: 100%;
@@ -13,6 +14,11 @@
     /*     box-sizing: border-box; */
     max-width: 324px;
     /* max-height: 200px; */
+
+}
+
+.video__link {
+    text-decoration: none;
 
 }
 
@@ -41,6 +47,7 @@
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     white-space: normal;
+    text-decoration: none;
 }
 
 .video__autor {
@@ -48,6 +55,7 @@
     font-size: 1.3rem;
     line-height: 2rem;
     font-weight: 400;
+    text-decoration: none;
 }
 
 .titulo span {
