@@ -1,8 +1,19 @@
 import { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
 import { buscar } from "../api/api";
+import FormularioCategorias from './Formulario/formularioCategorias';
 
-const ListaCategorias = () => {
+
+const ListaCategorias = ({actualizarColor}) => {
+
+    const [mostrarFormulario, actualizarMostrar] = useState(false)
+    const cambiarMostrar = () => {
+        actualizarMostrar(!mostrarFormulario)
+    }
+
+     const agregarNuevaCategoria = (categoria) => {
+        setData([...categorias, categoria]);
+      }; 
 
     const [categorias, setData] = useState([]);
 
@@ -10,8 +21,11 @@ const ListaCategorias = () => {
         buscar(`/categorias`, setData)
     }, [])
 
+
     return (
+
         <ul className='lista__categorias'>
+            <button onClick={cambiarMostrar}>Agregar Categoría</button>
             {
                 categorias.map(categoria => (
                     <Link to={`/categoria/${categoria.id}`} key={categoria.id} className='categoria__link' >
@@ -25,11 +39,15 @@ const ListaCategorias = () => {
                         </div>
 
                     </Link>
+
                 ))
+            }
+
+            {
+                mostrarFormulario && <FormularioCategorias agregarNuevaCategoria={agregarNuevaCategoria} actualizarColor={actualizarColor} />
             }
         </ul>
     )
 }
 
 export default ListaCategorias;
-

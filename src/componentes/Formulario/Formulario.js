@@ -28,7 +28,6 @@ const Formulario = (props) => {
 
     const nuevoVideo = async (e) => {
         e.preventDefault();
-        console.log("Manejar el envio");
         const videoID = getVideoId(videoUrl);
         const id = uuidv4();
         const datosAEnviar = {
@@ -44,8 +43,6 @@ const Formulario = (props) => {
         datosAEnviar.titulo = videoInfo.title;
         datosAEnviar.thumbnail_url = videoInfo.thumbnail_url;
         datosAEnviar.author_name = videoInfo.author_name;
-        console.log("videoInfo..:", videoInfo)
-        console.log("datosAEnviar..: ", datosAEnviar)
         registrarVideo(datosAEnviar);
         agregarNuevoVideo(datosAEnviar);
     };

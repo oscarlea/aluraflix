@@ -2,6 +2,8 @@ import "./Categoria.css";
 import Video from "../VideoDetalle/index.jsx";
 import { hexToRgba } from "../../api/api";
 import { Link } from 'react-router-dom';
+//import ListaVideos from "../ListaVideos";
+
 
 const Categoria = (props) => {
   // Destructuración
@@ -30,6 +32,11 @@ const Categoria = (props) => {
       </div>
 
 
+{/*       <ListaVideos url={`/videos?id_categoria=${id}`} eliminarVideo={eliminarVideo} colorPrimario={colorPrimario}
+      
+      /> */}
+
+
         <div className="videos">
           {
             videoList.map((video) => (
@@ -41,7 +48,7 @@ const Categoria = (props) => {
                 />
               </Link>
             ))}
-        </div>
+        </div> 
 
 
     </div>
@@ -49,3 +56,4 @@ const Categoria = (props) => {
 };
 
 export default Categoria;
+

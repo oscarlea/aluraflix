@@ -69,7 +69,8 @@
     width: 100%;
     box-sizing: border-box;
     justify-content: space-evenly;
-    margin-bottom: 2rem;
+    padding: 2rem;
+    flex-wrap: wrap;
 }
 
 .input-color{

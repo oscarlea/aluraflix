@@ -6,9 +6,10 @@ const VideoDetalle = (props) => {
     const { colorPrimario, eliminarVideo } = props;
 
     const handleClick = () => {
-//        console.log("props.datos..: ", props.datos)
+
     };
 
+    
     return (
 
         <div className="video" onClick={handleClick} style={{ borderColor: colorPrimario }}   >

@@ -35,21 +35,24 @@ function App() {
     actualizarVideos([...videoList, video]);
   };
 
+/*   const agregarNuevaCategoria = (categoria) => {
+    actualizarCategorias([...categorias, categoria]);
+  }; */
+
 
   //Eliminar Video
   const eliminarVideo = (event, id) => {
     event.stopPropagation();
-    console.log("Eliminar video", id)
     const videosActualizados = videoList.filter((videoList) => videoList.id !== id)
     actualizarVideos(videosActualizados)
   }
 
   //Actualizar color de la categoria
   const actualizarColor = (color, id) => {
-    console.log("Actualizar: ", color, id)
     const categoriasActualizadas = categorias.map((categoria) => {
       if (categoria.id === id) {
         categoria.colorPrimario = color
+        console.log("list " , id,  color  )
       }
 
       return categoria
@@ -58,7 +61,6 @@ function App() {
   }
 
   const registrarCategoria = (nuevaCategoria) => {
-    console.log(nuevaCategoria)
     actualizarCategorias([...categorias, { ...nuevaCategoria, id: uuidv4() }])
   }
 
@@ -73,9 +75,9 @@ function App() {
       paragraphLowerBound: lowerBound,
       paragraphUpperBound: upperBound
     });
-      return text;
+    return text;
   };
-    //console.log(generateLoremIpsum(1, 3, 7));
+  //console.log(generateLoremIpsum(1, 3, 7));
 
   //---
 
@@ -86,22 +88,22 @@ function App() {
         <Header cambiarMostrar={cambiarMostrar} />
         <Routes>
           <Route path='/' element={<Home
-              categorias={categorias}
-              videoList={videoList}
-              eliminarVideo={eliminarVideo}
-              actualizarColor={actualizarColor}
-              mostrarFormulario={mostrarFormulario}
-              registrarCategoria={registrarCategoria}
-              agregarNuevoVideo={agregarNuevoVideo}
-            />} />
-          <Route path='/videos' element={<Home />} />
+            categorias={categorias}
+            videoList={videoList}
+            eliminarVideo={eliminarVideo}
+            actualizarColor={actualizarColor}
+            mostrarFormulario={mostrarFormulario}
+            /* registrarCategoria={registrarCategoria} */
+            agregarNuevoVideo={agregarNuevoVideo}
+          />} />
+          <Route path='/videos' element={<PaginaVideo />} />
           <Route path='/videos/:id' element={<PaginaVideo />} />
-          <Route path='/categoria/:id/*' element={<PaginaCategoria />} />
-          <Route path='/cosa' element={<Cosa />} />
+          <Route path='/categorias' element={<PaginaCategoria actualizarColor={actualizarColor}  />} />
+          <Route path='/categoria/:id?/*' element={<PaginaCategoria   eliminarVideo={eliminarVideo} actualizarColor={actualizarColor} />} />
           <Route path='*' element={<NoPage />} />
         </Routes>
 
-         <Footer cambiarMostrar={cambiarMostrar} /> 
+        <Footer cambiarMostrar={cambiarMostrar} />
 
       </Router>
 
