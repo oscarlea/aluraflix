@@ -2,41 +2,56 @@ import { useState, useEffect } from "react"
 import ListaCategorias from '../componentes/ListaCategorias'
 import ListaVideos from '../componentes/ListaVideos'
 import { useParams, useNavigate, Routes, Route } from 'react-router-dom'
-import { buscar } from '../api/api'
-import { hexToRgba } from "../api/api";
-import {rgbaToHexWithAlpha} from '../api/api'
+import { hexToRgba } from "../Utils/Utils";
+import { rgbaToHexWithAlpha } from "../Utils/Utils";
+import { StyledCategoria, StyledDescripcionCategoria, StyledTituloCategoria } from "../UI";
 
 
-const PaginaCategoria = ({ actualizarColor, eliminarVideo, registrarCategoria }) => {
+const PaginaCategoria = ({ actualizarColor, eliminarVideo, categorias, agregarNuevaCategoria }) => {
 
     const { id } = useParams()
-    const [categoria, setData] = useState({})
+    const [categoria, setCategoria] = useState({});
     const navigate = useNavigate()
 
+    /*     useEffect(() => {
+            buscar(`/categorias?id=${id}`, (data) => {
+                setData(data[0] || {});
+            }).catch(() => {
+                navigate("/not-found");
+            });
+        }, [id, navigate]); */
+
     useEffect(() => {
-        buscar(`/categorias?id=${id}`, (data) => {
-            setData(data[0] || {});
-        }).catch(() => {
-            navigate("/not-found");
-        });
-    }, [id, navigate]);
+        const buscarCategoriaPorId = (id) => {
+            return categorias.find((categoria) => categoria.id === id);
+        };
+
+        const categoriaEncontrada = buscarCategoriaPorId(id);
+        if (categoriaEncontrada) {
+            setCategoria(categoriaEncontrada);
+        } else {
+            setCategoria({}); // me interesa  manejar un objeto vacio y no un objeto indefinido para luego  "{Object.keys(categoria).length > 0"
+            //navigate("/not-found");
+        }
+    }, [id, navigate, categorias]);
 
     const estiloNombre = { background: categoria.colorPrimario };
-    const obj = {         backgroundColor: hexToRgba(categoria.colorPrimario, 0.6)     };
+    const obj = { backgroundColor: hexToRgba(categoria.colorPrimario, 0.6) };
 
-    const rgbaColor  = hexToRgba(categoria.colorPrimario, 0.6)
+    const rgbaColor = hexToRgba(categoria.colorPrimario, 0.6)
     const hexColorWithAlpha = rgbaToHexWithAlpha(rgbaColor);
     const estiloAlpha = { textShadow: `1px 1px 2px ${hexColorWithAlpha}` }
-    
+
+
     return (
 
         <main className="contenedor">
 
-            <ListaCategorias actualizarColor={actualizarColor} />
+            <ListaCategorias actualizarColor={actualizarColor} categorias={categorias} agregarNuevaCategoria={agregarNuevaCategoria} />
 
             {Object.keys(categoria).length > 0 && (
 
-                <div className="categoria" style={obj}>
+                <StyledCategoria  bgcolor={obj.backgroundColor} data-testid="categoria/videos en PaginaCategoria">
 
                     <div className="categoria__encabezado" style={estiloNombre}>
                         <input
@@ -44,14 +59,15 @@ const PaginaCategoria = ({ actualizarColor, eliminarVideo, registrarCategoria })
                             className="input-color"
                             value={categoria.colorPrimario}
                             onChange={(evento) => {
-                                
                                 actualizarColor(evento.target.value, id);
                             }}
                         />
-                        <h1 style= {estiloAlpha} className="categoria__titulo">{categoria.nombre + 'jljjkl'}</h1>
-                        <h2 className="categoria__subtitulo">{categoria.descripcion}</h2>
+                        <StyledTituloCategoria style={estiloAlpha} >
+                            {categoria.nombre}
+                        </StyledTituloCategoria>
+                        <StyledDescripcionCategoria>{categoria.descripcion}</StyledDescripcionCategoria>
                     </div>
-
+ 
                     <Routes>
                         <Route path='/' element={<ListaVideos url={`/videos?id_categoria=${id}`}
                             colorPrimario={categoria.colorPrimario}
@@ -59,7 +75,7 @@ const PaginaCategoria = ({ actualizarColor, eliminarVideo, registrarCategoria })
                         />
                     </Routes>
 
-                </div>
+                </StyledCategoria >
 
             )}
 

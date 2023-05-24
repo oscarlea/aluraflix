@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import './reset.css';
 import './App.css';
 import Header from './componentes/Header';
 //import Formulario from './componentes/Formulario/Formulario';
 import Footer from './componentes/Footer';
-import Cosa from './pages/cosa'
 import Home from './pages/Home';
 import { buscar } from './api/api';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NoPage from './pages/noPage';
 import PaginaCategoria from './pages/PaginaCategoria';
 import PaginaVideo from './pages/PaginaVideo';
+import GlobaStyle from './GlobalStyle';
 
 function App() {
 
@@ -35,9 +34,9 @@ function App() {
     actualizarVideos([...videoList, video]);
   };
 
-/*   const agregarNuevaCategoria = (categoria) => {
+   const agregarNuevaCategoria = (categoria) => {                 
     actualizarCategorias([...categorias, categoria]);
-  }; */
+  }; 
 
 
   //Eliminar Video
@@ -60,29 +59,14 @@ function App() {
     actualizarCategorias(categoriasActualizadas)
   }
 
-  const registrarCategoria = (nuevaCategoria) => {
+/*   const registrarCategoria = (nuevaCategoria) => {
     actualizarCategorias([...categorias, { ...nuevaCategoria, id: uuidv4() }])
-  }
-
-  //---
-
-  const loremIpsum = require('lorem-ipsum').loremIpsum;
-
-  const generateLoremIpsum = (paragraphs, lowerBound, upperBound) => {
-    const text = loremIpsum({
-      count: paragraphs,
-      format: 'plain',
-      paragraphLowerBound: lowerBound,
-      paragraphUpperBound: upperBound
-    });
-    return text;
-  };
-  //console.log(generateLoremIpsum(1, 3, 7));
-
-  //---
+  } */
 
   return (
+    
     <div className="App">
+      <GlobaStyle />
 
       <Router>
         <Header cambiarMostrar={cambiarMostrar} />
@@ -93,13 +77,22 @@ function App() {
             eliminarVideo={eliminarVideo}
             actualizarColor={actualizarColor}
             mostrarFormulario={mostrarFormulario}
-            /* registrarCategoria={registrarCategoria} */
             agregarNuevoVideo={agregarNuevoVideo}
+            agregarNuevaCategoria={agregarNuevaCategoria}   
           />} />
           <Route path='/videos' element={<PaginaVideo />} />
           <Route path='/videos/:id' element={<PaginaVideo />} />
-          <Route path='/categorias' element={<PaginaCategoria actualizarColor={actualizarColor}  />} />
-          <Route path='/categoria/:id?/*' element={<PaginaCategoria   eliminarVideo={eliminarVideo} actualizarColor={actualizarColor} />} />
+          <Route path='/categorias/*' element={<PaginaCategoria 
+              actualizarColor={actualizarColor}
+              categorias={categorias}
+              agregarNuevaCategoria={agregarNuevaCategoria}
+                />} />
+          <Route path='/categoria/:id?/*' element={<PaginaCategoria   
+              eliminarVideo={eliminarVideo} 
+              actualizarColor={actualizarColor}
+              categorias={categorias}
+              agregarNuevaCategoria={agregarNuevaCategoria}
+               />} />
           <Route path='*' element={<NoPage />} />
         </Routes>
 

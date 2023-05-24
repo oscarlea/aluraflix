@@ -2,7 +2,7 @@ import "./Categoria.css";
 import Video from "../VideoDetalle/index.jsx";
 import { hexToRgba } from "../../api/api";
 import { Link } from 'react-router-dom';
-//import ListaVideos from "../ListaVideos";
+import { StyledDescripcionCategoria } from "../../UI";
 
 
 const Categoria = (props) => {
@@ -28,10 +28,10 @@ const Categoria = (props) => {
           }}
         />
         <h1 style={{ textShadow: `1px 1px 2px ${hexToRgba(colorPrimario, 0.6)}` }} className="categoria__titulo">{nombre}</h1>
-        <h2 className="categoria__subtitulo">{descripcion}</h2>
+        <StyledDescripcionCategoria>{descripcion}</StyledDescripcionCategoria>
       </div>
 
-
+ 
 {/*       <ListaVideos url={`/videos?id_categoria=${id}`} eliminarVideo={eliminarVideo} colorPrimario={colorPrimario}
       
       /> */}

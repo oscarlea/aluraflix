@@ -1,5 +1,38 @@
 import "./VideoDetalle.css";
 import { TiDelete } from "react-icons/ti"
+import styled from "styled-components"
+import { StyledTituloAutor, StyledTituloVideo } from "../../UI";
+
+const StyledBoxVideo = styled.div`
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 2px solid;
+    /*     box-sizing: border-box; */
+    max-width: 324px;
+    /* max-height: 200px; */
+`
+
+const StyleTiDelete = styled(TiDelete)`
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    color: black;
+`
+
+const StyledThumbnailVideo = styled.img`
+    width: 100%;
+    position: relative;    
+`
+
+const StyledBoxTextosVideo = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    margin: 0;
+    gap: 1rem;
+`
+
 
 const VideoDetalle = (props) => {
     const { id, titulo, thumbnail_url, author_name } = props.datos;
@@ -9,19 +42,19 @@ const VideoDetalle = (props) => {
 
     };
 
-    
+
     return (
 
         <div className="video" onClick={handleClick} style={{ borderColor: colorPrimario }}   >
 
-            <TiDelete className="eliminar" onClick={(event) => eliminarVideo(event, id)} />
+            <StyleTiDelete onClick={(event) => eliminarVideo(event, id)} />
 
-            {<img src={thumbnail_url} alt={titulo} />}
+            {<StyledThumbnailVideo src={thumbnail_url} alt={titulo} />}
 
-            <div className="titulo" >
-                <h3 className="video__titulo"> {"- " + titulo} </h3>
-                <h3 className="video__autor"> {"- " + author_name} </h3>
-            </div>
+            <StyledBoxTextosVideo>
+                <StyledTituloVideo> {"- " + titulo} </StyledTituloVideo>
+                <StyledTituloAutor> {"- " + author_name} </StyledTituloAutor>
+            </StyledBoxTextosVideo>
 
         </div>
 

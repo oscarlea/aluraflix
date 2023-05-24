@@ -2,7 +2,33 @@ import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { buscar } from "../api/api"
 import ReactPlayer from "react-player";
-import './PaginaVideo.css'
+import styled from "styled-components"
+import { StyledTituloVideo } from "../UI";
+
+const PlayerWrapper = styled.main`
+    width: 100%;
+    height: 0;
+    padding-top:  56.25%;         
+    background: black;
+    position: relative;
+`
+const StyledReactPlayer = styled(ReactPlayer)`
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+`
+const StyledVideoContainer = styled.div`
+    padding: 2rem;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    left: 0;
+    right: 0;
+`
+
 
 const PaginaVideo = ({ url }) => {
     const [video, setData] = useState({})
@@ -17,15 +43,17 @@ const PaginaVideo = ({ url }) => {
 
     return (
 
-        <div className='player-wrapper' >
-            <div className="contenedor_video">
-                <h3 className="video__titulo">{video.author_name + " : " + video.titulo }</h3>
-            </div>
-            <ReactPlayer
+        <PlayerWrapper>
+            <StyledVideoContainer>
+                <StyledTituloVideo>
+                    {video.author_name + " : " + video.titulo}
+                </StyledTituloVideo>
+            </StyledVideoContainer>
+            <StyledReactPlayer
                 url={video.videoUrl}
                 config={{
                     youtube: {
-                        playerVars: { disablekb: 0, controls: 2, fs: 1, modestbranding: 0, rel:0 }
+                        playerVars: { disablekb: 0, controls: 2, fs: 1, modestbranding: 0, rel: 0 }
                     }
                 }}
                 className='react-player'
@@ -35,7 +63,7 @@ const PaginaVideo = ({ url }) => {
                 muted={true}
             />
 
-        </div>
+        </PlayerWrapper>
 
     );
 }

@@ -7,7 +7,6 @@ const Campo = (props) => {
 
     const manejarCambio = (e) => {
         props.actualizarValor(e.target.value)
-        console.log(e.target.value)
     }
 
     return <div className={`campo campo-${type}`}>
@@ -18,6 +17,7 @@ const Campo = (props) => {
             value={props.valor}
             onInput={manejarCambio}
             type={type}
+            /* actualizarColor={actualizarColor} */
             
         />
     </div>

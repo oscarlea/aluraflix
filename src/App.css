@@ -11,7 +11,7 @@ html {
 }
 
 body {
-    font-family: "Roboto", sans-serif;
+    font-family: Roboto, Arial, sans-serif;
     max-width: 1440px;
     margin: 0 auto;
     /* padding: 20px; */
@@ -21,15 +21,4 @@ body {
 .contenedor_padding1rem {
     padding: 1rem;
 }
-
-.contenedor_video {
-    padding: 2rem;
-    position: absolute;
-    top: 0;
-    text-align: center;
-    left: 0;
-    right: 0;
-}
-
-
 
