@@ -7,7 +7,7 @@ import { rgbaToHexWithAlpha } from "../Utils/Utils";
 import { StyledCategoria, StyledDescripcionCategoria, StyledTituloCategoria } from "../UI";
 
 
-const PaginaCategoria = ({ actualizarColor, eliminarVideo, categorias, agregarNuevaCategoria }) => {
+const PaginaCategoria = ({ actualizarColor, eliminarVideo, categorias, agregarNuevaCategoria, botonAddCategoria, cambiarMostrar, mostrarFormulario }) => {
 
     const { id } = useParams()
     const [categoria, setCategoria] = useState({});
@@ -30,7 +30,7 @@ const PaginaCategoria = ({ actualizarColor, eliminarVideo, categorias, agregarNu
         if (categoriaEncontrada) {
             setCategoria(categoriaEncontrada);
         } else {
-            setCategoria({}); // me interesa  manejar un objeto vacio y no un objeto indefinido para luego  "{Object.keys(categoria).length > 0"
+            setCategoria({}); 
             //navigate("/not-found");
         }
     }, [id, navigate, categorias]);
@@ -47,11 +47,19 @@ const PaginaCategoria = ({ actualizarColor, eliminarVideo, categorias, agregarNu
 
         <main className="contenedor">
 
-            <ListaCategorias actualizarColor={actualizarColor} categorias={categorias} agregarNuevaCategoria={agregarNuevaCategoria} />
+            <ListaCategorias
+                actualizarColor={actualizarColor}
+                categorias={categorias}
+                agregarNuevaCategoria={agregarNuevaCategoria}
+                botonAddCategoria={botonAddCategoria}
+                cambiarMostrar={cambiarMostrar}
+                mostrarFormulario={mostrarFormulario}
+
+            />
 
             {Object.keys(categoria).length > 0 && (
 
-                <StyledCategoria  bgcolor={obj.backgroundColor} data-testid="categoria/videos en PaginaCategoria">
+                <StyledCategoria bgcolor={obj.backgroundColor} data-testid="categoria/videos en PaginaCategoria">
 
                     <div className="categoria__encabezado" style={estiloNombre}>
                         <input
@@ -67,7 +75,7 @@ const PaginaCategoria = ({ actualizarColor, eliminarVideo, categorias, agregarNu
                         </StyledTituloCategoria>
                         <StyledDescripcionCategoria>{categoria.descripcion}</StyledDescripcionCategoria>
                     </div>
- 
+
                     <Routes>
                         <Route path='/' element={<ListaVideos url={`/videos?id_categoria=${id}`}
                             colorPrimario={categoria.colorPrimario}

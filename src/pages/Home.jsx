@@ -1,12 +1,12 @@
 import Categoria from "../componentes/Categoria/Categoria.css";
-import Formulario from "../componentes/Formulario/Formulario.js";
+import Formulario from "../componentes/Formulario/FormularioVideos.js";
 import ListaCategorias from "../componentes/ListaCategorias.jsx"
 import ListaVideos from "../componentes/ListaVideos.jsx";
 import { hexToRgba } from "../Utils/Utils";
 import { rgbaToHexWithAlpha } from "../Utils/Utils";
 import { StyledDescripcionCategoria, StyledTituloCategoria , StyledCategoria} from "../UI";
 
-const Home = ({ categorias, videoList, eliminarVideo, actualizarColor, mostrarFormulario, agregarNuevoVideo, agregarNuevaCategoria }) => {
+const Home = ({ categorias, eliminarVideo, actualizarColor, mostrarFormulario, agregarNuevoVideo, agregarNuevaCategoria }) => {
 
   const categoria = {
     colorPrimario: "#ff0000",
@@ -28,18 +28,20 @@ const Home = ({ categorias, videoList, eliminarVideo, actualizarColor, mostrarFo
 
       <ListaCategorias categorias={categorias} agregarNuevaCategoria={agregarNuevaCategoria} />
 
-      {
+
+          {/* esto no va aqui * * * * * * * * * * * * * * * * * *  */}
+{/*       {
         mostrarFormulario && <Formulario
           categorias={categorias.map((categoria) => ({
             id: categoria.id,
             nombre: categoria.nombre,
           }))}
           agregarNuevoVideo={agregarNuevoVideo}
-        /* registrarCategoria={registrarCategoria} */
         />
-      }
-
+      } */}
+ 
       <StyledCategoria bgcolor={obj.backgroundColor} data-testid="categorias/videos en Home">
+
         <div className="categoria__encabezado" style={estiloNombre}>
           <StyledTituloCategoria style={estiloAlpha} >
             {categoria.nombre}
@@ -50,7 +52,6 @@ const Home = ({ categorias, videoList, eliminarVideo, actualizarColor, mostrarFo
         </div>
 
         <ListaVideos url={"/videos"}
-          eliminarVideo={eliminarVideo}
           actualizarColor={actualizarColor}
           colorPrimario={categoria.colorPrimario}
         />

@@ -1,5 +1,5 @@
 //import "./Footer.css"
-import Boton from "../Boton"
+//import Boton from "../Boton"
 import styled from "styled-components"
 import { fondoOscuro } from "../../UI/variables";
 import { Logo, LogoContainer } from "../../UI"
@@ -23,7 +23,7 @@ function Footer(props) {
     return (
 
         <StyledFooter>
-            <Boton titulo="Nuevo Video" onClick={props.cambiarMostrar} />
+            {/* <Boton titulo="Nuevo Video" onClick={props.cambiarMostrar} /> */}
             <LogoContainer>
                 <Logo src="/img/header-negro.png" alt='AluraFlix' />
             </LogoContainer>

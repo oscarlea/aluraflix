@@ -30,7 +30,7 @@ const StyledVideoContainer = styled.div`
 `
 
 
-const PaginaVideo = ({ url }) => {
+const PaginaVideoPlayer = ({ url }) => {
     const [video, setData] = useState({})
     const { id } = useParams()
     const navigate = useNavigate()
@@ -68,4 +68,4 @@ const PaginaVideo = ({ url }) => {
     );
 }
 
-export default PaginaVideo
+export default PaginaVideoPlayer

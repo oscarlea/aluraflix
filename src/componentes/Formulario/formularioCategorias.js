@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import "./Formulario.css";
 import Campo from "../Campo";
 import Boton from "../Boton";
+import { StyledForm, StyledTituloCategoria, StyledboxFormulario } from "../../UI";
 
 import { registrarCategoria } from "../../api/api";
 
-const FormularioCategorias = ({ agregarNuevaCategoria }) => {
+const FormularioCategorias = ({ agregarNuevaCategoria, cambiarMostrar }) => {
 
     const [nombreF, actualizarNombre] = useState("");
     const [color, actualizarColor] = useState("#353535");
@@ -26,12 +26,13 @@ const FormularioCategorias = ({ agregarNuevaCategoria }) => {
         };
         registrarCategoria(datosAEnviar);
         agregarNuevaCategoria(datosAEnviar);
+        cambiarMostrar();
     };
 
     return (
-        <section className="formulario">
-            <form onSubmit={nuevaCategoria}>
-                <h2>Nueva Categoria</h2>
+        <StyledboxFormulario>
+            <StyledForm onSubmit={nuevaCategoria}>
+                <StyledTituloCategoria>Nueva Categoria</StyledTituloCategoria>
                 <Campo
                     titulo="Nombre"
                     placeholder="Nombre de la categoría"
@@ -60,8 +61,8 @@ const FormularioCategorias = ({ agregarNuevaCategoria }) => {
                 <div className="button-container">
                     <Boton titulo="Guardar" />
                 </div>
-            </form>
-        </section>
+            </StyledForm>
+        </StyledboxFormulario>
     );
 };
 

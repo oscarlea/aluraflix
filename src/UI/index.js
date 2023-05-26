@@ -1,9 +1,9 @@
 import styled from "styled-components"
-import { textoClaro } from "./variables";
+import { textoClaro, amarillo } from "./variables";
 
 
 export const LogoContainer = styled.div`
-    background-color: #f5c518;
+    background-color: ${amarillo};
     border-radius: 10px;
 `;
 
@@ -59,6 +59,28 @@ export const StyledCategoria = styled.div`
 	gap: 1rem;
 	background-color: ${props => props.bgcolor};
 `
+
+export const StyledboxFormulario = styled.section`
+    display: flex;
+    justify-content: space-evenly;
+
+    width: 100%;
+    max-width: 1440px;
+    background-color: #000;
+   
+    flex-wrap: wrap;
+    /* margin: 80px 50px; */
+    box-sizing: border-box;
+    padding: 2rem 1rem;
+`
+
+export const StyledForm = styled.form`
+    width: 50%;
+    padding: 11px;
+    padding-bottom: 30px;
+`
+
+
 //StyledCategoria.displayName = 'categoria';  // instalar plugin
 
 

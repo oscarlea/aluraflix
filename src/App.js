@@ -9,49 +9,58 @@ import { buscar } from './api/api';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NoPage from './pages/noPage';
 import PaginaCategoria from './pages/PaginaCategoria';
-import PaginaVideo from './pages/PaginaVideo';
+import PaginaVideoPlayer from './pages/PaginaVideoPlayer';
 import GlobaStyle from './GlobalStyle';
+import FormularioVideos from './componentes/Formulario/FormularioVideos';
 
 function App() {
-
+  // Formulario Categorias
   const [mostrarFormulario, actualizarMostrar] = useState(false)
+  const cambiarMostrar = () => {
+    actualizarMostrar(!mostrarFormulario)
+  }
+  // Boton agregar categoria
+  const [botonAddCategoria, setAddCategoria] = useState(false);
+  const cambiarMostrarBotonAddCategoria = () => { setAddCategoria(!botonAddCategoria); };  //toggle
+  const MostrarBotonAddCategoria = () => { setAddCategoria(true); };
+  //const ocultarBotonAddCategoria = () => { setAddCategoria(false); };
+  //---
+
+  // bd.json
   const [categorias, actualizarCategorias] = useState([]);
-  const [videoList, actualizarVideos] = useState([]);
+  /* const [videoList, actualizarVideos] = useState([]);  */
 
   useEffect(() => {
     buscar(`/categorias`, actualizarCategorias)
   }, [])
 
-  useEffect(() => {
-    buscar(`/videos`, actualizarVideos)
-  }, [])
+  /*   useEffect(() => {
+      buscar(`/videos`, actualizarVideos)
+    }, [])
+   */
 
-  const cambiarMostrar = () => {
-    actualizarMostrar(!mostrarFormulario)
-  }
-
-  const agregarNuevoVideo = (video) => {
-    actualizarVideos([...videoList, video]);
+/*      const agregarNuevoVideo = (video) => {
+      actualizarVideos([...videoList, video]);
+    };
+    */
+  const agregarNuevaCategoria = (categoria) => {
+    actualizarCategorias([...categorias, categoria]);
   };
 
-   const agregarNuevaCategoria = (categoria) => {                 
-    actualizarCategorias([...categorias, categoria]);
-  }; 
-
-
-  //Eliminar Video
-  const eliminarVideo = (event, id) => {
-    event.stopPropagation();
-    const videosActualizados = videoList.filter((videoList) => videoList.id !== id)
-    actualizarVideos(videosActualizados)
-  }
-
+  /*   //Eliminar Video
+    const eliminarVideo = (id) => {
+      //event.stopPropagation();
+      console.log("id..: ", id)
+      const videosActualizados = videoList.filter((videoList) => videoList.id !== id)
+      actualizarVideos(videosActualizados)
+    }
+   */
   //Actualizar color de la categoria
   const actualizarColor = (color, id) => {
     const categoriasActualizadas = categorias.map((categoria) => {
       if (categoria.id === id) {
         categoria.colorPrimario = color
-        console.log("list " , id,  color  )
+        console.log("list ", id, color)
       }
 
       return categoria
@@ -59,40 +68,46 @@ function App() {
     actualizarCategorias(categoriasActualizadas)
   }
 
-/*   const registrarCategoria = (nuevaCategoria) => {
-    actualizarCategorias([...categorias, { ...nuevaCategoria, id: uuidv4() }])
-  } */
+  const propsHome = {
+    categorias: categorias,
+    actualizarColor: actualizarColor,
+    mostrarFormulario: mostrarFormulario,
+    agregarNuevaCategoria: agregarNuevaCategoria
+  };
+
 
   return (
-    
+
     <div className="App">
       <GlobaStyle />
 
       <Router>
-        <Header cambiarMostrar={cambiarMostrar} />
+        <Header cambiarMostrar={cambiarMostrar} MostrarBotonAddCategoria={MostrarBotonAddCategoria} cambiarMostrarBotonAddCategoria={cambiarMostrarBotonAddCategoria} />
         <Routes>
-          <Route path='/' element={<Home
-            categorias={categorias}
-            videoList={videoList}
-            eliminarVideo={eliminarVideo}
+          <Route path="/" element={<Home {...propsHome} />} />
+          <Route path='/videos' element={<FormularioVideos 
+              categorias={categorias.map((categoria) => ({
+                id: categoria.id,
+                nombre: categoria.nombre,
+              }))}
+/*               agregarNuevoVideo={agregarNuevoVideo} */
+              />} 
+              /> 
+          <Route path='/videos/:id' element={<PaginaVideoPlayer />} />
+          <Route path='/categorias/*' element={<PaginaCategoria
             actualizarColor={actualizarColor}
+            categorias={categorias}
+            agregarNuevaCategoria={agregarNuevaCategoria}
+            botonAddCategoria={botonAddCategoria}
+            cambiarMostrar={cambiarMostrar}
             mostrarFormulario={mostrarFormulario}
-            agregarNuevoVideo={agregarNuevoVideo}
-            agregarNuevaCategoria={agregarNuevaCategoria}   
+
           />} />
-          <Route path='/videos' element={<PaginaVideo />} />
-          <Route path='/videos/:id' element={<PaginaVideo />} />
-          <Route path='/categorias/*' element={<PaginaCategoria 
-              actualizarColor={actualizarColor}
-              categorias={categorias}
-              agregarNuevaCategoria={agregarNuevaCategoria}
-                />} />
-          <Route path='/categoria/:id?/*' element={<PaginaCategoria   
-              eliminarVideo={eliminarVideo} 
-              actualizarColor={actualizarColor}
-              categorias={categorias}
-              agregarNuevaCategoria={agregarNuevaCategoria}
-               />} />
+          <Route path='/categoria/:id?/*' element={<PaginaCategoria
+            actualizarColor={actualizarColor}
+            categorias={categorias}
+            agregarNuevaCategoria={agregarNuevaCategoria}
+          />} />
           <Route path='*' element={<NoPage />} />
         </Routes>
 
