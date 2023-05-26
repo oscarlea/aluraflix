@@ -1,18 +1,26 @@
 {
-    "version": 2,
+    "rewrites": [
+      {
+        "source": "/api/:path*",
+        "destination": "http://localhost:4000/api/:path*"
+      }
+    ],
+    "env": {
+      "DB_FILE": "src/data/db.json"
+    },
     "builds": [
       {
         "src": "server.js",
-        "use": "@vercel/node",
-        "config": {
-          "includeFiles": ["src/data/db.json"]
-        }
+        "use": "@vercel/node"
+      },
+      {
+        "src": "src/index.js",
+        "use": "@vercel/static-build"
       }
     ],
     "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "server.js"
-      }
+      { "handle": "filesystem" },
+      { "src": "/.*", "dest": "/index.html" }
     ]
   }
+  
