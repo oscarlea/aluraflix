@@ -1,7 +1,5 @@
 
 
-Puedes encontrar el ID de un video de YouTube en la URL del video después del v=.
-
 
 
 ****************************************************************************************************
