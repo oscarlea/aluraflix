@@ -6,6 +6,8 @@ import styled from "styled-components"
 import { StyledTituloCategoria } from '../UI';
 import { MdAddCircle } from "react-icons/md"
 import { amarillo } from '../UI/variables';
+import { TiDelete } from "react-icons/ti";
+
 
 
 const StyledContenedorCategorias = styled.div`
@@ -52,6 +54,15 @@ const StyleMdAddCircle = styled(MdAddCircle)`
     margin: 2rem 5rem;
 `
 
+const StyledTiDelete = styled(TiDelete)`
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    color: ${amarillo};
+    font-size: 4rem;
+    z-index: 1;
+`
+
 const ListaCategorias = ({ actualizarColor, categorias, agregarNuevaCategoria, botonAddCategoria, cambiarMostrar, mostrarFormulario }) => {
 
     return (
@@ -62,15 +73,19 @@ const ListaCategorias = ({ actualizarColor, categorias, agregarNuevaCategoria, b
 
                 {
                     categorias.map(categoria => (
-                        <StyledLinkCategoria to={`/categoria/${categoria.id}`} key={categoria.id}>
-                            <ContenedorBurbujasCategorias>
-                                <StyledItemListaCategorias style={{ background: categoria.colorPrimario }}>
-                                    <StyledTituloCategoria>
-                                        {categoria.nombre}
-                                    </StyledTituloCategoria>
-                                </StyledItemListaCategorias>
-                            </ContenedorBurbujasCategorias>
-                        </StyledLinkCategoria>
+                        <div style={{ position: "relative"} } >
+                           { botonAddCategoria && <StyledTiDelete onClick={console.log(categoria.nombre)}    />}
+
+                            <StyledLinkCategoria to={`/categoria/${categoria.id}`} key={categoria.id}>
+                                <ContenedorBurbujasCategorias>
+                                    <StyledItemListaCategorias style={{ background: categoria.colorPrimario }}>
+                                        <StyledTituloCategoria>
+                                            {categoria.nombre}
+                                        </StyledTituloCategoria>
+                                    </StyledItemListaCategorias>
+                                </ContenedorBurbujasCategorias>
+                            </StyledLinkCategoria>
+                        </div>
                     ))
                 }
 

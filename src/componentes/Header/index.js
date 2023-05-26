@@ -8,7 +8,7 @@ const StiledHeader = styled.header`
     display: flex;
     justify-content: center; 
     align-items: center; 
-    background-color: ${fondoOscuro};
+    background-color: ${ ({theme}) => theme.body };
     width: 100%;
     max-width: 1440px;
     border-bottom: 2px solid #2a7ae4;

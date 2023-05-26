@@ -1,17 +1,21 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './reset.css';
 import './App.css';
 import Header from './componentes/Header';
-//import Formulario from './componentes/Formulario/Formulario';
 import Footer from './componentes/Footer';
-import Home from './pages/Home';
-import { buscar } from './api/api';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import NoPage from './pages/noPage';
-import PaginaCategoria from './pages/PaginaCategoria';
-import PaginaVideoPlayer from './pages/PaginaVideoPlayer';
-import GlobaStyle from './GlobalStyle';
 import FormularioVideos from './componentes/Formulario/FormularioVideos';
+import Home from './pages/Home';
+import NoPage from './pages/noPage';
+import PaginaVideoPlayer from './pages/PaginaVideoPlayer';
+import PaginaCategoria from './pages/PaginaCategoria';
+import GlobaStyle from './GlobalStyle';
+import { buscar } from './api/api';
+import { temaClaro, temaOscuro } from './UI/temas';
+import { ThemeProvider } from 'styled-components';
+import Categoria from './componentes/Categoria';
+
+console.log(temaClaro, temaOscuro)
 
 function App() {
   // Formulario Categorias
@@ -28,21 +32,21 @@ function App() {
 
   // bd.json
   const [categorias, actualizarCategorias] = useState([]);
-  /* const [videoList, actualizarVideos] = useState([]);  */
-
+/*   const [videoList, actualizarVideos] = useState([]);   // comentario********************************
+ */
   useEffect(() => {
     buscar(`/categorias`, actualizarCategorias)
   }, [])
 
-  /*   useEffect(() => {
-      buscar(`/videos`, actualizarVideos)
-    }, [])
-   */
+/*      useEffect(() => {
+      buscar(`/videos`, actualizarVideos)  // comentario *******************************************
+    }, []) */
+   
 
-/*      const agregarNuevoVideo = (video) => {
-      actualizarVideos([...videoList, video]);
-    };
-    */
+  /*      const agregarNuevoVideo = (video) => {
+        actualizarVideos([...videoList, video]);
+      };
+      */
   const agregarNuevaCategoria = (categoria) => {
     actualizarCategorias([...categorias, categoria]);
   };
@@ -77,45 +81,47 @@ function App() {
 
 
   return (
+    <ThemeProvider theme={temaOscuro}>
+      <div className="App">
+        <GlobaStyle />
 
-    <div className="App">
-      <GlobaStyle />
-
-      <Router>
-        <Header cambiarMostrar={cambiarMostrar} MostrarBotonAddCategoria={MostrarBotonAddCategoria} cambiarMostrarBotonAddCategoria={cambiarMostrarBotonAddCategoria} />
-        <Routes>
-          <Route path="/" element={<Home {...propsHome} />} />
-          <Route path='/videos' element={<FormularioVideos 
+        <Router>
+          <Header cambiarMostrar={cambiarMostrar} MostrarBotonAddCategoria={MostrarBotonAddCategoria} cambiarMostrarBotonAddCategoria={cambiarMostrarBotonAddCategoria} />
+          <Routes>
+            <Route path="/" element={<Home {...propsHome} />} />
+            <Route path='/videos' element={<FormularioVideos
               categorias={categorias.map((categoria) => ({
                 id: categoria.id,
                 nombre: categoria.nombre,
               }))}
-/*               agregarNuevoVideo={agregarNuevoVideo} */
-              />} 
-              /> 
-          <Route path='/videos/:id' element={<PaginaVideoPlayer />} />
-          <Route path='/categorias/*' element={<PaginaCategoria
-            actualizarColor={actualizarColor}
-            categorias={categorias}
-            agregarNuevaCategoria={agregarNuevaCategoria}
-            botonAddCategoria={botonAddCategoria}
-            cambiarMostrar={cambiarMostrar}
-            mostrarFormulario={mostrarFormulario}
 
-          />} />
-          <Route path='/categoria/:id?/*' element={<PaginaCategoria
-            actualizarColor={actualizarColor}
-            categorias={categorias}
-            agregarNuevaCategoria={agregarNuevaCategoria}
-          />} />
-          <Route path='*' element={<NoPage />} />
-        </Routes>
+            />}
+            />
+            
+            <Route path='/videos/:id' element={<PaginaVideoPlayer />} />
+            <Route path='/categorias/*' element={<PaginaCategoria
+              actualizarColor={actualizarColor}
+              categorias={categorias}
+              agregarNuevaCategoria={agregarNuevaCategoria}
+              botonAddCategoria={botonAddCategoria}
+              cambiarMostrar={cambiarMostrar}
+              mostrarFormulario={mostrarFormulario}
+            />}
+            />
+            <Route path='/categoria/:id?/*' element={<PaginaCategoria
+              actualizarColor={actualizarColor}
+              categorias={categorias}
+              agregarNuevaCategoria={agregarNuevaCategoria}
+            />} />
+            <Route path='*' element={<NoPage />} />
+          </Routes>
 
-        <Footer cambiarMostrar={cambiarMostrar} />
+          <Footer cambiarMostrar={cambiarMostrar} />
 
-      </Router>
+        </Router>
 
-    </div>
+      </div>
+    </ThemeProvider>
   );
 }
 

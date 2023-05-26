@@ -1,18 +1,23 @@
 import "./Categoria.css";
-import Video from "../VideoDetalle/index.jsx";
-import { hexToRgba } from "../../api/api";
-import { Link } from 'react-router-dom';
+//import Video from "../VideoDetalle/index.jsx";
+import ListaVideos from "../ListaVideos";
+import { hexToRgba } from "../../Utils/Utils";
+import { Link   } from 'react-router-dom';
 import { StyledDescripcionCategoria } from "../../UI";
 
 
 const Categoria = (props) => {
   // Destructuración
-  const { colorPrimario, nombre, descripcion, id } = props.datos;
+  const { colorPrimario, nombre, descripcion, id } = props.categorias[0];
   const { videoList, eliminarVideo, actualizarColor } = props;
+
+  console.log(props.categorias[0])
+
+  
+
   const obj = {
     backgroundColor: hexToRgba(colorPrimario, 0.6)
   };
-
   const estiloNombre = { background: colorPrimario };
 
   return videoList.length > 0 &&
@@ -31,24 +36,19 @@ const Categoria = (props) => {
         <StyledDescripcionCategoria>{descripcion}</StyledDescripcionCategoria>
       </div>
 
- 
-{/*       <ListaVideos url={`/videos?id_categoria=${id}`} eliminarVideo={eliminarVideo} colorPrimario={colorPrimario}
-      
-      /> */}
 
 
-        <div className="videos">
-          {
-            videoList.map((video) => (
-              <Link to={`/videos/${video.id}`} key={video.id} className="video__link">
-                <Video
-                  datos={video}
-                  colorPrimario={colorPrimario}
-                  eliminarVideo={eliminarVideo}
-                />
-              </Link>
-            ))}
-        </div> 
+      <div className="videos">
+        {
+          videoList.map((video) => (
+            <Link to={`/videos/${video.id}`} key={video.id} className="video__link">
+              <ListaVideos url={`/videos?id_categoria=${id}`}
+                eliminarVideo={eliminarVideo}
+                colorPrimario={colorPrimario}
+              />
+            </Link>
+          ))}
+      </div>
 
 
     </div>

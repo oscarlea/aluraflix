@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from "uuid";
 import Campo from "../Campo";
 import Boton from "../Boton";
 import { StyledForm, StyledTituloCategoria, StyledboxFormulario } from "../../UI";
-
 import { registrarCategoria } from "../../api/api";
 
 const FormularioCategorias = ({ agregarNuevaCategoria, cambiarMostrar }) => {
