@@ -10,6 +10,13 @@ const port = 4000;
 server.use(middlewares);
 // Add this before server.use(router)
 
+server.use(
+    // Add custom route here if needed
+    jsonServer.rewriter({
+     "/api/*": "/$1",
+    })
+   );
+
 server.use(router);
 // Listen to port
 server.listen(port, () => {
