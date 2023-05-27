@@ -1,19 +1,86 @@
 {
-  "posts": [
+  "categorias": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "id": "1",
+      "nombre": "Back End",
+      "colorPrimario": "#57C278",
+      "colorSecundario": "#D9F7E9",
+      "descripcion": "Todos los video que estoy usando para estudiar Back End."
+    },
+    {
+      "id": "2",
+      "nombre": "Front End",
+      "colorPrimario": "#82CFFA",
+      "colorSecundario": "#E8F8FF",
+      "descripcion": "Qui deserunt laborum in enim fugiat ex occaecat sint duis sunt ipsum cillum."
+    },
+    {
+      "id": "3",
+      "nombre": "Data Science",
+      "colorPrimario": "#A6D157",
+      "colorSecundario": "#F0F8E2",
+      "descripcion": "Enim dolor incididunt adipisicing sunt nulla excepteur."
+    },
+    {
+      "id": "4",
+      "nombre": "Devops",
+      "colorPrimario": "#E06B69",
+      "colorSecundario": "#FDE7E8",
+      "descripcion": "Yoquese"
+    },
+    {
+      "id": "5",
+      "nombre": "UX y Diseño",
+      "colorPrimario": "#DB6EBF",
+      "colorSecundario": "#FAE9F5",
+      "descripcion": "Quis elit tempor velit nisi do amet ipsum non non."
+    },
+    {
+      "id": "dc9832c1-ebcf-4ef4-aa43-7494a4b38db6",
+      "nombre": "zzz",
+      "descripcion": "zzz",
+      "colorPrimario": "#ff8080"
+    },
+    {
+      "id": "8ab5113c-3550-42d1-8d1c-9f95f735a138",
+      "nombre": "xx",
+      "descripcion": "xx",
+      "colorPrimario": "#ffff80"
+    },
+    {
+      "id": "56ecc49c-fc80-4cce-af16-d7ea56176c91",
+      "nombre": "aaa",
+      "descripcion": "aaa",
+      "colorPrimario": "#0c0cf1"
+    },
+    {
+      "id": "e2b56532-1c9d-45de-886f-c414056ddded",
+      "nombre": "sdf",
+      "descripcion": "rthhfgh",
+      "colorPrimario": "#162854"
+    },
+    {
+      "nombre": "sad",
+      "descripcion": "s",
+      "colorPrimario": "#1b4b50",
+      "id": "lza_kdF"
+    },
+    {
+      "id": "8e92f944-b2a5-4ad8-a2d0-a0b2004ff0ce",
+      "nombre": "fhg",
+      "descripcion": "fgh",
+      "colorPrimario": "#051865"
     }
   ],
-  "comments": [
+  "videos": [
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": "7f0d0a1c-e09f-4cf0-9cc4-3c4da4027dda",
+      "id_categoria": "3",
+      "titulo": "Noticias IMPACTANTES que NO te cuentan - IA con Brazos Octopus",
+      "videoUrl": "https://www.youtube.com/watch?v=DFrkL3s-9E8",
+      "thumbnail_url": "https://i.ytimg.com/vi/DFrkL3s-9E8/hqdefault.jpg",
+      "author_name": "Vm granmisterio",
+      "videoID": "DFrkL3s"
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
