@@ -1,18 +1,8 @@
-{
-        "builds": [
-
-        {
-            "src": "server.js",
-            "use": "@vercel/node",
-            "config": {
-                "includeFiles": [
-                    "db.json"
-                ]
-            }
-        },
-        {
-            "src": "index.js",
-            "use": "@vercel/static-build"
-        }
+{ 
+    "rewrites": [
+      {
+        "source": "/api/:path*",
+        "destination": "http://localhost:4000/api/:path*"
+      }
     ]
 }
