@@ -7,7 +7,7 @@ const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
 
 const port = 4000;
-server.use(middlewares);
+//server.use(middlewares);
 // Add this before server.use(router)
 
 // Add custom route here if needed
