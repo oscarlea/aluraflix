@@ -6,7 +6,7 @@
       }
     ],
     "env": {
-      "DB_FILE": "src/data/db.json"
+      "DB_FILE": "data/db.json"
     },
     "builds": [
       {
@@ -17,10 +17,7 @@
         "src": "src/index.js",
         "use": "@vercel/static-build"
       }
-    ],
-    "routes": [
-      { "handle": "filesystem" },
-      { "src": "/.*", "dest": "/index.html" }
     ]
   }
+  
   
