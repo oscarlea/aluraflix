@@ -1,5 +1,4 @@
 {
-    "version": 2,
     "builds": [
 
         {
@@ -7,10 +6,4 @@
             "use": "@vercel/static-build"
         }
     ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "server.js"
-        }
-    ]
 }
