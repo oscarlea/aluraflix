@@ -4,15 +4,6 @@
         "source": "/api/:path*",
         "destination": "http://localhost:4000/api/:path*"
       }
-    ],
-
-  "builds": [
-
-    {
-      "src": "./index.js",
-      "use": "@vercel/static-build"
-    }
-  ]
-
+    ]
 }
 
