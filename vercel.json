@@ -7,11 +7,11 @@
     ],
 
     "functions": {
-      "api/server.js": {
+      "src/api/server.js": {
         "memory": 1024,
         "maxDuration": 10
       },
-      "api/*.js": {
+      "src/api/*.js": {
         "memory": 1024,
         "maxDuration": 10
       }
