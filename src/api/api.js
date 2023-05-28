@@ -3,7 +3,8 @@ import axios from "axios"
 //---
 
 export const api = axios.create({
-  baseURL: "http://localhost:4000"
+  //baseURL: "http://localhost:4000"
+  baseURL: "https://6471a5536a9370d5a41a83b2.mockapi.io"
 })
 
 //--- Buscar video/categoria
