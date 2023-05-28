@@ -6,16 +6,12 @@
       }
     ],
 
-    "functions": {
-      "src/api/api.js": {
-        "memory": 1024,
-        "maxDuration": 10
-      },
-      "src/api/*.js": {
-        "memory": 1024,
-        "maxDuration": 10
-      }
+  "builds": [
+    {
+      "src": ".api/server.js",
+      "use": "@now/node"
     }
+  ]
 
 }
 
