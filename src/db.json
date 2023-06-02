@@ -34,43 +34,9 @@
       "colorPrimario": "#DB6EBF",
       "colorSecundario": "#FAE9F5",
       "descripcion": "Quis elit tempor velit nisi do amet ipsum non non."
-    },
-    {
-      "id": "dc9832c1-ebcf-4ef4-aa43-7494a4b38db6",
-      "nombre": "zzz",
-      "descripcion": "zzz",
-      "colorPrimario": "#ff8080"
-    },
-    {
-      "id": "8ab5113c-3550-42d1-8d1c-9f95f735a138",
-      "nombre": "xx",
-      "descripcion": "xx",
-      "colorPrimario": "#ffff80"
-    },
-    {
-      "id": "56ecc49c-fc80-4cce-af16-d7ea56176c91",
-      "nombre": "aaa",
-      "descripcion": "aaa",
-      "colorPrimario": "#0c0cf1"
-    },
-    {
-      "id": "e2b56532-1c9d-45de-886f-c414056ddded",
-      "nombre": "sdf",
-      "descripcion": "rthhfgh",
-      "colorPrimario": "#162854"
-    },
-    {
-      "nombre": "sad",
-      "descripcion": "s",
-      "colorPrimario": "#1b4b50",
-      "id": "lza_kdF"
-    },
-    {
-      "id": "8e92f944-b2a5-4ad8-a2d0-a0b2004ff0ce",
-      "nombre": "fhg",
-      "descripcion": "fgh",
-      "colorPrimario": "#051865"
     }
+
+
   ],
   "videos": [
     {

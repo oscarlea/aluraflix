@@ -1,34 +1,39 @@
-//import { useState } from 'react'
-import { Link } from "react-router-dom"
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import FormularioCategorias from './Formulario/formularioCategorias';
-//import { StyledCategoria } from "../UI";
-import styled from "styled-components"
-import { StyledTituloCategoria } from '../UI';
-import { MdAddCircle } from "react-icons/md"
-import { amarillo } from '../UI/variables';
-import { TiDelete } from "react-icons/ti";
+import styled from "styled-components";
+import { Circulo, DeleteIcon, GoBackIcon } from "../UI";
+import Container from "@mui/material/Container";
+//import {  } from "react-toastify/dist/utils";
 
 
 
-const StyledContenedorCategorias = styled.div`
+const CContainer = styled(Container)`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+`
+
+const ContenedorCategorias = styled.div`
     width: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-`
+`;
 
-const StyledListaCategorias = styled.ul`
+const Ul = styled.ul`
     display: flex;
     justify-content: space-evenly;
-    padding: 2rem;
     flex-wrap: wrap;
-`
+`;
 
-const StyledItemListaCategorias = styled.li`
+const Li = styled.li`
     padding: 1rem 2rem;
     text-decoration: none;
     border-radius: 2rem;
-`
+    background-color: ${props => props.color};
+    box-shadow: 1px 1px 4px black;
+`;
 
 const ContenedorBurbujasCategorias = styled.div`
     display: flex;
@@ -41,68 +46,111 @@ const ContenedorBurbujasCategorias = styled.div`
     gap: 1rem;
     box-sizing: border-box;
     position: relative;
-`
+`;
 
-const StyledLinkCategoria = styled(Link)`
+const SLink = styled(Link)`
     text-decoration: none;
+`;
+
+const Div = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 `
 
-const StyleMdAddCircle = styled(MdAddCircle)`
-    color: ${amarillo};
-    font-size: 5rem;
-    align-self: end;
-    margin: 2rem 5rem;
-`
+const Box = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
 
-const StyledTiDelete = styled(TiDelete)`
-    position: absolute;
-    right: 5px;
-    bottom: 5px;
-    color: ${amarillo};
-    font-size: 4rem;
-    z-index: 1;
-`
+const BotonNombreCategoria = styled.h3`
+  color: ${({ theme }) => theme.text};
+  font-size: 2.5rem;
+  line-height: 2.2rem;
+  font-weight: 500;
+  white-space: normal;
+  padding-right: ${props => props.padding};
+`;
 
-const ListaCategorias = ({ actualizarColor, categorias, agregarNuevaCategoria, botonAddCategoria, cambiarMostrar, mostrarFormulario }) => {
+
+
+const ListaCategoriasComponent = ({ actualizarColor, categorias, agregarNuevaCategoria, cambiarMostrar, mostrarFormulario, eliminarCategoria }) => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const handleGoBack = () => {
+        if (mostrarFormulario) { cambiarMostrar() }
+        navigate('/');
+    };
+
+    /*     useEffect(() => {
+            console.log('mostrarFormulario:', mostrarFormulario);
+        }, [mostrarFormulario]);
+     */
+    const isHomePage = location.pathname === '/';
 
     return (
+        <ContenedorCategorias className="ContenedorCategorias">
 
-        <StyledContenedorCategorias className='xzcxzc'>
+                
+            <Ul className="ListaCategorias">
 
-            <StyledListaCategorias>
+                    {categorias.map(categoria => (
 
-                {
-                    categorias.map(categoria => (
-                        <div style={{ position: "relative"} } >
-                           { botonAddCategoria && <StyledTiDelete onClick={console.log(categoria.nombre)}    />}
 
-                            <StyledLinkCategoria to={`/categoria/${categoria.id}`} key={categoria.id}>
-                                <ContenedorBurbujasCategorias>
-                                    <StyledItemListaCategorias style={{ background: categoria.colorPrimario }}>
-                                        <StyledTituloCategoria>
+                        <Div key={categoria.id}>
+
+                            {mostrarFormulario && <DeleteIcon onClick={(event) => eliminarCategoria(event, categoria.id)} />}
+                            {mostrarFormulario && <Circulo />}
+
+                            <SLink to={`/categoria/${categoria.id}`} key={categoria.id} className="Link">
+
+                                <ContenedorBurbujasCategorias className="burbuja">
+
+                                    <Li color={categoria.colorPrimario}>
+
+                                        <BotonNombreCategoria padding={mostrarFormulario ? "3rem" : "0"}>
                                             {categoria.nombre}
-                                        </StyledTituloCategoria>
-                                    </StyledItemListaCategorias>
+                                        </BotonNombreCategoria>
+
+                                    </Li>
+
                                 </ContenedorBurbujasCategorias>
-                            </StyledLinkCategoria>
-                        </div>
-                    ))
-                }
 
-                {
-                    mostrarFormulario && <FormularioCategorias
-                        actualizarColor={actualizarColor}
-                        agregarNuevaCategoria={agregarNuevaCategoria}
-                        cambiarMostrar={cambiarMostrar}
-                        mostrarFormulario={mostrarFormulario}
+                            </SLink>
+
+                        </Div>
+                    )
+                    )
+                    }
+
+
+
+                {mostrarFormulario && (
+                    
+
+
+                <FormularioCategorias
+                    actualizarColor={actualizarColor}
+                    agregarNuevaCategoria={agregarNuevaCategoria}
+                    cambiarMostrar={cambiarMostrar}
+                    mostrarFormulario={mostrarFormulario}
                     />
-                }
-            </StyledListaCategorias >
+          
+                )}
 
-            {botonAddCategoria && <StyleMdAddCircle onClick={cambiarMostrar} />}
 
-        </StyledContenedorCategorias>
-    )
-}
+            </Ul>
+                    
 
-export default ListaCategorias;
+            <Box>
+                {!isHomePage && <GoBackIcon onClick={handleGoBack} />}
+                {/* {botonAddCategoria && <AddIcon onClick={cambiarMostrar} />} */}
+            </Box>
+
+        </ContenedorCategorias>
+    );
+};
+
+export default ListaCategoriasComponent;

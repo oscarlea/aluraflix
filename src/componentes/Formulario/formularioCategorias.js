@@ -2,13 +2,27 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Campo from "../Campo";
 import Boton from "../Boton";
-import { StyledForm, StyledTituloCategoria, StyledboxFormulario } from "../../UI";
+import { Form, TituloCategoria, FormContainer } from "../../UI";
 import { registrarCategoria } from "../../api/api";
+//import styled from "@emotion/styled";
+
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Container from "@mui/material/Container";
+import Typography from '@mui/material/Typography';
+
+
+/* const MuiContainer = styled(Container)`
+    display: flex;
+    justify-content: center;
+` */
+
+
 
 const FormularioCategorias = ({ agregarNuevaCategoria, cambiarMostrar }) => {
 
     const [nombreF, actualizarNombre] = useState("");
-    const [color, actualizarColor] = useState("#353535");
+    const [color, actualizarColor] = useState("#7d7d7d");
     const [descripcionF, actualizarDescripcionC] = useState("");
 
     const nuevaCategoria = async (e) => {
@@ -29,9 +43,19 @@ const FormularioCategorias = ({ agregarNuevaCategoria, cambiarMostrar }) => {
     };
 
     return (
-        <StyledboxFormulario>
-            <StyledForm onSubmit={nuevaCategoria}>
-                <StyledTituloCategoria>Nueva Categoria</StyledTituloCategoria>
+
+        <Container component={"div"} maxWidth="lg" style={{ display: "flex", justifyContent: "center" }} >
+
+            {/* <FormContainer className="FormContainer"> */}
+
+            <Form onSubmit={nuevaCategoria}>
+
+                <Typography variant="h3" align="center">
+                    Nueva Categoria
+                </Typography>
+
+                <TituloCategoria>Nueva Categoria</TituloCategoria>
+{/*                 
                 <Campo
                     titulo="Nombre"
                     placeholder="Nombre de la categoría"
@@ -39,6 +63,7 @@ const FormularioCategorias = ({ agregarNuevaCategoria, cambiarMostrar }) => {
                     valor={nombreF}
                     actualizarValor={actualizarNombre}
                 />
+
                 <Campo
                     titulo="Descripción"
                     placeholder="Ingresar descripción"
@@ -46,6 +71,40 @@ const FormularioCategorias = ({ agregarNuevaCategoria, cambiarMostrar }) => {
                     valor={descripcionF}
                     actualizarValor={actualizarDescripcionC}
                 />
+ */}
+
+
+                <TextField
+                    id="Nombre"
+                    label="Nombre de la categoría"
+                    variant="outlined"
+                    required
+                    defaultValue=""
+                    autoFocus
+                    valor={nombreF}
+                    //actualizarValor={actualizarNombre}
+                    fullWidth={true}
+                    margin="normal"
+                    value={nombreF}
+                    onChange={(e) => {
+                        console.log(e.target.value)
+                    }}
+                />
+
+
+                <TextField
+                    id="descripcion"
+                    label="Descripción de la categoría"
+                    variant="outlined"
+                    required
+                    defaultValue=""
+                    valor={descripcionF}
+                    //actualizarValor={actualizarNombre}
+                    fullWidth={true}
+                    margin="normal"
+                />
+
+
 
                 <Campo
                     titulo="Color"
@@ -59,9 +118,15 @@ const FormularioCategorias = ({ agregarNuevaCategoria, cambiarMostrar }) => {
 
                 <div className="button-container">
                     <Boton titulo="Guardar" />
+
+                    <Button variant="contained" fontSize="20px" >Registrar</Button>
                 </div>
-            </StyledForm>
-        </StyledboxFormulario>
+            </Form>
+
+            {/* </FormContainer> */}
+
+        </Container>
+
     );
 };
 

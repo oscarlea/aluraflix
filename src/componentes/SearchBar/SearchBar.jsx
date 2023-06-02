@@ -1,23 +1,30 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { FormatoHeader } from "../../UI";
 
 const StyledSearchBar = styled.div`
   display: flex;
   align-items: center;
-
+  flex-grow: 5;
+  gap: 1rem;
+/* 
   position: absolute;
   left: 50%;
-top: 50%;
-transform: translate(-50%, -50%);
+  top: 50%;
+  transform: translate(-50%, -50%); */
 `;
 
-const SearchInput = styled.input`
+
+const SearchInput = styled(FormatoHeader).attrs({ as: 'input' })`
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+  width: 100%;
+  line-height: 1.5;
 `;
+SearchInput.displayName = 'SearchInput';
 
-const SearchButton = styled.button`
+const SearchButton = styled(FormatoHeader).attrs({ as: 'h1' })`
   margin-left: 0.5rem;
   padding: 0.5rem 1rem;
   background-color: #2a7ae4;
@@ -25,9 +32,10 @@ const SearchButton = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  line-height: 1.5;
 `;
 
-const SearchBar = () => {
+const SearchBar = ({videos}) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = () => {

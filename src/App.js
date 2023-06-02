@@ -5,124 +5,158 @@ import './App.css';
 import Header from './componentes/Header';
 import Footer from './componentes/Footer';
 import FormularioVideos from './componentes/Formulario/FormularioVideos';
-import Home from './pages/Home';
 import NoPage from './pages/noPage';
 import PaginaVideoPlayer from './pages/PaginaVideoPlayer';
 import PaginaCategoria from './pages/PaginaCategoria';
 import GlobaStyle from './GlobalStyle';
-import { buscar } from './api/api';
+import { buscar, eliminarCategoriaApi } from './api/api';
 import { temaClaro, temaOscuro } from './UI/temas';
 import { ThemeProvider } from 'styled-components';
-import Categoria from './componentes/Categoria';
+import styled from 'styled-components';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-console.log(temaClaro, temaOscuro)
+import { ThemeProvider as ThemeProviderMui } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+
+import MuiTheme from './UI/MuiTheme';
+
+
+
+
+
+
+const SToast = styled(ToastContainer)`
+font-size: 16px;
+`
+
 
 function App() {
-  // Formulario Categorias
-  const [mostrarFormulario, actualizarMostrar] = useState(false)
-  const cambiarMostrar = () => {
-    actualizarMostrar(!mostrarFormulario)
-  }
-  // Boton agregar categoria
-  const [botonAddCategoria, setAddCategoria] = useState(false);
-  const cambiarMostrarBotonAddCategoria = () => { setAddCategoria(!botonAddCategoria); };  //toggle
-  const MostrarBotonAddCategoria = () => { setAddCategoria(true); };
-  //const ocultarBotonAddCategoria = () => { setAddCategoria(false); };
-  //---
-
-  // bd.json
-  const [categorias, actualizarCategorias] = useState([]);
-/*   const [videoList, actualizarVideos] = useState([]);   // comentario********************************
- */
-  useEffect(() => {
-    buscar(`/categorias`, actualizarCategorias)
-  }, [])
-
-/*      useEffect(() => {
-      buscar(`/videos`, actualizarVideos)  // comentario *******************************************
-    }, []) */
-   
-
-  /*      const agregarNuevoVideo = (video) => {
-        actualizarVideos([...videoList, video]);
-      };
-      */
-  const agregarNuevaCategoria = (categoria) => {
-    actualizarCategorias([...categorias, categoria]);
-  };
-
-  /*   //Eliminar Video
-    const eliminarVideo = (id) => {
-      //event.stopPropagation();
-      console.log("id..: ", id)
-      const videosActualizados = videoList.filter((videoList) => videoList.id !== id)
-      actualizarVideos(videosActualizados)
+    // Formulario Categorias
+    const [mostrarFormulario, actualizarMostrar] = useState(false)
+    const cambiarMostrar = () => {
+        actualizarMostrar(!mostrarFormulario)
     }
-   */
-  //Actualizar color de la categoria
-  const actualizarColor = (color, id) => {
-    const categoriasActualizadas = categorias.map((categoria) => {
-      if (categoria.id === id) {
-        categoria.colorPrimario = color
-        console.log("list ", id, color)
-      }
 
-      return categoria
-    })
-    actualizarCategorias(categoriasActualizadas)
-  }
+    //--- Manejo de Categorias
+    const [categorias, actualizarCategorias] = useState([]);
+    useEffect(() => {
+        buscar(`/categorias`, actualizarCategorias)
+    }, [])
 
-  const propsHome = {
-    categorias: categorias,
-    actualizarColor: actualizarColor,
-    mostrarFormulario: mostrarFormulario,
-    agregarNuevaCategoria: agregarNuevaCategoria
-  };
+    //--- Manejo de videos
+
+    const [videos, setVideos] = useState([]);
+
+    useEffect(() => {
+        buscar(`/videos`, setVideos);
+    }, []);
+
+    const actualizarVideos = (nuevoVideo) => {
+        setVideos([...videos, nuevoVideo]);
+    };
 
 
-  return (
-    <ThemeProvider theme={temaOscuro}>
-      <div className="App">
-        <GlobaStyle />
+    //--- manejo de temas claro/oscuro
+    const [tema, setTema] = useState(() => {
+        // Obtener el tema del localStorage al cargar el componente
+        const temaGuardado = localStorage.getItem('tema');
+        return temaGuardado ? JSON.parse(temaGuardado) : true; // Por defecto, tema claro
+    });
 
-        <Router>
-          <Header cambiarMostrar={cambiarMostrar} MostrarBotonAddCategoria={MostrarBotonAddCategoria} cambiarMostrarBotonAddCategoria={cambiarMostrarBotonAddCategoria} />
-          <Routes>
-            <Route path="/" element={<Home {...propsHome} />} />
-            <Route path='/videos' element={<FormularioVideos
-              categorias={categorias.map((categoria) => ({
-                id: categoria.id,
-                nombre: categoria.nombre,
-              }))}
+    const toggleTheme = () => {
+        const nuevoTema = !tema;
+        setTema(nuevoTema);
+        // Guardar el tema en el localStorage
+        localStorage.setItem('tema', JSON.stringify(nuevoTema));
+    };
 
-            />}
-            />
-            
-            <Route path='/videos/:id' element={<PaginaVideoPlayer />} />
-            <Route path='/categorias/*' element={<PaginaCategoria
-              actualizarColor={actualizarColor}
-              categorias={categorias}
-              agregarNuevaCategoria={agregarNuevaCategoria}
-              botonAddCategoria={botonAddCategoria}
-              cambiarMostrar={cambiarMostrar}
-              mostrarFormulario={mostrarFormulario}
-            />}
-            />
-            <Route path='/categoria/:id?/*' element={<PaginaCategoria
-              actualizarColor={actualizarColor}
-              categorias={categorias}
-              agregarNuevaCategoria={agregarNuevaCategoria}
-            />} />
-            <Route path='*' element={<NoPage />} />
-          </Routes>
+    //---
+    const eliminarCategoria = (event, id) => {
+        event.stopPropagation();
+        const categoriasActualizadas = categorias.filter((categoria) => categoria.id !== id);
+        actualizarCategorias(categoriasActualizadas);
+        eliminarCategoriaApi(id);
+    };
 
-          <Footer cambiarMostrar={cambiarMostrar} />
+    //---
+    const agregarNuevaCategoria = (categoria) => {
+        actualizarCategorias([...categorias, categoria]);
+    };
 
-        </Router>
+    //Actualizar color de la categoria
+    const actualizarColor = (color, id) => {
+        const categoriasActualizadas = categorias.map((categoria) => {
+            if (categoria.id === id) {
+                categoria.colorPrimario = color
+            }
+            return categoria
+        })
+        actualizarCategorias(categoriasActualizadas)
+        //editarCategoria(`/categorias/${id}`, categoriasActualizadas[id - 1])
+    }
 
-      </div>
-    </ThemeProvider>
-  );
+    //---
+    const categoriaProps = {
+        actualizarColor,
+        categorias,
+        agregarNuevaCategoria,
+        /* botonAddCategoria, */
+        cambiarMostrar,
+        mostrarFormulario,
+        eliminarCategoria,
+        videos
+        /* actualizarVideos */
+        /* ocultarBotonAddCategoria */
+    }
+
+
+    return (
+
+        <ThemeProvider theme={tema ? temaClaro : temaOscuro}>
+            {/* <ThemeProviderMui theme={MuiTheme}> */}
+
+             {/*    <Button>font-size</Button> */}
+
+                <div className="App">
+                    <SToast
+                        position="top-center"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme={tema ? "light" : "dark"}
+                    />
+                    <GlobaStyle />
+
+                    <Router>
+                        <Header tema={tema} toggleTheme={toggleTheme} mostrarFormulario={mostrarFormulario} cambiarMostrar={cambiarMostrar} videos={videos} />
+                        <Routes>
+                            <Route path='*' element={<PaginaCategoria {...categoriaProps} />} />
+                            <Route path='/videos' element={<FormularioVideos
+                                categorias={categorias.map((categoria) => ({
+                                    id: categoria.id,
+                                    nombre: categoria.nombre,
+                                }))} actualizarVideos={actualizarVideos}
+                            />} />
+                            <Route path='/videos/:id' element={<PaginaVideoPlayer />} />
+                            <Route path='/categorias/*' element={<PaginaCategoria {...categoriaProps} />} />
+                            <Route path='/categoria/:id?/*' element={<PaginaCategoria {...categoriaProps} />} />
+                            <Route path='*' element={<NoPage />} />
+                        </Routes>
+
+                        <Footer cambiarMostrar={cambiarMostrar} />
+
+                    </Router>
+
+                </div>
+            {/* </ThemeProviderMui> */}
+        </ThemeProvider>
+    );
 }
 
 export default App;

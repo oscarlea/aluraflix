@@ -3,8 +3,6 @@ import "./ListaOpciones.css"
 const ListaOpciones = (props) => {
 
     const manejarCambio = (e) => {
-
-        console.log("cambio", e.target.value)
         props.actualizarIdCategoria(e.target.value)
     }
 

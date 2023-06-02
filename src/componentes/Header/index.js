@@ -1,116 +1,74 @@
-import { NavLink } from "react-router-dom";
-import styled from "styled-components"
-import { fondoOscuro  } from "../../UI/variables";
-import { Logo, LogoContainer } from "../../UI"
 import SearchBar from "../SearchBar/SearchBar";
+import { useNavigate  } from "react-router-dom";
+import styled from "styled-components"
+import { Logo } from "../../UI"
+import { amarillo } from "../../UI/variables";
+import MenuComponent from "../MenuComponent/MenuComponent";
 
-const StiledHeader = styled.header`
+const HeaderContainer = styled.header`
     display: flex;
     justify-content: center; 
     align-items: center; 
-    background-color: ${ ({theme}) => theme.body };
+    background-color: ${({ theme }) => theme.body};
     width: 100%;
     max-width: 1440px;
     border-bottom: 2px solid #2a7ae4;
     padding: 2rem;
     box-sizing: border-box;
-    gap: 1rem;
+    gap: 2rem;
 `
 
-const Nav = styled.nav`
+const Container = styled.div`
+    background-color: ${amarillo};
+    border-radius: 10px;
     display: flex;
-    justify-content: flex-end;
-`
-const Ul = styled.ul`
-    display: flex;
-    align-items: center;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-`
-const StyledItem = styled.div`
-    margin-left: 20px;
-    color: #fff;
-    text-decoration: none;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 1.6rem;
-    font-weight: 400;
-    line-height: normal;
-    transition: color .25s ease;
-
-    &:hover {
-    color: #f5c518;
-    /* font-weight: 600; */
-  }
-`
-
-const StyledBoxLogo = styled.div`
     flex-grow: 5;
     position: relative;
-    
+    padding: 0 2rem;
 `;
 
-const StyleBoxMenu = styled.div`
-    display: flex;
-    justify-content: center;
+const LogoContainer = styled.div`
+    flex-direction: 1;
     flex-grow: 1;
-    background-color: red;
-    border-radius: 10px;
-`
+`;
 
-const StyledNavLink = styled(NavLink)`
-    text-decoration: none;
-`
+function Header({ tema, toggleTheme, mostrarBotonAddCategoria, mostrarFormulario, cambiarMostrar, videos }) {
+    const navigate = useNavigate();
+
+    const heandleClick = () => {
+        if (mostrarFormulario) {
+            cambiarMostrar()
+        }
+        navigate ("/")
+    }
 
 
-
-function Header({ cambiarMostrar, MostrarBotonAddCategoria, cambiarMostrarBotonAddCategoria }) {
     return (
-        <StiledHeader>
+        <HeaderContainer >
 
-            <StyledBoxLogo>
+            <Container className="container">
 
-                <SearchBar className="ñlkl" />
+                <LogoContainer className="logolink" >
 
-                <StyledNavLink to="/" >
-                    <LogoContainer >
+                     <div onClick={heandleClick}> 
                         <Logo src="/img/header-negro.png" alt="AluraFlix" />
-                    </LogoContainer>
-                </StyledNavLink>
+                     </div> 
 
-            </StyledBoxLogo>
+                </LogoContainer>
 
-            <StyleBoxMenu>
-                <Nav>
-                    <Ul >
-                        <li>
-                            <StyledNavLink to="/categorias" onClick={MostrarBotonAddCategoria}>
-                                <StyledItem>
-                                    Categorias
-                                </StyledItem>
-                            </StyledNavLink>
-                        </li>
-                        <li>
-                            <StyledNavLink to="/videos" >
-                                <StyledItem>
-                                    Videos
-                                </StyledItem>
-                            </StyledNavLink>
-                        </li>
+                
+                <SearchBar videos={videos} />
 
-{/*                         <li>
-                            <button onClick={cambiarMostrar}>
-                                Nuevo Video
-                            </button>
-                        </li> */}
+            </Container>
 
-                    </Ul>
-                </Nav>
-            </StyleBoxMenu>
+            <MenuComponent /* mostrarBotonAddCategoria={mostrarBotonAddCategoria}  */
+                            mostrarFormulario={mostrarFormulario} 
+                            cambiarMostrar={cambiarMostrar} 
+                            tema={tema}
+                            toggleTheme={toggleTheme}
+                            />
 
-        </StiledHeader>
+        </HeaderContainer >
     );
 }
 

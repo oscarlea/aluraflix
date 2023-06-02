@@ -11,8 +11,7 @@ const Categoria = (props) => {
   const { colorPrimario, nombre, descripcion, id } = props.categorias[0];
   const { videoList, eliminarVideo, actualizarColor } = props;
 
-  console.log(props.categorias[0])
-
+  
   
 
   const obj = {

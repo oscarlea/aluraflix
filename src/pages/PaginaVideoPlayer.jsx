@@ -3,13 +3,14 @@ import { useParams, useNavigate } from "react-router-dom"
 import { buscar } from "../api/api"
 import ReactPlayer from "react-player";
 import styled from "styled-components"
-import { StyledTituloVideo } from "../UI";
+import { TituloVideo } from "../UI";
+import { fondoOscuro } from "../UI/variables";
 
 const PlayerWrapper = styled.main`
     width: 100%;
     height: 0;
     padding-top:  56.25%;         
-    background: black;
+    background: ${fondoOscuro};
     position: relative;
 `
 const StyledReactPlayer = styled(ReactPlayer)`
@@ -45,9 +46,9 @@ const PaginaVideoPlayer = ({ url }) => {
 
         <PlayerWrapper>
             <StyledVideoContainer>
-                <StyledTituloVideo>
+                <TituloVideo>
                     {video.author_name + " : " + video.titulo}
-                </StyledTituloVideo>
+                </TituloVideo>
             </StyledVideoContainer>
             <StyledReactPlayer
                 url={video.videoUrl}

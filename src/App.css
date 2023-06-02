@@ -1,6 +1,12 @@
 html {
     font-size: 10px;
     background-color: grey;
+
+        background-image: url('../public/img/pxfuel.jpg');
+        background-size: cover; /* Para ajustar la imagen al tamaño del contenedor */
+
+
+      
 }
 
 .App {
@@ -10,11 +16,12 @@ html {
     align-items: center;
 }
 
+ 
 body {
-    font-family: Roboto, Arial, sans-serif;
-    max-width: 1440px;
-    margin: 0 auto;
-    /* padding: 20px; */
+/*      font-family: Roboto, Arial, sans-serif; 
+     max-width: 1440px; 
+ */     margin: 0 auto; 
+/*      padding: 20px;  */
 }
 
 

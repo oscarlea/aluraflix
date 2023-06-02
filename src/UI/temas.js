@@ -16,5 +16,6 @@ export const temaClaro = {
 export const temaOscuro = {
     body: fondoOscuro,
     inside: contenidoOscuro,
-    text: textoFondoOscuro
+    text: textoFondoOscuro,
+    filter: "invert(100%)"
 }

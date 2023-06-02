@@ -42,7 +42,7 @@ export const rgbaToHexWithAlpha = (rgba) => {
 
   const loremIpsum = require('lorem-ipsum').loremIpsum;
 
-  const generateLoremIpsum = (paragraphs, lowerBound, upperBound) => {
+  export const generateLoremIpsum = (paragraphs, lowerBound, upperBound) => {
     const text = loremIpsum({
       count: paragraphs,
       format: 'plain',
