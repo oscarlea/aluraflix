@@ -32,13 +32,10 @@ const LogoContainer = styled.div`
     flex-grow: 1;
 `;
 
-function Header({ tema, toggleTheme, mostrarBotonAddCategoria, mostrarFormulario, cambiarMostrar, videos }) {
+function Header({ videos, ...props }) {
     const navigate = useNavigate();
 
     const heandleClick = () => {
-        if (mostrarFormulario) {
-            cambiarMostrar()
-        }
         navigate ("/")
     }
 
@@ -62,10 +59,13 @@ function Header({ tema, toggleTheme, mostrarBotonAddCategoria, mostrarFormulario
             </Container>
 
             <MenuComponent /* mostrarBotonAddCategoria={mostrarBotonAddCategoria}  */
-                            mostrarFormulario={mostrarFormulario} 
-                            cambiarMostrar={cambiarMostrar} 
-                            tema={tema}
-                            toggleTheme={toggleTheme}
+                            tema={props.tema}
+                            toggleTheme={props.toggleTheme}
+                            cambiarMostrar={props.cambiarMostrar} 
+                            cambiarMostrarVideos={props.cambiarMostrarVideos}
+                            mostrarFormVideos={props.mostrarFormVideos}
+                            mostrarFormCategorias={props.mostrarFormCategorias} 
+                            videos={videos}
                             />
 
         </HeaderContainer >

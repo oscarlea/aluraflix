@@ -1,0 +1,32 @@
+.MuiContainer-maxWidthLg {
+    max-width: 1440px;
+}
+
+/*
+Rule name	Global class	Description
+root	.MuiContainer-root	Styles applied to the root element.
+disableGutters	.MuiContainer-disableGutters	Styles applied to the root element if disableGutters={true}.
+fixed	.MuiContainer-fixed	Styles applied to the root element if fixed={true}.
+maxWidthXs	.MuiContainer-maxWidthXs	Styles applied to the root element if maxWidth="xs".
+maxWidthSm	.MuiContainer-maxWidthSm	Styles applied to the root element if maxWidth="sm".
+maxWidthMd	.MuiContainer-maxWidthMd	Styles applied to the root element if maxWidth="md".
+maxWidthLg	.MuiContainer-maxWidthLg	Styles applied to the root element if maxWidth="lg".
+maxWidthXl	.MuiContainer-maxWidthXl	Styles applied to the root element if maxWidth="xl".
+*/
+
+.MuiTextField-root {
+    size: medium;
+
+}
+
+
+
+
+
+@media (min-width: 1440px) {
+
+    .css-vixtlp-MuiContainer-root {
+        max-width: 1440px;
+    }
+
+}

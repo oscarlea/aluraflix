@@ -5,30 +5,26 @@ import { useParams, useNavigate, Routes, Route } from 'react-router-dom'
 import { hexToRgba, rgbaToHexWithAlpha } from "../Utils/Utils";
 import { CategoriaEncabezado, DescripcionCategoria, MainContainer, StyledCategoria, TituloCategoria } from "../UI";
 import { styled } from "styled-components";
-//import InputColor from "../componentes/InputColor/InputColor";
 
 
-
-
- const InputColor = styled.input`
+const InputColor = styled.input`
     position: absolute;
     right: 2rem;
     padding: .3rem;
     top: 50%;
     transform: translate(0, -50%);
-` 
+`
 
 const Div = styled(StyledCategoria)`
     padding: 0;
 `;
 
-const PaginaCategoria = ({ actualizarColor, eliminarVideo, categorias, agregarNuevaCategoria, cambiarMostrar, mostrarFormulario, eliminarCategoria, videos }) => {
-
-    const { id } = useParams()
+const PaginaCategoria = ({ categorias, videos, actualizarColor, eliminarVideo, ...props }) => {
+    //const { id } = useParams()
     const [categoria, setCategoria] = useState({});
+    const { id = "0" } = useParams()
     const navigate = useNavigate()
-
-
+    
 
     /*     useEffect(() => {
             buscar(`/categorias?id=${id}`, (data) => {
@@ -38,12 +34,11 @@ const PaginaCategoria = ({ actualizarColor, eliminarVideo, categorias, agregarNu
             });
         }, [id, navigate]); */
 
-
-    useEffect(() => {
+    //----
+     useEffect(() => { 
         const buscarCategoriaPorId = (id) => {
             return categorias.find((categoria) => categoria.id === id);
         };
-
         const categoriaEncontrada = buscarCategoriaPorId(id);
         if (categoriaEncontrada) {
             setCategoria(categoriaEncontrada);
@@ -51,8 +46,9 @@ const PaginaCategoria = ({ actualizarColor, eliminarVideo, categorias, agregarNu
             setCategoria({});
             //navigate("/not-found");
         }
-    }, [id, navigate, categorias]);
+     }, [id, navigate, categorias]); 
 
+    //----
     const colorEncabezado = categoria.colorPrimario ? categoria.colorPrimario : "#808080"
     const estiloNombre = { background: colorEncabezado };
     const obj = { backgroundColor: hexToRgba(colorEncabezado, 0.6) };
@@ -65,14 +61,18 @@ const PaginaCategoria = ({ actualizarColor, eliminarVideo, categorias, agregarNu
         <MainContainer className="MainContainer_P_C">
 
             <ListaCategorias
-                actualizarColor={actualizarColor}
+                actualizarColor={props.actualizarColor}
                 categorias={categorias}
-                agregarNuevaCategoria={agregarNuevaCategoria}
-                /* botonAddCategoria={botonAddCategoria} */
-                cambiarMostrar={cambiarMostrar}
-                mostrarFormulario={mostrarFormulario}
-                eliminarCategoria={eliminarCategoria}
-            /* ocultarBotonAddCategoria={ocultarBotonAddCategoria} */
+                nuevaCategoria={props.nuevaCategoria}
+                cambiarMostrar={props.cambiarMostrar}
+                eliminarCategoria={props.eliminarCategoria}
+                mostrarFormCategorias={props.mostrarFormCategorias}
+                mostrarFormVideos={props.mostrarFormVideos}
+                actualizarVideos={props.actualizarVideos}
+                cambiarMostrarVideos={props.cambiarMostrarVideos}
+                setFormCatFalse={props.setFormCatFalse}
+                setFormVidFalse={props.setFormVidFalse}
+
             />
 
             <StyledCategoria bgcolor={obj.backgroundColor} data-testid="categoria/videos en PaginaCategoria">
@@ -95,15 +95,19 @@ const PaginaCategoria = ({ actualizarColor, eliminarVideo, categorias, agregarNu
                             <DescripcionCategoria>{categoria.descripcion}</DescripcionCategoria>
                         </CategoriaEncabezado>
 
-                        <Routes>
+
+                        <Routes>  {/* /Reformular y eliminar ruta. pasar "videos" por props y filtrar el ListaVideos / */}
                             <Route path='/' element={<ListaVideos url={`/videos?id_categoria=${id}`}
                                 colorPrimario={categoria.colorPrimario}
                                 eliminarVideo={eliminarVideo}
-
-                            /* actualizarVideos={actualizarVideos} */
+                                mostrarFormVideos={props.mostrarFormVideos}
+                                id={id}
+                                videos={videos}
                             />}
                             />
                         </Routes>
+
+
                     </>
 
                 ) : (
@@ -118,12 +122,15 @@ const PaginaCategoria = ({ actualizarColor, eliminarVideo, categorias, agregarNu
                             </DescripcionCategoria>
                         </CategoriaEncabezado>
 
-                        <ListaVideos
-                            url="/videos"
+                        {/* /Reformular y eliminar ruta. pasar "videos" por props y filtrar el ListaVideos / */}
+                        <ListaVideos  
+                            url="/videos" 
                             colorPrimario=""
-                            eliminarVideo={eliminarVideo} videos={videos}
-                        /* actualizarVideos={actualizarVideos} */
+                            eliminarVideo={eliminarVideo} 
+                             videos={videos} 
+                            mostrarFormVideos={props.mostrarFormVideos}
                         />
+
                     </Div>
                 )
 

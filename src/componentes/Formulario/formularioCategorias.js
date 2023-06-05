@@ -1,131 +1,72 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import Campo from "../Campo";
-import Boton from "../Boton";
-import { Form, TituloCategoria, FormContainer } from "../../UI";
-import { registrarCategoria } from "../../api/api";
-//import styled from "@emotion/styled";
-
+import { Form, FormContainer, TituloFormulario } from "../../UI";
+import styled from "@emotion/styled";
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Container from "@mui/material/Container";
-import Typography from '@mui/material/Typography';
+//import Container from "@mui/material/Container";
+import '../../UI/Mui.css'
+import FormTextFields from "../TextField";
 
 
-/* const MuiContainer = styled(Container)`
+const Div = styled.div`
     display: flex;
-    justify-content: center;
-` */
+    justify-content: space-around;
+    align-items: center;
+    padding: 2rem 0;
+`
 
+const FormularioCategorias = ({ cambiarMostrar, nuevaCategoria }) => {
 
+    const [nombre, setNombre] = useState("");
+    const [descripcion, setDescripcion] = useState("");
+    const [colorPrimario, setColorPrimario] = useState("#7d7d7d");
 
-const FormularioCategorias = ({ agregarNuevaCategoria, cambiarMostrar }) => {
-
-    const [nombreF, actualizarNombre] = useState("");
-    const [color, actualizarColor] = useState("#7d7d7d");
-    const [descripcionF, actualizarDescripcionC] = useState("");
-
-    const nuevaCategoria = async (e) => {
-        e.preventDefault();
-        const id = uuidv4();
-        const nombre = nombreF;
-        const descripcion = descripcionF;
-        const colorPrimario = color;
-        const datosAEnviar = {
-            id,
-            nombre,
-            descripcion,
-            colorPrimario,
-        };
-        registrarCategoria(datosAEnviar);
-        agregarNuevaCategoria(datosAEnviar);
-        cambiarMostrar();
-    };
 
     return (
 
-        <Container component={"div"} maxWidth="lg" style={{ display: "flex", justifyContent: "center" }} >
+        <FormContainer className="FormContainer">
 
-            {/* <FormContainer className="FormContainer"> */}
+            <Form onSubmit={(e) => {
+                e.preventDefault()
+                nuevaCategoria({ id: uuidv4(), nombre, descripcion, colorPrimario })
 
-            <Form onSubmit={nuevaCategoria}>
+                setNombre(""); 
+                setDescripcion(""); 
+                setColorPrimario("7d7d7d");
+/*                 cambiarMostrar();                */
+            }}>
 
-                <Typography variant="h3" align="center">
-                    Nueva Categoria
-                </Typography>
+                <TituloFormulario>Nueva Categoría</TituloFormulario>
 
-                <TituloCategoria>Nueva Categoria</TituloCategoria>
-{/*                 
-                <Campo
-                    titulo="Nombre"
-                    placeholder="Nombre de la categoría"
+                <FormTextFields
+                    titulo="Nombre de la categoría"
                     required
-                    valor={nombreF}
-                    actualizarValor={actualizarNombre}
+                    valor={nombre}
+                    actualizarValor={setNombre}
                 />
 
-                <Campo
-                    titulo="Descripción"
-                    placeholder="Ingresar descripción"
+                <FormTextFields
+                    titulo="Descripción de la categoría"
                     required
-                    valor={descripcionF}
-                    actualizarValor={actualizarDescripcionC}
-                />
- */}
-
-
-                <TextField
-                    id="Nombre"
-                    label="Nombre de la categoría"
-                    variant="outlined"
-                    required
-                    defaultValue=""
-                    autoFocus
-                    valor={nombreF}
-                    //actualizarValor={actualizarNombre}
-                    fullWidth={true}
-                    margin="normal"
-                    value={nombreF}
-                    onChange={(e) => {
-                        console.log(e.target.value)
-                    }}
+                    valor={descripcion}
+                    actualizarValor={setDescripcion}
                 />
 
-
-                <TextField
-                    id="descripcion"
-                    label="Descripción de la categoría"
-                    variant="outlined"
-                    required
-                    defaultValue=""
-                    valor={descripcionF}
-                    //actualizarValor={actualizarNombre}
-                    fullWidth={true}
-                    margin="normal"
-                />
-
-
-
-                <Campo
+                <FormTextFields
                     titulo="Color"
-                    placeholder="Ingresar color hexadecimal"
                     required
-                    valor={color}
-                    defaultValue={color}
-                    actualizarValor={actualizarColor}
+                    valor={colorPrimario}
+                    actualizarValor={setColorPrimario}
                     type="color"
                 />
 
-                <div className="button-container">
-                    <Boton titulo="Guardar" />
+                <Div className="button-container">
+                    <Button variant="contained" type="submit" size="large" style={{ fontSize: "1.5rem" }}  >Registrar</Button>
+                </Div>
 
-                    <Button variant="contained" fontSize="20px" >Registrar</Button>
-                </div>
             </Form>
 
-            {/* </FormContainer> */}
-
-        </Container>
+        </FormContainer>
 
     );
 };

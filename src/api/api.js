@@ -1,6 +1,7 @@
 import axios from "axios"
 import { toast } from "react-toastify"
 
+
 //---
 export const api = axios.create({
   //baseURL: "http://localhost:4000"
@@ -35,9 +36,6 @@ export const registrarCategoria = async (categoria) => {
 
 //---- Editar Categoria
 export const editarCategoria = async (url, categoria) => {
-
-  console.log(url, categoria)
-  //url = `/categorias/${categoria}`;
   return await api.put(url, categoria);
 }
 
@@ -73,7 +71,7 @@ export const getVideoInfo = async (videoUrl) => {
     if (error.response && error.response.status === 401) {
       throw new Error("El propietario del video inhabilitó la reproducción en otros sitios web.");
     } else {
-      throw new Error("Error al realizar la solicitud GET");
+      throw new Error("Error al registrar el video.");
     }
   }
 };

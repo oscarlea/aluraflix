@@ -5,6 +5,7 @@ import BotonTema from "../BotonTema/BotonTema";
 import { FormatoHeader } from "../../UI";
 
 
+
 // ...
 
 const NavContainer = styled.div`
@@ -28,9 +29,7 @@ const Ul = styled.ul`
 
 const SLink = styled(Link)`
     text-decoration: none;
-
     color: #fff;
-    text-decoration: none;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -45,8 +44,8 @@ const SLink = styled(Link)`
 `;
 
 
-const MenuComponent = ({ tema, toggleTheme, cambiarMostrar }) => {
 
+const MenuComponent = ({ videos, tema, toggleTheme, cambiarMostrar, cambiarMostrarVideos, ...props }) => {
 
     return (
 
@@ -59,10 +58,11 @@ const MenuComponent = ({ tema, toggleTheme, cambiarMostrar }) => {
                     </SLink>
                 </li>
 
+
                 <li>
-                    <SLink to="/videos">
+                    <FormatoHeader onClick={cambiarMostrarVideos}>
                         Videos
-                    </SLink>
+                    </FormatoHeader>
                 </li>
 
                 <BotonTema tema={tema} toggleTheme={toggleTheme} />
@@ -74,3 +74,16 @@ const MenuComponent = ({ tema, toggleTheme, cambiarMostrar }) => {
 };
 
 export default MenuComponent;
+
+/* 
+if (mostrarFormVideos) {
+    cambiarMostrarVideos();
+}       */
+
+/* 
+if (mostrarFormCategorias) {
+    cambiarMostrar();
+}
+if (mostrarFormVideos) {
+    cambiarMostrarVideos();
+}       */

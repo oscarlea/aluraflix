@@ -10,12 +10,18 @@ import {
 export const temaClaro = {
     body: fondoClaro,
     inside: contenidoClaro,
-    text: textoFondoClaro
+    text: textoFondoClaro,
+
+    bodyForm: "#e1dbdb",
+    textForm: "#333333"
 }
 
 export const temaOscuro = {
     body: fondoOscuro,
     inside: contenidoOscuro,
     text: textoFondoOscuro,
-    filter: "invert(100%)"
+
+    bodyForm: "#e1dbdb",
+    textForm: "#333333"
 }
+

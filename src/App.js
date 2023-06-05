@@ -9,20 +9,28 @@ import NoPage from './pages/noPage';
 import PaginaVideoPlayer from './pages/PaginaVideoPlayer';
 import PaginaCategoria from './pages/PaginaCategoria';
 import GlobaStyle from './GlobalStyle';
-import { buscar, eliminarCategoriaApi } from './api/api';
+import { buscar, eliminarCategoriaApi, eliminarVideoApi, registrarCategoria } from './api/api';
 import { temaClaro, temaOscuro } from './UI/temas';
 import { ThemeProvider } from 'styled-components';
+import { ThemeProvider as ThemeProviderMui } from '@mui/material/styles';
 import styled from 'styled-components';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-import { ThemeProvider as ThemeProviderMui } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-
-import MuiTheme from './UI/MuiTheme';
+import { createTheme } from '@mui/material/styles';
 
 
-
+const theme = createTheme({
+    typography: {
+        button: {
+            fontSize: '1rem',
+        },
+        TextField: {
+            MuiInputLabelRoot: {
+                fontSize: '30px',
+            },
+        },
+    },
+});
 
 
 
@@ -32,20 +40,28 @@ font-size: 16px;
 
 
 function App() {
+
     // Formulario Categorias
-    const [mostrarFormulario, actualizarMostrar] = useState(false)
+    const [mostrarFormCategorias, actualizarMostrar] = useState(false)
+    const setFormCatFalse = () => { actualizarMostrar(false); };
     const cambiarMostrar = () => {
-        actualizarMostrar(!mostrarFormulario)
+        actualizarMostrar(!mostrarFormCategorias)
+    }
+
+    // Formulario Videos
+    const [mostrarFormVideos, setShowVideos] = useState(false)
+    const setFormVidFalse = () => { setShowVideos(false); };
+    const cambiarMostrarVideos = () => {
+        setShowVideos(!mostrarFormVideos)
     }
 
     //--- Manejo de Categorias
-    const [categorias, actualizarCategorias] = useState([]);
+    const [categorias, setCategorias] = useState([]);
     useEffect(() => {
-        buscar(`/categorias`, actualizarCategorias)
+        buscar(`/categorias`, setCategorias)
     }, [])
 
     //--- Manejo de videos
-
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {
@@ -59,7 +75,6 @@ function App() {
 
     //--- manejo de temas claro/oscuro
     const [tema, setTema] = useState(() => {
-        // Obtener el tema del localStorage al cargar el componente
         const temaGuardado = localStorage.getItem('tema');
         return temaGuardado ? JSON.parse(temaGuardado) : true; // Por defecto, tema claro
     });
@@ -67,21 +82,29 @@ function App() {
     const toggleTheme = () => {
         const nuevoTema = !tema;
         setTema(nuevoTema);
-        // Guardar el tema en el localStorage
         localStorage.setItem('tema', JSON.stringify(nuevoTema));
     };
 
-    //---
+    //--- eliminar Categoria
     const eliminarCategoria = (event, id) => {
         event.stopPropagation();
         const categoriasActualizadas = categorias.filter((categoria) => categoria.id !== id);
-        actualizarCategorias(categoriasActualizadas);
+        setCategorias(categoriasActualizadas);
         eliminarCategoriaApi(id);
     };
 
-    //---
-    const agregarNuevaCategoria = (categoria) => {
-        actualizarCategorias([...categorias, categoria]);
+    //--- eliminar Video
+    const eliminarVideo = (event, id) => {
+        event.stopPropagation();
+        const videosActualizados = videos.filter((video) => video.id !== id);
+        setVideos(videosActualizados);
+        eliminarVideoApi(id);
+    };
+
+    //---nueva Categoria
+    const nuevaCategoria = (valores) => {
+        registrarCategoria(valores);
+        setCategorias([...categorias, valores]);
     };
 
     //Actualizar color de la categoria
@@ -92,31 +115,32 @@ function App() {
             }
             return categoria
         })
-        actualizarCategorias(categoriasActualizadas)
-        //editarCategoria(`/categorias/${id}`, categoriasActualizadas[id - 1])
+        setCategorias(categoriasActualizadas)
     }
 
     //---
     const categoriaProps = {
         actualizarColor,
         categorias,
-        agregarNuevaCategoria,
-        /* botonAddCategoria, */
+        nuevaCategoria,
         cambiarMostrar,
-        mostrarFormulario,
+        cambiarMostrarVideos,
+        mostrarFormCategorias,
+        mostrarFormVideos,
         eliminarCategoria,
-        videos
-        /* actualizarVideos */
-        /* ocultarBotonAddCategoria */
+        eliminarVideo,
+        videos,
+        actualizarVideos,
+        setFormCatFalse,
+        setFormVidFalse
     }
 
 
     return (
 
         <ThemeProvider theme={tema ? temaClaro : temaOscuro}>
-            {/* <ThemeProviderMui theme={MuiTheme}> */}
 
-             {/*    <Button>font-size</Button> */}
+            <ThemeProviderMui theme={theme}>
 
                 <div className="App">
                     <SToast
@@ -134,14 +158,24 @@ function App() {
                     <GlobaStyle />
 
                     <Router>
-                        <Header tema={tema} toggleTheme={toggleTheme} mostrarFormulario={mostrarFormulario} cambiarMostrar={cambiarMostrar} videos={videos} />
+                        <Header tema={tema} toggleTheme={toggleTheme}
+                            /* mostrarFormCategorias={mostrarFormCategorias}  */
+                            videos={videos}
+                            cambiarMostrar={cambiarMostrar}
+                            cambiarMostrarVideos={cambiarMostrarVideos}
+                            mostrarFormCategorias={mostrarFormCategorias}
+                            mostrarFormVideos={mostrarFormVideos}
+
+                        />
                         <Routes>
                             <Route path='*' element={<PaginaCategoria {...categoriaProps} />} />
+
                             <Route path='/videos' element={<FormularioVideos
                                 categorias={categorias.map((categoria) => ({
                                     id: categoria.id,
                                     nombre: categoria.nombre,
                                 }))} actualizarVideos={actualizarVideos}
+
                             />} />
                             <Route path='/videos/:id' element={<PaginaVideoPlayer />} />
                             <Route path='/categorias/*' element={<PaginaCategoria {...categoriaProps} />} />
@@ -154,7 +188,9 @@ function App() {
                     </Router>
 
                 </div>
-            {/* </ThemeProviderMui> */}
+
+            </ThemeProviderMui>
+
         </ThemeProvider>
     );
 }

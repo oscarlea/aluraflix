@@ -8,29 +8,12 @@ const MuiTheme = createTheme({
     typography: {
         fontFamily: 'Roboto',
         fontSize: 12,
-        button: {
+
+        TextField: {
             fontSize: '2rem',
-            fontStyle: 'italic',
         },
-
     },
 
-    palette: {
-        background: {
-            paper: '#fff',
-        },
-        text: {
-            primary: '#173A5E',
-            secondary: '#46505A',
-        },
-        action: {
-            active: '#001E3C',
-        },
-        success: {
-            dark: '#009688',
-        },
-
-    },
 
 
 

@@ -1,17 +1,17 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormularioCategorias from './Formulario/formularioCategorias';
+import FormularioVideos from "./Formulario/FormularioVideos";
 import styled from "styled-components";
 import { Circulo, DeleteIcon, GoBackIcon } from "../UI";
-import Container from "@mui/material/Container";
+//import Container from "@mui/material/Container";
 //import {  } from "react-toastify/dist/utils";
+import { Container } from "@mui/material";
 
 
-
-const CContainer = styled(Container)`
+const MContainer = styled(Container)`
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    
+    justify-content: center;   
 `
 
 const ContenedorCategorias = styled.div`
@@ -73,81 +73,90 @@ const BotonNombreCategoria = styled.h3`
   padding-right: ${props => props.padding};
 `;
 
+//--------------------------------------------------------------------------------------------------------------------------//
 
-
-const ListaCategoriasComponent = ({ actualizarColor, categorias, agregarNuevaCategoria, cambiarMostrar, mostrarFormulario, eliminarCategoria }) => {
+const ListaCategoriasComponent = ({ categorias, mostrarFormCategorias, mostrarFormVideos, cambiarMostrar, cambiarMostrarVideos, ...props }) => {
     const navigate = useNavigate();
-    const location = useLocation();
 
     const handleGoBack = () => {
-        if (mostrarFormulario) { cambiarMostrar() }
-        navigate('/');
+         cambiarMostrar(false)
+         cambiarMostrarVideos(false)       
+         props.setFormCatFalse()
+         props.setFormVidFalse()
+        navigate('/'); 
     };
 
     /*     useEffect(() => {
-            console.log('mostrarFormulario:', mostrarFormulario);
-        }, [mostrarFormulario]);
+            console.log('mostrarFormCategorias:', mostrarFormCategorias);
+        }, [mostrarFormCategorias]);
      */
-    const isHomePage = location.pathname === '/';
 
     return (
         <ContenedorCategorias className="ContenedorCategorias">
 
-                
             <Ul className="ListaCategorias">
 
-                    {categorias.map(categoria => (
+                {categorias.map(categoria => (
 
+                    <Div key={categoria.id}>
 
-                        <Div key={categoria.id}>
+                        {mostrarFormCategorias && <DeleteIcon onClick={(event) => props.eliminarCategoria(event, categoria.id)} />}
+                        {mostrarFormCategorias && <Circulo />}
 
-                            {mostrarFormulario && <DeleteIcon onClick={(event) => eliminarCategoria(event, categoria.id)} />}
-                            {mostrarFormulario && <Circulo />}
+                        <SLink to={`/categoria/${categoria.id}`} key={categoria.id} className="Link">
 
-                            <SLink to={`/categoria/${categoria.id}`} key={categoria.id} className="Link">
+                            <ContenedorBurbujasCategorias className="burbuja">
 
-                                <ContenedorBurbujasCategorias className="burbuja">
+                                <Li color={categoria.colorPrimario}>
 
-                                    <Li color={categoria.colorPrimario}>
+                                    <BotonNombreCategoria padding={mostrarFormCategorias ? "3rem" : "0"}>
+                                        {categoria.nombre}
+                                    </BotonNombreCategoria>
 
-                                        <BotonNombreCategoria padding={mostrarFormulario ? "3rem" : "0"}>
-                                            {categoria.nombre}
-                                        </BotonNombreCategoria>
+                                </Li>
 
-                                    </Li>
+                            </ContenedorBurbujasCategorias>
 
-                                </ContenedorBurbujasCategorias>
+                        </SLink>
 
-                            </SLink>
-
-                        </Div>
-                    )
-                    )
-                    }
-
-
-
-                {mostrarFormulario && (
-                    
-
-
-                <FormularioCategorias
-                    actualizarColor={actualizarColor}
-                    agregarNuevaCategoria={agregarNuevaCategoria}
-                    cambiarMostrar={cambiarMostrar}
-                    mostrarFormulario={mostrarFormulario}
-                    />
-          
-                )}
-
+                    </Div>
+                )
+                )
+                }
 
             </Ul>
-                    
 
-            <Box>
-                {!isHomePage && <GoBackIcon onClick={handleGoBack} />}
-                {/* {botonAddCategoria && <AddIcon onClick={cambiarMostrar} />} */}
-            </Box>
+            {mostrarFormVideos && (
+                <>
+                    <FormularioVideos
+                        categorias={categorias.map((categoria) => ({
+                            id: categoria.id,
+                            nombre: categoria.nombre,
+                        }))} actualizarVideos={props.actualizarVideos}
+                        cambiarMostrarVideos={cambiarMostrarVideos}
+                    />
+
+                    <Box>
+                        <GoBackIcon onClick={handleGoBack} />
+                    </Box>
+
+                </>
+            )
+            }
+
+            {mostrarFormCategorias && (
+                <>
+                    <FormularioCategorias
+                        actualizarColor={props.actualizarColor}
+                        cambiarMostrar={cambiarMostrar}
+                        nuevaCategoria={props.nuevaCategoria}
+                    />
+
+                    <Box>
+                        <GoBackIcon onClick={handleGoBack} />
+                    </Box>
+                </>
+            )}
 
         </ContenedorCategorias>
     );

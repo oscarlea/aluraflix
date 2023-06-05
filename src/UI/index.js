@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { textoClaro, amarillo, fondoOscuro } from "./variables";
+import { textoClaro, amarillo } from "./variables";
 import { MdAddCircle, MdArrowCircleLeft, MdFiberManualRecord } from "react-icons/md";
 import { TiDelete } from "react-icons/ti";
 
@@ -66,6 +66,16 @@ export const DescripcionCategoria = styled.h2`
     font-weight: 400;
 `
 
+export const TituloFormulario = styled.h3`
+    color: ${({ theme }) => theme.textForm};
+    line-height: 2.2rem;
+    white-space: normal;
+    text-align: center;
+    font-size: 3.5rem;
+    padding: 3rem;
+    font-weight: 300;
+`
+
 export const StyledCategoria = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -90,18 +100,19 @@ export const CategoriaEncabezado = styled.div`
 
 export const FormContainer = styled.section`
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+    /* flex-direction: column; */
+/*     align-items: center;
+    justify-content: space-evenly; */
+    justify-content: center;
 
     width: 100%;
     max-width: 1440px;
     background-color: ${({ theme }) => theme.body};
    
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     /* margin: 80px 50px; */
     box-sizing: border-box;
-    padding: 2rem 1rem;
+    padding: 5rem 0rem;
 `
 
 export const Form = styled.form`
@@ -150,8 +161,8 @@ export const FormatoHeader = styled.h1`
 /*     text-decoration: none;
     color: #fff;
     background-color: transparent;
-    border: none;
-    cursor: pointer; */
+    border: none;*/
+    cursor: pointer;
     font-size: 2rem;
     font-weight: 400;
     line-height: normal;
