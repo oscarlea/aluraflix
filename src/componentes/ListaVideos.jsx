@@ -1,10 +1,11 @@
-import { useState, useEffect, memo } from "react";
-import { buscar } from "../api/api";
-import { Link } from "react-router-dom";
-import { TiDelete } from "react-icons/ti";
+import { memo } from "react";
+//import { buscar } from "../api/api";
+//import { Link } from "react-router-dom";
+//import { TiDelete } from "react-icons/ti";
 import styled from "styled-components";
-import { TituloVideo, TituloAutor, TituloCategoria } from "../UI";
+//import { TituloVideo, TituloAutor, TituloCategoria } from "../UI";
 import { amarillo } from "../UI/variables";
+import ActionAreaCard from "./Card";
 
 /* const VideoContainer = styled.div`
 justify-content: space-between;
@@ -25,7 +26,7 @@ const VideoContainer = styled.div`
   gap: 1rem;
 `;
 
-const VideoItem = styled.div`
+/* const VideoItem = styled.div`
   position: relative;
   width: 100%;
   height: inherit;
@@ -33,24 +34,32 @@ const VideoItem = styled.div`
   max-width: 324px;
   
 `;
+ */
 
+/* 
 const SLink = styled(Link)`
   text-decoration: none;
 `;
+ */
 
+/* 
 const DeleteIcon = styled(TiDelete)`
   position: absolute;
-  right: 5px;
-  bottom: 5px;
+   right: 5px;
+  bottom: 5px; 
   color: ${amarillo};
   font-size: 3.5rem;
-`;
+`; */
 
+
+/* 
 const VideoThumbnail = styled.img`
   width: 100%;
   position: relative;
 `;
+ */
 
+/* 
 const VideoTextContainer = styled.div`
 justify-content: space-between;
   display: flex;
@@ -60,44 +69,55 @@ justify-content: space-between;
   gap: 1rem;
   color: ${({ theme }) => theme.text};
 `;
-
+ */
 //------------------------------------------------------------------------------------------//
 
 const VideoList = ({ url, id, colorPrimario, mostrarFormVideos, eliminarVideo, videos }) => {
 
     const filtroIdCategoria = id;
 
-/*     const [videosUrl, setVideos] = useState([]);
-
-    useEffect(() => {
-        buscar(url, setVideos);
-    }, [url]); */
+    /*     const [videosUrl, setVideos] = useState([]);
+    
+        useEffect(() => {
+            buscar(url, setVideos);
+        }, [url]); */
 
     return (
         videos.length > 0 && (
-          <VideoContainer className="VideoContainer">
-            {videos.map((video) => {
-              const { id } = video;
-      
-              if (filtroIdCategoria && video.id_categoria !== filtroIdCategoria) {
-                return null; // Si filtroIdCategoria está definido y el video no coincide, no se renderiza nada
-              }
-      
-              return (
-                <VideoItem style={{ borderColor: colorPrimario }} key={id} className="VideoItem">
-                  <TituloCategoria />
-                  {mostrarFormVideos && <DeleteIcon onClick={(event) => eliminarVideo(event, id)} />}
-                  <SLink to={`/videos/${id}`}>
-                    {<VideoThumbnail src={video.thumbnail_url} alt={video.titulo} />}
-                    <VideoTextContainer>
-                      <TituloVideo>{"- " + video.titulo}</TituloVideo>
-                      <TituloAutor>{"- " + video.author_name}</TituloAutor>
-                    </VideoTextContainer>
-                  </SLink>
-                </VideoItem>
-              );
-            })}
-          </VideoContainer>
+            <VideoContainer className="VideoContainer">
+                {videos.map((video) => {
+                    /* const { id } = video; */
+
+                    if (filtroIdCategoria && video.id_categoria !== filtroIdCategoria) {
+                        return null; // Si filtroIdCategoria está definido y el video no coincide, no se renderiza nada
+                    }
+
+                    return (
+                        <>
+                            <ActionAreaCard video={video} 
+                                            colorPrimario={colorPrimario} 
+                                            key={video.id} 
+                                            eliminarVideo={eliminarVideo} 
+                                            mostrarFormVideos={mostrarFormVideos} 
+                                            amarillo={amarillo} >
+                            </ActionAreaCard>
+
+                            {/*                             <VideoItem style={{ borderColor: colorPrimario }} key={id} className="VideoItem">
+                                <TituloCategoria />
+                                {mostrarFormVideos && <DeleteIcon onClick={(event) => eliminarVideo(event, id)} />}
+                                <SLink to={`/videos/${id}`}>
+                                    {<VideoThumbnail src={video.thumbnail_url} alt={video.titulo} />}
+                                    <VideoTextContainer>
+                                        <TituloVideo>{"- " + video.titulo}</TituloVideo>
+                                        <TituloAutor>{"- " + video.author_name}</TituloAutor>
+                                    </VideoTextContainer>
+                                </SLink>
+                            </VideoItem> */}
+
+                        </>
+                    );
+                })}
+            </VideoContainer>
         )
     );
 };

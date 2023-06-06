@@ -12,13 +12,13 @@ import GlobaStyle from './GlobalStyle';
 import { buscar, eliminarCategoriaApi, eliminarVideoApi, registrarCategoria } from './api/api';
 import { temaClaro, temaOscuro } from './UI/temas';
 import { ThemeProvider } from 'styled-components';
-import { ThemeProvider as ThemeProviderMui } from '@mui/material/styles';
+//import { ThemeProvider as ThemeProviderMui } from '@mui/material/styles';
 import styled from 'styled-components';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { createTheme } from '@mui/material/styles';
+//import { createTheme } from '@mui/material/styles';
 
-
+/* 
 const theme = createTheme({
     typography: {
         button: {
@@ -32,7 +32,7 @@ const theme = createTheme({
     },
 });
 
-
+ */
 
 const SToast = styled(ToastContainer)`
 font-size: 16px;
@@ -140,12 +140,13 @@ function App() {
 
         <ThemeProvider theme={tema ? temaClaro : temaOscuro}>
 
-            <ThemeProviderMui theme={theme}>
+{/*             <ThemeProviderMui theme={theme} > */}
+            {/* <ThemeProviderMui  >                 */}
 
                 <div className="App">
                     <SToast
                         position="top-center"
-                        autoClose={5000}
+                        autoClose={4000}
                         hideProgressBar={false}
                         newestOnTop={false}
                         closeOnClick
@@ -156,6 +157,8 @@ function App() {
                         theme={tema ? "light" : "dark"}
                     />
                     <GlobaStyle />
+
+{/*                     console.log(theme) */}
 
                     <Router>
                         <Header tema={tema} toggleTheme={toggleTheme}
@@ -189,7 +192,7 @@ function App() {
 
                 </div>
 
-            </ThemeProviderMui>
+            {/* </ThemeProviderMui> */}
 
         </ThemeProvider>
     );

@@ -14,12 +14,12 @@ export default function SelectLabels(props) {
 
     return (
         <div>
-            <FormControl sx={{ m: 1, minWidth: 250, margin:0, marginBottom:"1.8rem" }} required >
+            <FormControl sx={{ m: 1, minWidth: 250, margin: 0, marginBottom: "1.8rem" }} required >
                 <InputLabel id="" style={{ fontSize: '1.8rem' }} >
                     Categorías
                 </InputLabel>
                 <Select
-                    
+
                     labelId=""
                     id=""
                     value={props.valor}

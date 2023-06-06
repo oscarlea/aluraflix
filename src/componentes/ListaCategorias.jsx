@@ -1,18 +1,22 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FormularioCategorias from './Formulario/formularioCategorias';
 import FormularioVideos from "./Formulario/FormularioVideos";
 import styled from "styled-components";
-import { Circulo, DeleteIcon, GoBackIcon } from "../UI";
+import { Circulo, GoBackIcon } from "../UI";
+import FloatingActionButton from "./FloatingButton";
+import { useTheme } from 'styled-components';
+import { amarillo } from "../UI/variables";
+
 //import Container from "@mui/material/Container";
 //import {  } from "react-toastify/dist/utils";
-import { Container } from "@mui/material";
+//import { Container } from "@mui/material";
 
-
+/* 
 const MContainer = styled(Container)`
     display: flex;
     flex-direction: column;
     justify-content: center;   
-`
+` */
 
 const ContenedorCategorias = styled.div`
     width: 100%;
@@ -25,8 +29,9 @@ const Ul = styled.ul`
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    padding: 2rem;
 `;
-
+/* 
 const Li = styled.li`
     padding: 1rem 2rem;
     text-decoration: none;
@@ -34,7 +39,8 @@ const Li = styled.li`
     background-color: ${props => props.color};
     box-shadow: 1px 1px 4px black;
 `;
-
+ */
+/* 
 const ContenedorBurbujasCategorias = styled.div`
     display: flex;
     flex-direction: column;
@@ -47,23 +53,25 @@ const ContenedorBurbujasCategorias = styled.div`
     box-sizing: border-box;
     position: relative;
 `;
-
+ */
+/* 
 const SLink = styled(Link)`
     text-decoration: none;
 `;
-
+ */
+/* 
 const Div = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
 `
-
+ */
 const Box = styled.div`
     display: flex;
     justify-content: space-between;
 `;
-
+/* 
 const BotonNombreCategoria = styled.h3`
   color: ${({ theme }) => theme.text};
   font-size: 2.5rem;
@@ -72,54 +80,76 @@ const BotonNombreCategoria = styled.h3`
   white-space: normal;
   padding-right: ${props => props.padding};
 `;
+ */
 
 //--------------------------------------------------------------------------------------------------------------------------//
 
 const ListaCategoriasComponent = ({ categorias, mostrarFormCategorias, mostrarFormVideos, cambiarMostrar, cambiarMostrarVideos, ...props }) => {
     const navigate = useNavigate();
+    const theme = useTheme();
 
     const handleGoBack = () => {
-         cambiarMostrar(false)
-         cambiarMostrarVideos(false)       
-         props.setFormCatFalse()
-         props.setFormVidFalse()
-        navigate('/'); 
+        cambiarMostrar(false)
+        cambiarMostrarVideos(false)
+        props.setFormCatFalse()
+        props.setFormVidFalse()
+        navigate('/');
     };
 
-    /*     useEffect(() => {
-            console.log('mostrarFormCategorias:', mostrarFormCategorias);
-        }, [mostrarFormCategorias]);
-     */
+    const catZero = {"id":"00",
+    "nombre":"Todos",
+    "colorPrimario":amarillo,
+    "colorSecundario":"",
+    "descripcion":""}
+
 
     return (
         <ContenedorCategorias className="ContenedorCategorias">
 
+       {/*      <GoBackIcon onClick={handleGoBack} /> */}
+
             <Ul className="ListaCategorias">
 
+            <FloatingActionButton categoria={catZero} color={theme.text} amarillo={amarillo} /> 
+                        
                 {categorias.map(categoria => (
+                    <>
 
-                    <Div key={categoria.id}>
+                        <FloatingActionButton categoria={categoria} 
+                                                color={theme.text} 
+                                                amarillo={amarillo} 
+                                                mostrarFormCategorias={mostrarFormCategorias}
+                                                eliminarCategoria={props.eliminarCategoria} 
+                        > 
+                        
+                        </FloatingActionButton>
 
-                        {mostrarFormCategorias && <DeleteIcon onClick={(event) => props.eliminarCategoria(event, categoria.id)} />}
-                        {mostrarFormCategorias && <Circulo />}
+                       
+{/* 
+                        <Div key={categoria.id} className="Div" >
 
-                        <SLink to={`/categoria/${categoria.id}`} key={categoria.id} className="Link">
+                            {mostrarFormCategorias && <DeleteIcon onClick={(event) => props.eliminarCategoria(event, categoria.id)} />}
+                            {mostrarFormCategorias && <Circulo />}
 
-                            <ContenedorBurbujasCategorias className="burbuja">
+                            <SLink to={`/categoria/${categoria.id}`} key={categoria.id} className="Link">
 
-                                <Li color={categoria.colorPrimario}>
+                                <ContenedorBurbujasCategorias className="burbuja">
 
-                                    <BotonNombreCategoria padding={mostrarFormCategorias ? "3rem" : "0"}>
-                                        {categoria.nombre}
-                                    </BotonNombreCategoria>
+                                    <Li color={categoria.colorPrimario}>
 
-                                </Li>
+                                        <BotonNombreCategoria padding={mostrarFormCategorias ? "3rem" : "0"}>
+                                            {categoria.nombre}
+                                        </BotonNombreCategoria>
 
-                            </ContenedorBurbujasCategorias>
+                                    </Li>
 
-                        </SLink>
+                                </ContenedorBurbujasCategorias>
 
-                    </Div>
+                            </SLink>
+
+                        </Div>
+ */}
+                    </>
                 )
                 )
                 }
@@ -138,6 +168,8 @@ const ListaCategoriasComponent = ({ categorias, mostrarFormCategorias, mostrarFo
 
                     <Box>
                         <GoBackIcon onClick={handleGoBack} />
+                       
+
                     </Box>
 
                 </>
@@ -163,3 +195,4 @@ const ListaCategoriasComponent = ({ categorias, mostrarFormCategorias, mostrarFo
 };
 
 export default ListaCategoriasComponent;
+

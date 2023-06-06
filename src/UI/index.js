@@ -149,12 +149,13 @@ export const AddIcon = styled(MdAddCircle)`
 
 export const DeleteIcon = styled(TiDelete)`
 position: absolute; 
-right: 7px; 
+right: 7px;  
 color: ${amarillo};
 font-size: 5rem;
 z-index: 2;
 top: 50%;
 transform: translateY(-50%);
+margin-left: 2rem;
 `;
 
 export const FormatoHeader = styled.h1`
