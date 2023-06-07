@@ -3,11 +3,13 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions, IconButton } from '@mui/material';
+import { CardActionArea, CardActions } from '@mui/material';
 import { Link } from 'react-router-dom';
-import CancelSharpIcon from '@mui/icons-material/CancelSharp';
+//import CancelSharpIcon from '@mui/icons-material/CancelSharp';
 import PlayCircleSharpIcon from '@mui/icons-material/PlayCircleSharp';
-
+//import { DeleteIcon } from '../UI';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import '../UI/Mui.css'
 
 export default function ActionAreaCard({ video, colorPrimario, eliminarVideo, mostrarFormVideos, amarillo }) {
 
@@ -15,14 +17,11 @@ export default function ActionAreaCard({ video, colorPrimario, eliminarVideo, mo
         bgcolor: 'background.paper',
         m: 1,
         border: 1,
-        width: '321',
-        height: '241',
+        
     };
 
-
     return (
-        <Card sx={{ maxWidth: 345, ...commonStyles, borderColor: colorPrimario }}  >
-            {/* <CardActionArea component={Link} to={`/videos/${video.id}`}  > */}
+        <Card sx={{  ...commonStyles, borderColor: colorPrimario }} style={{margin:0}} >
             <CardActionArea  >
 
                 <CardMedia
@@ -42,32 +41,30 @@ export default function ActionAreaCard({ video, colorPrimario, eliminarVideo, mo
                 </CardContent>
 
 
-
                 <CardActions  >
 
-                    <Link to={`/videos/${video.id}`}>
-                        <IconButton aria-label="Play Video" 
-                        sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
-                          >
-                            <PlayCircleSharpIcon style={{ fontSize: 40, color: amarillo }} />
-                            Ver
-                        </IconButton>
+                    <Link to={`/videos/${video.id}`} >
+                        {/*                         <IconButton aria-label="Play Video"
+                            sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
+                        >
+                    </IconButton> */}
+                        <PlayCircleSharpIcon style={{ fontSize: 40, color: amarillo }} />
                     </Link>
 
-                    {mostrarFormVideos && <IconButton aria-label="Eliminar" onClick={(event) => eliminarVideo(event, video.id)}
-                                            style={{ marginLeft: 'auto' }}
-                                            sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
-                    >
-                        <CancelSharpIcon style={{ fontSize: 40, color: amarillo }} />
-                        Eliminar
-                    </IconButton>
+
+                    {mostrarFormVideos &&
+                        /*      <IconButton variant="outlined" aria-label="Eliminar" onClick={(event) => eliminarVideo(event, video.id)}
+                                 style={{ marginLeft: 'auto' }}
+                                 sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
+                             > */
+
+                        <DeleteForeverIcon style={{ fontSize: 40, color: amarillo, marginLeft: 'auto' }} onClick={(event) => eliminarVideo(event, video.id)} />
+
+                        /*         Eliminar */
+                        /*  </IconButton> */
                     }
 
-
-
                 </CardActions>
-
-
 
             </CardActionArea>
         </Card>

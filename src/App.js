@@ -4,7 +4,7 @@ import './reset.css';
 import './App.css';
 import Header from './componentes/Header';
 import Footer from './componentes/Footer';
-import FormularioVideos from './componentes/Formulario/FormularioVideos';
+import FormularioVideos from './componentes/FormularioVideos';
 import NoPage from './pages/noPage';
 import PaginaVideoPlayer from './pages/PaginaVideoPlayer';
 import PaginaCategoria from './pages/PaginaCategoria';
@@ -12,32 +12,14 @@ import GlobaStyle from './GlobalStyle';
 import { buscar, eliminarCategoriaApi, eliminarVideoApi, registrarCategoria } from './api/api';
 import { temaClaro, temaOscuro } from './UI/temas';
 import { ThemeProvider } from 'styled-components';
-//import { ThemeProvider as ThemeProviderMui } from '@mui/material/styles';
 import styled from 'styled-components';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-//import { createTheme } from '@mui/material/styles';
 
-/* 
-const theme = createTheme({
-    typography: {
-        button: {
-            fontSize: '1rem',
-        },
-        TextField: {
-            MuiInputLabelRoot: {
-                fontSize: '30px',
-            },
-        },
-    },
-});
-
- */
 
 const SToast = styled(ToastContainer)`
 font-size: 16px;
 `
-
 
 function App() {
 
@@ -102,8 +84,8 @@ function App() {
     };
 
     //---nueva Categoria
-    const nuevaCategoria = (valores) => {
-        registrarCategoria(valores);
+    const nuevaCategoria = async (e, valores) => {
+        valores.id = await registrarCategoria(valores);
         setCategorias([...categorias, valores]);
     };
 
@@ -140,59 +122,52 @@ function App() {
 
         <ThemeProvider theme={tema ? temaClaro : temaOscuro}>
 
-{/*             <ThemeProviderMui theme={theme} > */}
-            {/* <ThemeProviderMui  >                 */}
+            <div className="App">
+                <SToast
+                    position="top-center"
+                    autoClose={4000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme={tema ? "light" : "dark"}
+                />
+                <GlobaStyle />
 
-                <div className="App">
-                    <SToast
-                        position="top-center"
-                        autoClose={4000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                        theme={tema ? "light" : "dark"}
+                <Router>
+                    <Header tema={tema} toggleTheme={toggleTheme}
+                        /* mostrarFormCategorias={mostrarFormCategorias}  */
+                        videos={videos}
+                        cambiarMostrar={cambiarMostrar}
+                        cambiarMostrarVideos={cambiarMostrarVideos}
+                        mostrarFormCategorias={mostrarFormCategorias}
+                        mostrarFormVideos={mostrarFormVideos}
+
                     />
-                    <GlobaStyle />
+                    <Routes>
+                        <Route path='*' element={<PaginaCategoria {...categoriaProps} />} />
 
-{/*                     console.log(theme) */}
+                        <Route path='/videos' element={<FormularioVideos
+                            categorias={categorias.map((categoria) => ({
+                                id: categoria.id,
+                                nombre: categoria.nombre,
+                            }))} actualizarVideos={actualizarVideos}
 
-                    <Router>
-                        <Header tema={tema} toggleTheme={toggleTheme}
-                            /* mostrarFormCategorias={mostrarFormCategorias}  */
-                            videos={videos}
-                            cambiarMostrar={cambiarMostrar}
-                            cambiarMostrarVideos={cambiarMostrarVideos}
-                            mostrarFormCategorias={mostrarFormCategorias}
-                            mostrarFormVideos={mostrarFormVideos}
+                        />} />
+                        <Route path='/videos/:id' element={<PaginaVideoPlayer />} />
+                        <Route path='/categorias/*' element={<PaginaCategoria {...categoriaProps} />} />
+                        <Route path='/categoria/:id?/*' element={<PaginaCategoria {...categoriaProps} />} />
+                        <Route path='*' element={<NoPage />} />
+                    </Routes>
 
-                        />
-                        <Routes>
-                            <Route path='*' element={<PaginaCategoria {...categoriaProps} />} />
+                    <Footer cambiarMostrar={cambiarMostrar} />
 
-                            <Route path='/videos' element={<FormularioVideos
-                                categorias={categorias.map((categoria) => ({
-                                    id: categoria.id,
-                                    nombre: categoria.nombre,
-                                }))} actualizarVideos={actualizarVideos}
+                </Router>
 
-                            />} />
-                            <Route path='/videos/:id' element={<PaginaVideoPlayer />} />
-                            <Route path='/categorias/*' element={<PaginaCategoria {...categoriaProps} />} />
-                            <Route path='/categoria/:id?/*' element={<PaginaCategoria {...categoriaProps} />} />
-                            <Route path='*' element={<NoPage />} />
-                        </Routes>
-
-                        <Footer cambiarMostrar={cambiarMostrar} />
-
-                    </Router>
-
-                </div>
-
-            {/* </ThemeProviderMui> */}
+            </div>
 
         </ThemeProvider>
     );

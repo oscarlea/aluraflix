@@ -4,7 +4,7 @@ import { toast } from "react-toastify"
 
 //---
 export const api = axios.create({
-  //baseURL: "http://localhost:4000"
+ //   baseURL: "http://localhost:4000"
   baseURL: "https://6471a5536a9370d5a41a83b2.mockapi.io"
 })
 
@@ -14,21 +14,25 @@ export const buscar = async (url, setData) => {
   setData(response.data)
 }
 
-//---- registrar Video
+//---- registrar Video          NOTA:  mockapi.io asigna automaticamente el "id" entonces hacemos un callback con  "return response.data.id; "
 export const registrarVideo = async (video) => {
   try {
     const response = await api.post("/videos", video);
-    toast.success(`Nuevo Video registrado : ${JSON.stringify(response.data.titulo)}` );
+    toast.success(`Nuevo Video registrado: ${JSON.stringify(response.data.titulo)}`);
+    return response.data.id; // Devolver el ID retornado
   } catch (error) {
-    toast.error("Error al registrar el video. ");
+    toast.error("Error al registrar el video.");
+    throw error; // Lanzar el error para manejarlo en el componente `FormularioVideos`
   }
 };
+
 
 //---- registrar Categoria
 export const registrarCategoria = async (categoria) => {
   try {
     const response = await api.post("/categorias", categoria);
     toast.success(`Nueva Categoría registrada : ${JSON.stringify(response.data.nombre)}` );
+    return response.data.id; // Devolver el ID retornado
   } catch (error) {
     toast.error("Error al registrar la Categoría");
   }
@@ -43,7 +47,7 @@ export const editarCategoria = async (url, categoria) => {
 export const eliminarVideoApi = async (id) => {
   try {
     const response = await api.delete(`videos/${id}`);
-    toast.success(`Video eliminado : ${JSON.stringify(response.data.titulo)}` );
+    toast.success(`Video eliminado. : ${JSON.stringify(response.data)}` );
   } catch (error) {
     toast.error("Error al eliminar video:");
   }
@@ -51,7 +55,7 @@ export const eliminarVideoApi = async (id) => {
 
 //---- Eliminar Categoria
 export const eliminarCategoriaApi = async (id) => {
-  try {
+    try {
     const response = await api.delete(`categorias/${id}`);
     toast.success(`Categoría eliminada: ${JSON.stringify(response.data.nombre)}` );
   } catch (error) {

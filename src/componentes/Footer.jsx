@@ -1,7 +1,7 @@
 //import "./Footer.css"
 //import Boton from "../Boton"
 import styled from "styled-components"
-import { Logo, LogoContainer } from "../../UI"
+import { Logo, LogoContainer } from "../UI"
 
 const FooterContainer = styled.footer`
     width: 100%;
@@ -12,7 +12,7 @@ const FooterContainer = styled.footer`
     align-items: center;
     background-color: ${({theme}) => theme.body};
     border-top: 2px solid #2A7AE4;
-    padding: 2rem;
+    padding: min(2rem, 2vw);
     box-sizing: border-box;
 `
 //---
@@ -22,7 +22,6 @@ function Footer(props) {
     return (
 
         <FooterContainer>
-            {/* <Boton titulo="Nuevo Video" onClick={props.cambiarMostrar} /> */}
             <LogoContainer>
                 <Logo src="/img/header-negro.png" alt='AluraFlix' />
             </LogoContainer>

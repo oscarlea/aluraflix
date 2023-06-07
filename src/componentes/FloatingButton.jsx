@@ -7,11 +7,9 @@ import CancelSharpIcon from '@mui/icons-material/CancelSharp';
 //import CancelTwoToneIcon from '@mui/icons-material/CancelTwoTone';
 import CircleIcon from '@mui/icons-material/Circle';
 import { Link } from 'react-router-dom';
-
+import '../UI/Mui.css'
 
 export default function FloatingActionButton({ categoria, color, amarillo, mostrarFormCategorias, eliminarCategoria }) {
-
-
 
 
     const CircleStyles = {
@@ -33,31 +31,33 @@ export default function FloatingActionButton({ categoria, color, amarillo, mostr
     const FabStyles = {
         color: color,
         backgroundColor: categoria.colorPrimario,
-        fontSize: "2rem",
+
+/*         '@media (max-width: 768px)': {
+            fontSize: "1rem"
+          },
+ */
         ":hover": {
             backgroundColor: "#40423e",
             color: "white"
-        }
+        },
     };
+
+
 
     return (
         <Box sx={{ '& > :not(style)': { m: 1, position: 'relative' } }}>
 
-
             <Link to={`/categoria/${categoria.id}`} key={categoria.id} >
-                <Fab variant="extended" aria-label="add" sx={{ ...FabStyles }}>
+                <Fab variant="extended" aria-label="add" size="large" sx={{ ...FabStyles }}>
                     {categoria.nombre}
                     {mostrarFormCategorias && <CircleIcon sx={{ mr: 1, ...CircleStyles }} />}
                     {mostrarFormCategorias && <CancelSharpIcon sx={{ mr: 1, ...CancelStyles }} onClick={(event) => {
-                        /*                         console.log(event, categoria.id) */
                         event.stopPropagation();
                         event.preventDefault();
                         eliminarCategoria(event, categoria.id)
-
                     }} />}
                 </Fab>
             </Link>
-
 
         </Box>
     );

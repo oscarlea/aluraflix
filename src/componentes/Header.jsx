@@ -1,9 +1,9 @@
-import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "./SearchBar";
 import { useNavigate  } from "react-router-dom";
 import styled from "styled-components"
-import { Logo } from "../../UI"
-import { amarillo } from "../../UI/variables";
-import MenuComponent from "../MenuComponent/MenuComponent";
+import { Logo } from "../UI"
+import { amarillo } from "../UI/variables";
+import MenuComponent from "./MenuComponent";
 
 const HeaderContainer = styled.header`
     display: flex;
@@ -13,9 +13,9 @@ const HeaderContainer = styled.header`
     width: 100%;
     max-width: 1440px;
     border-bottom: 2px solid #2a7ae4;
-    padding: 2rem;
+    padding: min(2rem, 2vw);
     box-sizing: border-box;
-    gap: 2rem;
+    gap: min(2rem, 2vw);
 `
 
 const Container = styled.div`
@@ -24,7 +24,7 @@ const Container = styled.div`
     display: flex;
     flex-grow: 5;
     position: relative;
-    padding: 0 2rem;
+    padding: 0 min(2rem, 2vw);
 `;
 
 const LogoContainer = styled.div`

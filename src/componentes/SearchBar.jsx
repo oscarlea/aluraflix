@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { FormatoHeader } from "../../UI";
+import { FormatoHeader } from "../UI";
 
 const StyledSearchBar = styled.div`
   display: flex;

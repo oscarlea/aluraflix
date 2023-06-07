@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
-import { amarillo } from "../../UI/variables";
-import BotonTema from "../BotonTema/BotonTema";
-import { FormatoHeader } from "../../UI";
-
-
+import { amarillo } from "../UI/variables";
+import BotonTema from "./BotonTema";
+import { FormatoHeader } from "../UI";
 
 // ...
 
@@ -19,13 +17,17 @@ const NavContainer = styled.div`
 `;
 
 const Ul = styled.ul`
-    gap: 2rem;
+    /* gap: min(2rem, 2vw); */
     display: flex;
     align-items: center;
     list-style: none;
     padding: 0;
     margin: 0;
 `;
+
+const Li = styled.li`
+    padding: min(2rem, 2vw);;
+`
 
 const SLink = styled(Link)`
     text-decoration: none;
@@ -44,7 +46,6 @@ const SLink = styled(Link)`
 `;
 
 
-
 const MenuComponent = ({ videos, tema, toggleTheme, cambiarMostrar, cambiarMostrarVideos, ...props }) => {
 
     return (
@@ -52,20 +53,21 @@ const MenuComponent = ({ videos, tema, toggleTheme, cambiarMostrar, cambiarMostr
         <NavContainer>
             <Ul>
 
-                <li>
+                <Li>
                     <SLink to="/categorias" onClick={cambiarMostrar}>
                         Categorias
                     </SLink>
-                </li>
+                </Li>
 
-
-                <li>
+                <Li>
                     <FormatoHeader onClick={cambiarMostrarVideos}>
                         Videos
                     </FormatoHeader>
-                </li>
+                </Li>
 
-                <BotonTema tema={tema} toggleTheme={toggleTheme} />
+                <Li>
+                    <BotonTema tema={tema} toggleTheme={toggleTheme} />
+                </Li>
 
             </Ul>
         </NavContainer>
@@ -74,16 +76,3 @@ const MenuComponent = ({ videos, tema, toggleTheme, cambiarMostrar, cambiarMostr
 };
 
 export default MenuComponent;
-
-/* 
-if (mostrarFormVideos) {
-    cambiarMostrarVideos();
-}       */
-
-/* 
-if (mostrarFormCategorias) {
-    cambiarMostrar();
-}
-if (mostrarFormVideos) {
-    cambiarMostrarVideos();
-}       */

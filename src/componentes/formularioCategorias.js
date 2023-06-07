@@ -1,21 +1,20 @@
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { Form, FormContainer, TituloFormulario } from "../../UI";
+//import { v4 as uuidv4 } from "uuid";
+import { Form, FormContainer, TituloFormulario } from "../UI";
 import styled from "@emotion/styled";
 import Button from '@mui/material/Button';
-//import Container from "@mui/material/Container";
-import '../../UI/Mui.css'
-import FormTextFields from "../TextField";
+//import '../UI/Mui.css'
+import FormTextFields from "./TextField";
 
 
 const Div = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 2rem 0;
+    padding: min(2rem 2vw) 0;
 `
 
-const FormularioCategorias = ({ cambiarMostrar, nuevaCategoria }) => {
+const FormularioCategorias = ({ nuevaCategoria }) => {
 
     const [nombre, setNombre] = useState("");
     const [descripcion, setDescripcion] = useState("");
@@ -28,12 +27,10 @@ const FormularioCategorias = ({ cambiarMostrar, nuevaCategoria }) => {
 
             <Form onSubmit={(e) => {
                 e.preventDefault()
-                nuevaCategoria({ id: uuidv4(), nombre, descripcion, colorPrimario })
-
+                nuevaCategoria(e, { nombre, descripcion, colorPrimario })
                 setNombre(""); 
                 setDescripcion(""); 
-                setColorPrimario("7d7d7d");
-/*                 cambiarMostrar();                */
+                setColorPrimario("#7d7d7d");
             }}>
 
                 <TituloFormulario>Nueva Categoría</TituloFormulario>

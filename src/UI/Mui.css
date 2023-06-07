@@ -19,9 +19,31 @@ maxWidthXl	.MuiContainer-maxWidthXl	Styles applied to the root element if maxWid
 
 }
 
+/* .MuiFab-root {
+    font-size: 2rem;
+}    
+
+.MuiFab-sizeMedium {
+    font-size: 2rem;
+} */
+
+.MuiFab-sizeLarge {
+    font-size: 2rem !important;
+}
+
+.MuiCard-root {
+    width: 100%;
+    max-Width: 328px;
+}
 
 
+@media (max-width: 768px) {
 
+    .MuiFab-sizeLarge {
+        font-size: 1.5rem !important;
+    }
+    
+}    
 
 @media (min-width: 1440px) {
 

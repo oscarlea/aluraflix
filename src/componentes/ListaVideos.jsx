@@ -1,75 +1,35 @@
-import { memo } from "react";
-//import { buscar } from "../api/api";
-//import { Link } from "react-router-dom";
-//import { TiDelete } from "react-icons/ti";
+import { Fragment, memo } from "react";
 import styled from "styled-components";
-//import { TituloVideo, TituloAutor, TituloCategoria } from "../UI";
 import { amarillo } from "../UI/variables";
 import ActionAreaCard from "./Card";
+import { Box } from "@mui/material";
 
-/* const VideoContainer = styled.div`
-justify-content: space-between;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+const VideoContainer = styled(Box)`
+    display: grid;
+    grid-gap: 10px;
+    justify-content: center;
 
-  &::after {
-    content: "";
-    flex: 1 1 auto;
-  }
- 
+    @media (max-width: 767px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1024px) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+/*     display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+        gap: 1rem;
+    } */
 `;
- */
-const VideoContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(calc((100% - 3rem) / 4), 1fr));
-  gap: 1rem;
-`;
 
-/* const VideoItem = styled.div`
-  position: relative;
-  width: 100%;
-  height: inherit;
-  border: 2px solid;
-  max-width: 324px;
-  
-`;
- */
-
-/* 
-const SLink = styled(Link)`
-  text-decoration: none;
-`;
- */
-
-/* 
-const DeleteIcon = styled(TiDelete)`
-  position: absolute;
-   right: 5px;
-  bottom: 5px; 
-  color: ${amarillo};
-  font-size: 3.5rem;
-`; */
-
-
-/* 
-const VideoThumbnail = styled.img`
-  width: 100%;
-  position: relative;
-`;
- */
-
-/* 
-const VideoTextContainer = styled.div`
-justify-content: space-between;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  margin: 0;
-  gap: 1rem;
-  color: ${({ theme }) => theme.text};
-`;
- */
 //------------------------------------------------------------------------------------------//
 
 const VideoList = ({ url, id, colorPrimario, mostrarFormVideos, eliminarVideo, videos }) => {
@@ -77,7 +37,6 @@ const VideoList = ({ url, id, colorPrimario, mostrarFormVideos, eliminarVideo, v
     const filtroIdCategoria = id;
 
     /*     const [videosUrl, setVideos] = useState([]);
-    
         useEffect(() => {
             buscar(url, setVideos);
         }, [url]); */
@@ -93,28 +52,15 @@ const VideoList = ({ url, id, colorPrimario, mostrarFormVideos, eliminarVideo, v
                     }
 
                     return (
-                        <>
-                            <ActionAreaCard video={video} 
-                                            colorPrimario={colorPrimario} 
-                                            key={video.id} 
-                                            eliminarVideo={eliminarVideo} 
-                                            mostrarFormVideos={mostrarFormVideos} 
-                                            amarillo={amarillo} >
+                        <Fragment key={video.id}>
+                            <ActionAreaCard video={video}
+                                colorPrimario={colorPrimario}
+                                key={video.id}
+                                eliminarVideo={eliminarVideo}
+                                mostrarFormVideos={mostrarFormVideos}
+                                amarillo={amarillo} >
                             </ActionAreaCard>
-
-                            {/*                             <VideoItem style={{ borderColor: colorPrimario }} key={id} className="VideoItem">
-                                <TituloCategoria />
-                                {mostrarFormVideos && <DeleteIcon onClick={(event) => eliminarVideo(event, id)} />}
-                                <SLink to={`/videos/${id}`}>
-                                    {<VideoThumbnail src={video.thumbnail_url} alt={video.titulo} />}
-                                    <VideoTextContainer>
-                                        <TituloVideo>{"- " + video.titulo}</TituloVideo>
-                                        <TituloAutor>{"- " + video.author_name}</TituloAutor>
-                                    </VideoTextContainer>
-                                </SLink>
-                            </VideoItem> */}
-
-                        </>
+                        </Fragment>
                     );
                 })}
             </VideoContainer>

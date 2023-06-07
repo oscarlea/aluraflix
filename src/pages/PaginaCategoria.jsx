@@ -107,7 +107,6 @@ const PaginaCategoria = ({ categorias, videos, actualizarColor, eliminarVideo, .
                             />
                         </Routes>
 
-
                     </>
 
                 ) : (

@@ -1,11 +1,11 @@
 import { useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
-import { Form, FormContainer, TituloFormulario } from "../../UI";
-import { getVideoInfo, registrarVideo } from '../../api/api';
+//import { v4 as uuidv4 } from 'uuid';
+import { Form, FormContainer, TituloFormulario } from "../UI";
+import { getVideoInfo, registrarVideo } from "../api/api";
 import { toast } from "react-toastify";
-import SelectLabels from "../Select";
-import FormTextFields from "../TextField";
+import SelectLabels from "./Select";
+import FormTextFields from "./TextField";
 import { styled } from "styled-components";
 import Button from "@mui/material/Button";
 
@@ -14,10 +14,9 @@ const Div = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 2rem 0;
+    padding: min(2rem 2vw) 0;
 `
-
-const FormularioVideos = ({ categorias, actualizarVideos, cambiarMostrarVideos }) => {
+const FormularioVideos = ({ categorias, actualizarVideos }) => {
 
     const navigate = useNavigate();
     const formRef = useRef(null);
@@ -28,20 +27,21 @@ const FormularioVideos = ({ categorias, actualizarVideos, cambiarMostrarVideos }
     const nuevoVideo = async (e) => {
         e.preventDefault();
         const datosAEnviar = {
-            id: uuidv4(),
+          /*   id: uuidv4(), */
             id_categoria,
             videoUrl,
             videoID: getVideoId(videoUrl),
             titulo: "",
             thumbnail_url: "",
             author_name: "",
+            id:"",
         };
         try {
             const videoInfo = await getVideoInfo(videoUrl);
             datosAEnviar.titulo = videoInfo.title;
             datosAEnviar.thumbnail_url = videoInfo.thumbnail_url;
             datosAEnviar.author_name = videoInfo.author_name;
-            await registrarVideo(datosAEnviar);
+            datosAEnviar.id = await registrarVideo(datosAEnviar);
             actualizarVideos(datosAEnviar)
             /* formRef.current.reset(); */
             actualizarIdCategoria(""); 

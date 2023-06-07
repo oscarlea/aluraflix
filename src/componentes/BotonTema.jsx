@@ -8,6 +8,7 @@ const TemaIcono = styled.div`
     justify-content: center;
     gap: 1rem;
     cursor: pointer;
+    padding: min(1rem, 2vw) ;
 `;
 
 function BotonTema({ tema, toggleTheme }) {

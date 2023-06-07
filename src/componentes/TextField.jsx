@@ -34,14 +34,14 @@ export default function FormTextFields(props) {
                             fontSize: '1.8rem',
                         },
                     }}
-                 
+
                     helperText={props.textoAyuda}
                     FormHelperTextProps={{
                         sx: {
-                          fontSize: '1.5rem',
+                            fontSize: '1.5rem',
                         },
-                      }}
-  
+                    }}
+
                 />
             </div>
 
