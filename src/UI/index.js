@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { textoClaro, amarillo } from "./variables";
+import { amarillo } from "./variables";
 import {  MdArrowCircleLeft } from "react-icons/md";
 
 

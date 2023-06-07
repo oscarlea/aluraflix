@@ -1,8 +1,10 @@
-import { Fragment, memo } from "react";
+import { Fragment, memo, useContext } from "react";
 import styled from "styled-components";
 import { amarillo } from "../UI/variables";
 import ActionAreaCard from "./Card";
 import { Box } from "@mui/material";
+import { VideoDataContext } from "../Context";
+
 
 const VideoContainer = styled(Box)`
     display: grid;
@@ -20,19 +22,14 @@ const VideoContainer = styled(Box)`
     @media (min-width: 1024px) {
         grid-template-columns: repeat(4, 1fr);
     }
-
-/*     display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-
-    @media (max-width: 768px) {
-        gap: 1rem;
-    } */
 `;
 
 //------------------------------------------------------------------------------------------//
 
-const VideoList = ({ url, id, colorPrimario, mostrarFormVideos, eliminarVideo, videos }) => {
+const VideoList = ({ url, id, colorPrimario }) => {
+
+    const videoDataContext = useContext(VideoDataContext)
+    const videos = videoDataContext.videos
 
     const filtroIdCategoria = id;
 
@@ -56,8 +53,6 @@ const VideoList = ({ url, id, colorPrimario, mostrarFormVideos, eliminarVideo, v
                             <ActionAreaCard video={video}
                                 colorPrimario={colorPrimario}
                                 key={video.id}
-                                eliminarVideo={eliminarVideo}
-                                mostrarFormVideos={mostrarFormVideos}
                                 amarillo={amarillo} >
                             </ActionAreaCard>
                         </Fragment>

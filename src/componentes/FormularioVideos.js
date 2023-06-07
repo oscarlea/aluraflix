@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 //import { v4 as uuidv4 } from 'uuid';
 import { Form, FormContainer, TituloFormulario } from "../UI";
@@ -8,6 +8,7 @@ import SelectLabels from "./Select";
 import FormTextFields from "./TextField";
 import { styled } from "styled-components";
 import Button from "@mui/material/Button";
+import { VideoDataContext } from "../Context";
 
 
 const Div = styled.div`
@@ -16,7 +17,10 @@ const Div = styled.div`
     align-items: center;
     padding: min(2rem 2vw) 0;
 `
-const FormularioVideos = ({ categorias, actualizarVideos }) => {
+const FormularioVideos = () => {
+
+    const videoDataContext = useContext(VideoDataContext);
+    const actualizarVideos = videoDataContext.actualizarVideos
 
     const navigate = useNavigate();
     const formRef = useRef(null);
@@ -27,14 +31,14 @@ const FormularioVideos = ({ categorias, actualizarVideos }) => {
     const nuevoVideo = async (e) => {
         e.preventDefault();
         const datosAEnviar = {
-          /*   id: uuidv4(), */
+            /*   id: uuidv4(), */
             id_categoria,
             videoUrl,
             videoID: getVideoId(videoUrl),
             titulo: "",
             thumbnail_url: "",
             author_name: "",
-            id:"",
+            id: "",
         };
         try {
             const videoInfo = await getVideoInfo(videoUrl);
@@ -44,8 +48,8 @@ const FormularioVideos = ({ categorias, actualizarVideos }) => {
             datosAEnviar.id = await registrarVideo(datosAEnviar);
             actualizarVideos(datosAEnviar)
             /* formRef.current.reset(); */
-            actualizarIdCategoria(""); 
-            actualizarVideoUrl(""); 
+            actualizarIdCategoria("");
+            actualizarVideoUrl("");
         } catch (error) {
             toast.error(error.message);
             navigate('/');
@@ -68,7 +72,6 @@ const FormularioVideos = ({ categorias, actualizarVideos }) => {
                 <SelectLabels
                     valor={id_categoria}
                     actualizarIdCategoria={actualizarIdCategoria}
-                    categorias={categorias}
                 />
 
                 <FormTextFields

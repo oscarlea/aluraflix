@@ -1,9 +1,10 @@
 import SearchBar from "./SearchBar";
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
 import { Logo } from "../UI"
 import { amarillo } from "../UI/variables";
 import MenuComponent from "./MenuComponent";
+
 
 const HeaderContainer = styled.header`
     display: flex;
@@ -32,42 +33,26 @@ const LogoContainer = styled.div`
     flex-grow: 1;
 `;
 
-function Header({ videos, ...props }) {
+function Header() {
+
     const navigate = useNavigate();
 
     const heandleClick = () => {
-        navigate ("/")
+        navigate("/")
     }
 
 
     return (
         <HeaderContainer >
-
             <Container className="container">
-
                 <LogoContainer className="logolink" >
-
-                     <div onClick={heandleClick}> 
+                    <div onClick={heandleClick}>
                         <Logo src="/img/header-negro.png" alt="AluraFlix" />
-                     </div> 
-
+                    </div>
                 </LogoContainer>
-
-                
-                <SearchBar videos={videos} />
-
+                <SearchBar />
             </Container>
-
-            <MenuComponent /* mostrarBotonAddCategoria={mostrarBotonAddCategoria}  */
-                            tema={props.tema}
-                            toggleTheme={props.toggleTheme}
-                            cambiarMostrar={props.cambiarMostrar} 
-                            cambiarMostrarVideos={props.cambiarMostrarVideos}
-                            mostrarFormVideos={props.mostrarFormVideos}
-                            mostrarFormCategorias={props.mostrarFormCategorias} 
-                            videos={videos}
-                            />
-
+            <MenuComponent />
         </HeaderContainer >
     );
 }

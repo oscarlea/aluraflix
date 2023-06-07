@@ -1,31 +1,6 @@
 html {
     font-size: 10px;
     background-color: grey;
-
-        background-image: url('../public/img/pxfuel.jpg');
-        background-size: cover; /* Para ajustar la imagen al tamaño del contenedor */
-
-
-      
+    background-image: url(../public/img/jj-ying-unsplash.jpg);
+    background-size: cover;
 }
-
-.App {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
- 
-body {
-/*      font-family: Roboto, Arial, sans-serif; 
-     max-width: 1440px; 
- */     margin: 0 auto; 
-/*      padding: 20px;  */
-}
-
-
-.contenedor_padding1rem {
-    padding: 1rem;
-}
-

@@ -6,7 +6,8 @@ import { GoBackIcon } from "../UI";
 import FloatingActionButton from "./FloatingButton";
 import { useTheme } from 'styled-components';
 import { amarillo } from "../UI/variables";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
+import { VideoDataContext } from "../Context";
 
 
 const ContenedorCategorias = styled.div`
@@ -31,15 +32,30 @@ const Box = styled.div`
 
 //--------------------------------------------------------------------------------------------------------------------------//
 
-const ListaCategoriasComponent = ({ categorias, mostrarFormCategorias, mostrarFormVideos, cambiarMostrar, cambiarMostrarVideos, ...props }) => {
+const ListaCategoriasComponent = () => {
+
+    const videoDataContext = useContext(VideoDataContext);
+    const categorias = videoDataContext.categorias;
+    const mostrarFormCategorias = videoDataContext.mostrarFormCategorias
+    const mostrarFormVideos = videoDataContext.mostrarFormVideos
+    const cambiarMostrar = videoDataContext.cambiarMostrar
+    const cambiarMostrarVideos = videoDataContext.cambiarMostrarVideos
+/*     const setFormCatFalse = videoDataContext.setFormCatFalse
+    const setFormVidFalse = videoDataContext.setFormVidFalse
+ */    const actualizarMostrar = videoDataContext.actualizarMostrar
+    const setShowVideos = videoDataContext.setShowVideos
+    
+
     const navigate = useNavigate();
     const theme = useTheme();
 
     const handleGoBack = () => {
         cambiarMostrar(false)
         cambiarMostrarVideos(false)
-        props.setFormCatFalse()
-        props.setFormVidFalse()
+        /* setFormCatFalse() */
+        /* setFormVidFalse() */
+        actualizarMostrar(false)
+        setShowVideos(false)
         navigate('/');
     };
 
@@ -65,7 +81,6 @@ const ListaCategoriasComponent = ({ categorias, mostrarFormCategorias, mostrarFo
                             color={theme.text}
                             amarillo={amarillo}
                             mostrarFormCategorias={mostrarFormCategorias}
-                            eliminarCategoria={props.eliminarCategoria}
                         >
                         </FloatingActionButton>
                     </Fragment>
@@ -79,7 +94,7 @@ const ListaCategoriasComponent = ({ categorias, mostrarFormCategorias, mostrarFo
                         categorias={categorias.map((categoria) => ({
                             id: categoria.id,
                             nombre: categoria.nombre,
-                        }))} actualizarVideos={props.actualizarVideos}
+                        }))} 
                         cambiarMostrarVideos={cambiarMostrarVideos}
                     />
 
@@ -93,9 +108,7 @@ const ListaCategoriasComponent = ({ categorias, mostrarFormCategorias, mostrarFo
             {mostrarFormCategorias && (
                 <>
                     <FormularioCategorias
-                        actualizarColor={props.actualizarColor}
                         cambiarMostrar={cambiarMostrar}
-                        nuevaCategoria={props.nuevaCategoria}
                     />
 
                     <Box>
@@ -109,4 +122,3 @@ const ListaCategoriasComponent = ({ categorias, mostrarFormCategorias, mostrarFo
 };
 
 export default ListaCategoriasComponent;
-

@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 //import { v4 as uuidv4 } from "uuid";
 import { Form, FormContainer, TituloFormulario } from "../UI";
 import styled from "@emotion/styled";
 import Button from '@mui/material/Button';
-//import '../UI/Mui.css'
 import FormTextFields from "./TextField";
+import { VideoDataContext } from "../Context";
 
 
 const Div = styled.div`
@@ -14,7 +14,10 @@ const Div = styled.div`
     padding: min(2rem 2vw) 0;
 `
 
-const FormularioCategorias = ({ nuevaCategoria }) => {
+const FormularioCategorias = () => {
+
+    const videoDataContext = useContext(VideoDataContext)
+    const nuevaCategoria = videoDataContext.nuevaCategoria
 
     const [nombre, setNombre] = useState("");
     const [descripcion, setDescripcion] = useState("");
@@ -22,8 +25,8 @@ const FormularioCategorias = ({ nuevaCategoria }) => {
 
 
     return (
-
         <FormContainer className="FormContainer">
+
 
             <Form onSubmit={(e) => {
                 e.preventDefault()
@@ -32,7 +35,7 @@ const FormularioCategorias = ({ nuevaCategoria }) => {
                 setDescripcion(""); 
                 setColorPrimario("#7d7d7d");
             }}>
-
+ 
                 <TituloFormulario>Nueva Categoría</TituloFormulario>
 
                 <FormTextFields
@@ -62,9 +65,8 @@ const FormularioCategorias = ({ nuevaCategoria }) => {
                 </Div>
 
             </Form>
-
+        
         </FormContainer>
-
     );
 };
 

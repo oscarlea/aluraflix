@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
+import { useParams, useNavigate, Routes, Route } from 'react-router-dom'
 import ListaCategorias from '../componentes/ListaCategorias'
 import ListaVideos from '../componentes/ListaVideos'
-import { useParams, useNavigate, Routes, Route } from 'react-router-dom'
 import { hexToRgba, rgbaToHexWithAlpha } from "../Utils/Utils";
 import { CategoriaEncabezado, DescripcionCategoria, MainContainer, StyledCategoria, TituloCategoria } from "../UI";
 import { styled } from "styled-components";
+import { VideoDataContext } from "../Context";
 
 
 const InputColor = styled.input`
@@ -19,7 +20,12 @@ const Div = styled(StyledCategoria)`
     padding: 0;
 `;
 
-const PaginaCategoria = ({ categorias, videos, actualizarColor, eliminarVideo, ...props }) => {
+const PaginaCategoria = () => {
+
+    const videoDataContext = useContext(VideoDataContext);
+    const categorias = videoDataContext.categorias;
+    const actualizarColor = videoDataContext.actualizarColor
+
     //const { id } = useParams()
     const [categoria, setCategoria] = useState({});
     const { id = "0" } = useParams()
@@ -61,17 +67,12 @@ const PaginaCategoria = ({ categorias, videos, actualizarColor, eliminarVideo, .
         <MainContainer className="MainContainer_P_C">
 
             <ListaCategorias
-                actualizarColor={props.actualizarColor}
-                categorias={categorias}
-                nuevaCategoria={props.nuevaCategoria}
-                cambiarMostrar={props.cambiarMostrar}
-                eliminarCategoria={props.eliminarCategoria}
+/*                 cambiarMostrar={cambiarMostrar}
                 mostrarFormCategorias={props.mostrarFormCategorias}
                 mostrarFormVideos={props.mostrarFormVideos}
-                actualizarVideos={props.actualizarVideos}
                 cambiarMostrarVideos={props.cambiarMostrarVideos}
                 setFormCatFalse={props.setFormCatFalse}
-                setFormVidFalse={props.setFormVidFalse}
+                setFormVidFalse={props.setFormVidFalse} */
 
             />
 
@@ -99,10 +100,7 @@ const PaginaCategoria = ({ categorias, videos, actualizarColor, eliminarVideo, .
                         <Routes>  {/* /Reformular y eliminar ruta. pasar "videos" por props y filtrar el ListaVideos / */}
                             <Route path='/' element={<ListaVideos url={`/videos?id_categoria=${id}`}
                                 colorPrimario={categoria.colorPrimario}
-                                eliminarVideo={eliminarVideo}
-                                mostrarFormVideos={props.mostrarFormVideos}
                                 id={id}
-                                videos={videos}
                             />}
                             />
                         </Routes>
@@ -117,7 +115,7 @@ const PaginaCategoria = ({ categorias, videos, actualizarColor, eliminarVideo, .
                                 {'Todos los Videos'}
                             </TituloCategoria>
                             <DescripcionCategoria>
-                                {'asdasd asd asd asd '}
+                                {'asdasd asd asd asd '}    {/* <-- indicar cant de videos uy cant categorias */}
                             </DescripcionCategoria>
                         </CategoriaEncabezado>
 
@@ -125,9 +123,7 @@ const PaginaCategoria = ({ categorias, videos, actualizarColor, eliminarVideo, .
                         <ListaVideos  
                             url="/videos" 
                             colorPrimario=""
-                            eliminarVideo={eliminarVideo} 
-                             videos={videos} 
-                            mostrarFormVideos={props.mostrarFormVideos}
+           /*                  mostrarFormVideos={props.mostrarFormVideos} */
                         />
 
                     </Div>

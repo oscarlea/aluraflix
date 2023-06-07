@@ -8,10 +8,17 @@ import CancelSharpIcon from '@mui/icons-material/CancelSharp';
 import CircleIcon from '@mui/icons-material/Circle';
 import { Link } from 'react-router-dom';
 import '../UI/Mui.css'
+import { VideoDataContext } from '../Context';
+import { useContext } from 'react';
+import { amarillo } from '../UI/variables';
 
-export default function FloatingActionButton({ categoria, color, amarillo, mostrarFormCategorias, eliminarCategoria }) {
+export default function FloatingActionButton({ categoria, color, mostrarFormCategorias }) {
 
+    // falta funcion para generar "categoria"
+    const videoDataContext  = useContext(VideoDataContext)
+    const eliminarCategoria = videoDataContext.eliminarCategoria
 
+    
     const CircleStyles = {
         position: 'relative',
         zIndex: 1,

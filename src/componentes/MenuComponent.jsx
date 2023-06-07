@@ -3,7 +3,9 @@ import { styled } from "styled-components";
 import { amarillo } from "../UI/variables";
 import BotonTema from "./BotonTema";
 import { FormatoHeader } from "../UI";
-
+import { VideoDataContext } from "../Context";
+import { useContext } from "react";
+ 
 // ...
 
 const NavContainer = styled.div`
@@ -46,7 +48,13 @@ const SLink = styled(Link)`
 `;
 
 
-const MenuComponent = ({ videos, tema, toggleTheme, cambiarMostrar, cambiarMostrarVideos, ...props }) => {
+const MenuComponent = () => {
+
+    const videoDataContext = useContext(VideoDataContext)
+    const toggleTheme = videoDataContext.toggleTheme
+    const cambiarMostrar = videoDataContext.cambiarMostrar
+    const cambiarMostrarVideos = videoDataContext.cambiarMostrarVideos
+    const tema = videoDataContext.tema
 
     return (
 
@@ -65,9 +73,9 @@ const MenuComponent = ({ videos, tema, toggleTheme, cambiarMostrar, cambiarMostr
                     </FormatoHeader>
                 </Li>
 
-                <Li>
+                
                     <BotonTema tema={tema} toggleTheme={toggleTheme} />
-                </Li>
+                
 
             </Ul>
         </NavContainer>

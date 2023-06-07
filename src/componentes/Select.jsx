@@ -1,15 +1,21 @@
-import * as React from 'react';
+/* import React  from 'react'; */
+import { useContext } from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 //import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { VideoDataContext } from '../Context';
 
-export default function SelectLabels(props) {
+
+export default function SelectLabels({ actualizarIdCategoria, valor }) {
+
+    const videoDataContext = useContext(VideoDataContext)
+    const categorias = videoDataContext.categorias
 
 
     const handleChange = (event) => {
-        props.actualizarIdCategoria(event.target.value)
+        actualizarIdCategoria(event.target.value)
     }
 
     return (
@@ -22,13 +28,13 @@ export default function SelectLabels(props) {
 
                     labelId=""
                     id=""
-                    value={props.valor}
+                    value={valor}
                     label="id_categoria"
                     onChange={handleChange}
                     style={{ fontSize: '1.8rem' }}
                     size="large"
                 >
-                    {props.categorias.map((categoria) => {
+                    {categorias.map((categoria) => {
                         return (
                             <MenuItem key={categoria.id} value={categoria.id} style={{ fontSize: '1.5rem' }}>{categoria.nombre}</MenuItem>
                         );

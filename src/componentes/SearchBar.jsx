@@ -35,7 +35,7 @@ const SearchButton = styled(FormatoHeader).attrs({ as: 'h1' })`
   line-height: 1.5;
 `;
 
-const SearchBar = ({videos}) => {
+const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = () => {
