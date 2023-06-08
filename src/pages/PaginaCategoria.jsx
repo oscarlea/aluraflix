@@ -89,7 +89,7 @@ const PaginaCategoria = () => {
                         </CategoriaEncabezado>
 
 
-                        <Routes>  {/* /Reformular y eliminar ruta. pasar "videos" por props y filtrar el ListaVideos / */}
+                        <Routes>  {/* /falta Reformular y eliminar ruta. pasar "videos" por props y filtrar el ListaVideos / */}
                             <Route path='/' element={<ListaVideos url={`/videos?id_categoria=${id}`}
                                 colorPrimario={categoria.colorPrimario}
                                 id={id}

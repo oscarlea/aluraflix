@@ -7,7 +7,7 @@ import '../UI/Mui.css'
 import { VideoDataContext } from '../Context';
 import AlertDialog from './AlertDialog';
 
-export default function FloatingActionButton({ categoria, color, mostrarFormCategorias }) {
+export default function FloatingActionButton({ categoria, color, isFormCategoriasVisible }) {
 
     // falta funcion para generar "categoria"
     const videoDataContext = useContext(VideoDataContext)
@@ -50,10 +50,10 @@ export default function FloatingActionButton({ categoria, color, mostrarFormCate
                 <Fab variant="extended" aria-label="add" size="large" sx={{ ...FabStyles }}>
                     {categoria.nombre}
 
-                    {mostrarFormCategorias &&
+                    {isFormCategoriasVisible &&
                         <CircleIcon sx={{ mr: 1, ...CircleStyles }} />}
 
-                    {mostrarFormCategorias &&
+                    {isFormCategoriasVisible &&
                         <AlertDialog
                             sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
                             CancelStyles={CancelStyles}

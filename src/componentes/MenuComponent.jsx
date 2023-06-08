@@ -5,7 +5,7 @@ import { amarillo } from "../UI/variables";
 import BotonTema from "./BotonTema";
 import { FormatoHeader } from "../UI";
 import { VideoDataContext } from "../Context";
- 
+
 // ...
 
 const NavContainer = styled.div`
@@ -52,9 +52,11 @@ const MenuComponent = () => {
 
     const videoDataContext = useContext(VideoDataContext)
     const toggleTheme = videoDataContext.toggleTheme
-    const cambiarMostrar = videoDataContext.cambiarMostrar
-    const cambiarMostrarVideos = videoDataContext.cambiarMostrarVideos
+    const toggleFormCategorias  = videoDataContext.toggleFormCategorias 
+    const toggleFormVideos = videoDataContext.toggleFormVideos
     const tema = videoDataContext.tema
+    const setFormVideosVisible = videoDataContext.setFormVideosVisible
+    const setFormCategoriasVisible  = videoDataContext.setFormCategoriasVisible 
 
     return (
 
@@ -62,20 +64,26 @@ const MenuComponent = () => {
             <Ul>
 
                 <Li>
-                    <SLink to="/categorias" onClick={cambiarMostrar}>
+                    <SLink to="/categorias" onClick={ () => {
+                        toggleFormCategorias ();
+                        setFormVideosVisible(false);
+                    }}>
                         Categorias
                     </SLink>
                 </Li>
 
                 <Li>
-                    <FormatoHeader onClick={cambiarMostrarVideos}>
+                    <FormatoHeader onClick={() => {
+                        toggleFormVideos(); 
+                        setFormCategoriasVisible (false)
+                    }}>
                         Videos
                     </FormatoHeader>
                 </Li>
 
-                
-                    <BotonTema tema={tema} toggleTheme={toggleTheme} />
-                
+
+                <BotonTema tema={tema} toggleTheme={toggleTheme} />
+
 
             </Ul>
         </NavContainer>

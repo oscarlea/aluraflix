@@ -36,22 +36,22 @@ const ListaCategoriasComponent = () => {
 
     const videoDataContext = useContext(VideoDataContext);
     const categorias = videoDataContext.categorias;
-    const mostrarFormCategorias = videoDataContext.mostrarFormCategorias
-    const mostrarFormVideos = videoDataContext.mostrarFormVideos
-    const cambiarMostrar = videoDataContext.cambiarMostrar
-    const cambiarMostrarVideos = videoDataContext.cambiarMostrarVideos
-    const actualizarMostrar = videoDataContext.actualizarMostrar
-    const setShowVideos = videoDataContext.setShowVideos
+    const isFormCategoriasVisible = videoDataContext.isFormCategoriasVisible
+    const isFormVideosVisible = videoDataContext.isFormVideosVisible
+    const toggleFormCategorias  = videoDataContext.toggleFormCategorias 
+    const toggleFormVideos = videoDataContext.toggleFormVideos
+    const setFormCategoriasVisible  = videoDataContext.setFormCategoriasVisible 
+    const setFormVideosVisible = videoDataContext.setFormVideosVisible
     
 
     const navigate = useNavigate();
     const theme = useTheme();
 
     const handleGoBack = () => {
-        cambiarMostrar(false)
-        cambiarMostrarVideos(false)
-        actualizarMostrar(false)
-        setShowVideos(false)
+        toggleFormCategorias (false)
+        toggleFormVideos(false)
+        setFormCategoriasVisible (false)
+        setFormVideosVisible(false)
         navigate('/');
     };
 
@@ -76,7 +76,7 @@ const ListaCategoriasComponent = () => {
                         <FloatingActionButton categoria={categoria}
                             color={theme.text}
                             amarillo={amarillo}
-                            mostrarFormCategorias={mostrarFormCategorias}
+                            isFormCategoriasVisible={isFormCategoriasVisible}
                         >
                         </FloatingActionButton>
                     </Fragment>
@@ -84,14 +84,14 @@ const ListaCategoriasComponent = () => {
 
             </Ul>
 
-            {mostrarFormVideos && (
+            {isFormVideosVisible && (
                 <>
                     <FormularioVideos
                         categorias={categorias.map((categoria) => ({
                             id: categoria.id,
                             nombre: categoria.nombre,
                         }))} 
-                        cambiarMostrarVideos={cambiarMostrarVideos}
+                        toggleFormVideos={toggleFormVideos}
                     />
 
                     <Box>
@@ -101,10 +101,10 @@ const ListaCategoriasComponent = () => {
             )
             }
 
-            {mostrarFormCategorias && (
+            {isFormCategoriasVisible && (
                 <>
                     <FormularioCategorias
-                        cambiarMostrar={cambiarMostrar}
+                        toggleFormCategorias ={toggleFormCategorias }
                     />
 
                     <Box>

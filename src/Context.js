@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { buscar, eliminarCategoriaApi, eliminarVideoApi, registrarCategoria } from './api/api';
+import { buscar, eliminarCategoriaApi, eliminarVideoApi, registrarCategoria, fetchData } from './api/api';
 
 export const VideoDataContext = createContext();
 
@@ -12,9 +12,9 @@ const VideoDataContextProvider = ({ children }) => {
     }, []);
 
     // Formulario Categorias
-    const [mostrarFormCategorias, actualizarMostrar] = useState(false)
-        const cambiarMostrar = () => {
-        actualizarMostrar(!mostrarFormCategorias)
+    const [isFormCategoriasVisible, setFormCategoriasVisible ] = useState(false)
+        const toggleFormCategorias  = () => {
+        setFormCategoriasVisible (!isFormCategoriasVisible)
     }
 
     //----------------------------------------------------------------- Videos
@@ -23,9 +23,9 @@ const VideoDataContextProvider = ({ children }) => {
         buscar('/videos', setVideos);
     }, []);
 
-    const [mostrarFormVideos, setShowVideos] = useState(false)
-        const cambiarMostrarVideos = () => {
-        setShowVideos(!mostrarFormVideos)
+    const [isFormVideosVisible, setFormVideosVisible] = useState(false)
+        const toggleFormVideos = () => {
+        setFormVideosVisible(!isFormVideosVisible)
     }
 
     // Eliminar categoría
@@ -86,17 +86,17 @@ const VideoDataContextProvider = ({ children }) => {
             value={{
                 categorias,
                 videos,
+                isFormCategoriasVisible, isFormVideosVisible,
+                toggleFormCategorias , toggleFormVideos,
+                setFormCategoriasVisible, setFormVideosVisible,
                 eliminarCategoria, eliminarVideo,
                 nuevaCategoria,
                 actualizarColor,
                 actualizarVideos,
-                toggleTheme,
-                cambiarMostrar,
-                actualizarMostrar,
-                setShowVideos,
-                cambiarMostrarVideos,
-                mostrarFormCategorias, mostrarFormVideos,
+                fetchData,
                 tema, setTema,
+                toggleTheme,
+                setVideos
                 // Otros estados y funciones necesarios
             }}
         >

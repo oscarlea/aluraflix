@@ -80,4 +80,21 @@ export const getVideoInfo = async (videoUrl) => {
   }
 };
 
+//-------- Search --------------------------------------------------------
+
+export const fetchData = async (string, setVideos) => {
+  try {
+    const response = await api.get('/videos', {
+      params: { titulo: string },
+    });
+    setVideos(response.data)
+    const tasks = response.data;
+        console.log(tasks);
+  } catch (error) {
+    // handle error
+    console.log('Error:', error.message);
+  }
+};
+
+//fetchData('trump');
 

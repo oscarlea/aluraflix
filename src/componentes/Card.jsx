@@ -16,7 +16,7 @@ export default function ActionAreaCard({ video, colorPrimario }) {
 
     const videoDataContext = useContext(VideoDataContext)
     const eliminarVideo = videoDataContext.eliminarVideo
-    const mostrarFormVideos = videoDataContext.mostrarFormVideos
+    const isFormVideosVisible = videoDataContext.isFormVideosVisible
 
     const commonStyles = {
         bgcolor: 'background.paper',
@@ -52,7 +52,7 @@ export default function ActionAreaCard({ video, colorPrimario }) {
                         </Tooltip>
                     </Link>
 
-                    {mostrarFormVideos &&
+                    {isFormVideosVisible &&
                         <AlertDialog
                             sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
                             dialogTitle={"Eliminar Video ? "}

@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { FormatoHeader } from "../UI";
+import { VideoDataContext } from "../Context";
+
 
 const StyledSearchBar = styled.div`
   display: flex;
@@ -36,13 +38,31 @@ const SearchButton = styled(FormatoHeader).attrs({ as: 'h1' })`
 `;
 
 const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState("");
 
+  const videoDataContext = useContext(VideoDataContext);
+  //const videos = videoDataContext.videos
+  const fetchData = videoDataContext.fetchData
+  const setVideos = videoDataContext.setVideos
+
+  
+  
+  const [searchTerm, setSearchTerm] = useState("");
+  
   const handleSearch = () => {
-    // Aquí puedes realizar la lógica de búsqueda según tu necesidad
     console.log("Realizando búsqueda:", searchTerm);
-    // Lógica adicional...
+    
+    /* const results = videos.filter((video) =>
+    video.titulo.toLowerCase().includes(searchTerm.toLowerCase())
+    ); */
+    console.log(searchTerm, setVideos)
+
+    fetchData(searchTerm, setVideos)
+   // console.log("Resultados de búsqueda:", results);
+    
+    
+
   };
+  
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
