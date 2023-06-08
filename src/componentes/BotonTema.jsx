@@ -1,6 +1,6 @@
+import { useContext } from "react";
 import { RiSunFill, RiMoonFill } from "react-icons/ri";
 import { styled } from "styled-components";
-import { useContext } from "react";
 import { VideoDataContext } from "../Context";
 
 

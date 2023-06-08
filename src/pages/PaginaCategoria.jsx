@@ -30,7 +30,7 @@ const PaginaCategoria = () => {
     const [categoria, setCategoria] = useState({});
     const { id = "0" } = useParams()
     const navigate = useNavigate()
-    
+
 
     /*     useEffect(() => {
             buscar(`/categorias?id=${id}`, (data) => {
@@ -41,7 +41,7 @@ const PaginaCategoria = () => {
         }, [id, navigate]); */
 
     //----
-     useEffect(() => { 
+    useEffect(() => {
         const buscarCategoriaPorId = (id) => {
             return categorias.find((categoria) => categoria.id === id);
         };
@@ -52,7 +52,7 @@ const PaginaCategoria = () => {
             setCategoria({});
             //navigate("/not-found");
         }
-     }, [id, navigate, categorias]); 
+    }, [id, navigate, categorias]);
 
     //----
     const colorEncabezado = categoria.colorPrimario ? categoria.colorPrimario : "#808080"
@@ -66,15 +66,7 @@ const PaginaCategoria = () => {
 
         <MainContainer className="MainContainer_P_C">
 
-            <ListaCategorias
-/*                 cambiarMostrar={cambiarMostrar}
-                mostrarFormCategorias={props.mostrarFormCategorias}
-                mostrarFormVideos={props.mostrarFormVideos}
-                cambiarMostrarVideos={props.cambiarMostrarVideos}
-                setFormCatFalse={props.setFormCatFalse}
-                setFormVidFalse={props.setFormVidFalse} */
-
-            />
+            <ListaCategorias />
 
             <StyledCategoria bgcolor={obj.backgroundColor} data-testid="categoria/videos en PaginaCategoria">
                 {Object.keys(categoria).length > 0 ? (
@@ -120,10 +112,9 @@ const PaginaCategoria = () => {
                         </CategoriaEncabezado>
 
                         {/* /Reformular y eliminar ruta. pasar "videos" por props y filtrar el ListaVideos / */}
-                        <ListaVideos  
-                            url="/videos" 
+                        <ListaVideos
+                            url="/videos"
                             colorPrimario=""
-           /*                  mostrarFormVideos={props.mostrarFormVideos} */
                         />
 
                     </Div>

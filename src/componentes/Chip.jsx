@@ -6,7 +6,7 @@ import '../UI/Mui.css'
 import { amarillo } from '../UI/variables';
 
 export default function ClickableAndDeletableChips({categoria}) {
-    console.log(categoria)
+    
   const handleClick = () => {
     console.info('You clicked the Chip.');
   };

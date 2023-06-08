@@ -47,7 +47,7 @@ export const editarCategoria = async (url, categoria) => {
 export const eliminarVideoApi = async (id) => {
   try {
     const response = await api.delete(`videos/${id}`);
-    toast.success(`Video eliminado. : ${JSON.stringify(response.data)}` );
+    toast.success(`Video eliminado. : ${JSON.stringify(response.data.titulo)}` );
   } catch (error) {
     toast.error("Error al eliminar video:");
   }

@@ -1,3 +1,4 @@
+import { Fragment, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import FormularioCategorias from './formularioCategorias';
 import FormularioVideos from "./FormularioVideos";
@@ -6,7 +7,6 @@ import { GoBackIcon } from "../UI";
 import FloatingActionButton from "./FloatingButton";
 import { useTheme } from 'styled-components';
 import { amarillo } from "../UI/variables";
-import { Fragment, useContext } from "react";
 import { VideoDataContext } from "../Context";
 
 
@@ -40,9 +40,7 @@ const ListaCategoriasComponent = () => {
     const mostrarFormVideos = videoDataContext.mostrarFormVideos
     const cambiarMostrar = videoDataContext.cambiarMostrar
     const cambiarMostrarVideos = videoDataContext.cambiarMostrarVideos
-/*     const setFormCatFalse = videoDataContext.setFormCatFalse
-    const setFormVidFalse = videoDataContext.setFormVidFalse
- */    const actualizarMostrar = videoDataContext.actualizarMostrar
+    const actualizarMostrar = videoDataContext.actualizarMostrar
     const setShowVideos = videoDataContext.setShowVideos
     
 
@@ -52,8 +50,6 @@ const ListaCategoriasComponent = () => {
     const handleGoBack = () => {
         cambiarMostrar(false)
         cambiarMostrarVideos(false)
-        /* setFormCatFalse() */
-        /* setFormVidFalse() */
         actualizarMostrar(false)
         setShowVideos(false)
         navigate('/');

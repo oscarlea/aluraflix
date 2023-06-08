@@ -1,5 +1,3 @@
-//import "./Footer.css"
-//import Boton from "../Boton"
 import styled from "styled-components"
 import { Logo, LogoContainer } from "../UI"
 

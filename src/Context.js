@@ -13,8 +13,7 @@ const VideoDataContextProvider = ({ children }) => {
 
     // Formulario Categorias
     const [mostrarFormCategorias, actualizarMostrar] = useState(false)
-    /* const setFormCatFalse = () => { actualizarMostrar(false); }; */
-    const cambiarMostrar = () => {
+        const cambiarMostrar = () => {
         actualizarMostrar(!mostrarFormCategorias)
     }
 
@@ -25,8 +24,7 @@ const VideoDataContextProvider = ({ children }) => {
     }, []);
 
     const [mostrarFormVideos, setShowVideos] = useState(false)
-    /* const setFormVidFalse = () => { setShowVideos(false); }; */
-    const cambiarMostrarVideos = () => {
+        const cambiarMostrarVideos = () => {
         setShowVideos(!mostrarFormVideos)
     }
 

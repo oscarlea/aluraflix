@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 import { styled } from "styled-components";
 import { amarillo } from "../UI/variables";
 import BotonTema from "./BotonTema";
 import { FormatoHeader } from "../UI";
 import { VideoDataContext } from "../Context";
-import { useContext } from "react";
  
 // ...
 

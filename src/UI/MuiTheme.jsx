@@ -5,15 +5,21 @@ import   createTheme  from '@mui/system/createTheme';
 
 
 const MuiTheme = createTheme({
-    typography: {
+/*     typography: {
         fontFamily: 'Roboto',
         fontSize: 12,
 
         TextField: {
             fontSize: '2rem',
         },
+    }, */
+    overrides: {
+        MuiTooltip: {
+            tooltip: {
+                fontSize: "1em",
+            },
+        },
     },
-
 
 
 

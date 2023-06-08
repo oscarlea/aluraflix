@@ -1,5 +1,5 @@
-import SearchBar from "./SearchBar";
 import { useNavigate } from "react-router-dom";
+import SearchBar from "./SearchBar";
 import styled from "styled-components"
 import { Logo } from "../UI"
 import { amarillo } from "../UI/variables";

@@ -15,21 +15,18 @@ import styled from 'styled-components';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { VideoDataContext } from './Context';
-
-
 const SToast = styled(ToastContainer)`
     font-size: 16px;
     `
 
 function App() {
-    
+
     const videoDataContext = useContext(VideoDataContext)
     const tema = videoDataContext.tema
 
-
     return (
 
-            <ThemeProvider theme={tema ? temaClaro : temaOscuro}>
+        <ThemeProvider theme={tema ? temaClaro : temaOscuro}>
 
                 <div className="App">
 
@@ -65,9 +62,9 @@ function App() {
 
                     </Router>
 
-                </div>
+                </div>            
 
-            </ThemeProvider>
+        </ThemeProvider>
 
     );
 }

@@ -76,11 +76,13 @@ const PaginaVideoPlayer = ({ url }) => {
     return (
         <Div >
 
-            <GoBackIcon onClick={goBack} style={{ position: "absolute", bottom: "50%", left: "0" }} />
 
-            <PlayerWrapper className="PlayerWrapper">
 
-                {/*             <StyledVideoContainer className="StyledVideoContainer" >
+             <GoBackIcon onClick={goBack} style={{ position: "absolute", bottom: "50%", left: "0" }} />
+
+            <PlayerWrapper className="PlayerWrapper"> 
+
+{/*             <StyledVideoContainer className="StyledVideoContainer" >
 
                 <TituloVideo className="TituloVideo">
                     {video.author_name + " : " + video.titulo}
@@ -89,7 +91,7 @@ const PaginaVideoPlayer = ({ url }) => {
             </StyledVideoContainer>
 */}
 
-                <StyledReactPlayer
+                 <StyledReactPlayer
                     url={video.videoUrl}
                     config={{
                         youtube: {
@@ -103,7 +105,7 @@ const PaginaVideoPlayer = ({ url }) => {
                     muted={true}
                 />
 
-            </PlayerWrapper>
+            </PlayerWrapper> 
         </Div>
     );
 }
