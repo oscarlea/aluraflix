@@ -55,7 +55,7 @@ function Header() {
             <Container className="container">
                 <LogoContainer className="logolink" >
                     <div onClick={heandleClick}   >
-                        <Logo src="/img/header-negro.png" alt="AluraFlix" />
+                        <Logo src="/img/header_n.png" alt="AluraFlix" />
                     </div>
                 </LogoContainer>
                 <SearchBar />

@@ -21,7 +21,7 @@ function Footer(props) {
 
         <FooterContainer>
             <LogoContainer>
-                <Logo src="/img/header-negro.png" alt='AluraFlix' />
+                <Logo src="/img/header_n.png" alt='AluraFlix' />
             </LogoContainer>
         </FooterContainer>
 
