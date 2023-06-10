@@ -4,7 +4,7 @@ import { toast } from "react-toastify"
 
 //---
 export const api = axios.create({
- //   baseURL: "http://localhost:4000"
+   //  baseURL: "http://localhost:4000"
   baseURL: "https://6471a5536a9370d5a41a83b2.mockapi.io"
 })
 
@@ -31,7 +31,7 @@ export const registrarVideo = async (video) => {
 export const registrarCategoria = async (categoria) => {
   try {
     const response = await api.post("/categorias", categoria);
-    toast.success(`Nueva Categoría registrada : ${JSON.stringify(response.data.nombre)}` );
+    toast.success(`Nueva Categoría registrada : ${JSON.stringify(response.data.nombre)}`);
     return response.data.id; // Devolver el ID retornado
   } catch (error) {
     toast.error("Error al registrar la Categoría");
@@ -47,7 +47,7 @@ export const editarCategoria = async (url, categoria) => {
 export const eliminarVideoApi = async (id) => {
   try {
     const response = await api.delete(`videos/${id}`);
-    toast.success(`Video eliminado. : ${JSON.stringify(response.data.titulo)}` );
+    toast.success(`Video eliminado. : ${JSON.stringify(response.data.titulo)}`);
   } catch (error) {
     toast.error("Error al eliminar video:");
   }
@@ -55,11 +55,11 @@ export const eliminarVideoApi = async (id) => {
 
 //---- Eliminar Categoria
 export const eliminarCategoriaApi = async (id) => {
-    try {
+  try {
     const response = await api.delete(`categorias/${id}`);
-    toast.success(`Categoría eliminada: ${JSON.stringify(response.data.nombre)}` );
+    toast.success(`Categoría eliminada: ${JSON.stringify(response.data.nombre)}`);
   } catch (error) {
-    toast.error(`Error al eliminar categoría `      );
+    toast.error(`Error al eliminar categoría `);
   }
 }
 
@@ -80,7 +80,7 @@ export const getVideoInfo = async (videoUrl) => {
   }
 };
 
-//-------- Search --------------------------------------------------------
+//-------- Search : busqueda en titulos de videos -------------------------------------------------
 
 export const fetchData = async (string, setVideos) => {
   try {
@@ -88,11 +88,8 @@ export const fetchData = async (string, setVideos) => {
       params: { titulo: string },
     });
     setVideos(response.data)
-    const tasks = response.data;
-        console.log(tasks);
   } catch (error) {
-    // handle error
-    console.log('Error:', error.message);
+    toast.error(error.message);
   }
 };
 

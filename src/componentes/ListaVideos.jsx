@@ -28,9 +28,8 @@ const VideoContainer = styled(Box)`
 
 const VideoList = ({ url, id, colorPrimario }) => {
 
-    const videoDataContext = useContext(VideoDataContext)
-    const videos = videoDataContext.videos
-
+    const {videos} = useContext(VideoDataContext)
+    
     const filtroIdCategoria = id;
 
     /*     const [videosUrl, setVideos] = useState([]);

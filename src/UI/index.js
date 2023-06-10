@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { amarillo } from "./variables";
-import {  MdArrowCircleLeft } from "react-icons/md";
+import { MdArrowCircleLeft } from "react-icons/md";
 
 
 export const MainContainer = styled.main`
@@ -23,6 +23,12 @@ export const Logo = styled.img`
     width: 169px;
     height: 40px;
     margin: 10px;
+
+    @media (max-width: 768px) {
+        width: 70%;
+        height: 70%;
+    }  
+
 `;
 
 export const TituloVideo = styled.h3`

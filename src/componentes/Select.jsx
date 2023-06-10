@@ -12,7 +12,6 @@ export default function SelectLabels({ actualizarIdCategoria, valor }) {
     const videoDataContext = useContext(VideoDataContext)
     const categorias = videoDataContext.categorias
 
-
     const handleChange = (event) => {
         actualizarIdCategoria(event.target.value)
     }

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
@@ -7,64 +7,71 @@ import '../UI/Mui.css'
 import { VideoDataContext } from '../Context';
 import AlertDialog from './AlertDialog';
 
-export default function FloatingActionButton({ categoria, color, isFormCategoriasVisible }) {
+export function FloatingActionButton({ categoria, color, isFormCategoriasVisible , handleReloadVideos}) {  //dejalo así
 
-    // falta funcion para generar "categoria"
-    const videoDataContext = useContext(VideoDataContext)
-    const eliminarCategoria = videoDataContext.eliminarCategoria
+    const { eliminarCategoria } = useContext(VideoDataContext);
+
 
     const CircleStyles = {
         position: 'relative',
         zIndex: 1,
         right: -19,
-        fontSize: 40,
+        fontSize: "4rem",
         color: "black"
     };
 
     const CancelStyles = {
         position: 'absolute',
         zIndex: 2,
-        right: -3,
-        top: 4,
+        right: "5px",
+        top: 0,
+        bottom: 0,
+        margin: "auto",
+        fontSize: "4rem",
     };
 
     const FabStyles = {
         color: color,
         backgroundColor: categoria.colorPrimario,
 
-        /*         '@media (max-width: 768px)': {
-                    fontSize: "1rem"
-                  },
-         */
         ":hover": {
             backgroundColor: "#40423e",
             color: "white"
         },
+
+        '@media (max-width: 768px)': {
+            height: "auto"
+        },
+
     };
 
 
     return (
         <Box sx={{ '& > :not(style)': { m: 1, position: 'relative' } }}>
 
-            <Link to={`/categoria/${categoria.id}`} key={categoria.id} >
-                <Fab variant="extended" aria-label="add" size="large" sx={{ ...FabStyles }}>
-                    {categoria.nombre}
+                <Link to={`/categoria/${categoria.id}`} key={categoria.id} onClick={handleReloadVideos} >
 
-                    {isFormCategoriasVisible &&
-                        <CircleIcon sx={{ mr: 1, ...CircleStyles }} />}
+                    <Fab variant="extended" aria-label="add" size="large" sx={{ ...FabStyles }}>
+                        {categoria.nombre}
 
-                    {isFormCategoriasVisible &&
-                        <AlertDialog
-                            sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
-                            CancelStyles={CancelStyles}
-                            estilos={{ position: 'absolute', zIndex: 2, right: -3, top: 4 }}
-                            dialogTitle={"Eliminar Categoría ? "}
-                            dialogContent={categoria.nombre}
-                            onDelete={(event) => eliminarCategoria(event, categoria.id)}
-                        />}
+                        {isFormCategoriasVisible &&
+                            <Fragment >
 
-                </Fab>
-            </Link>
+                                <CircleIcon sx={{ mr: 1, ...CircleStyles }} />
+                                <AlertDialog
+                                    sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}
+                                    CancelStyles={CancelStyles}
+                                    /* estilos={{ position: 'absolute', zIndex: 2, right: -3, top: 4 }}  */
+                                    dialogTitle={"Eliminar Categoría ? "}
+                                    dialogContent={categoria.nombre}
+                                    onDelete={(event) => eliminarCategoria(event, categoria.id)}
+                                />
+
+                            </Fragment>
+                        }
+
+                    </Fab>
+                </Link>
 
         </Box>
     );

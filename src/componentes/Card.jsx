@@ -14,9 +14,7 @@ import AlertDialog from './AlertDialog';
 
 export default function ActionAreaCard({ video, colorPrimario }) {
 
-    const videoDataContext = useContext(VideoDataContext)
-    const eliminarVideo = videoDataContext.eliminarVideo
-    const isFormVideosVisible = videoDataContext.isFormVideosVisible
+    const {eliminarVideo, isFormVideosVisible} = useContext(VideoDataContext)
 
     const commonStyles = {
         bgcolor: 'background.paper',

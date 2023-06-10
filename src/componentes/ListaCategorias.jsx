@@ -4,10 +4,11 @@ import FormularioCategorias from './formularioCategorias';
 import FormularioVideos from "./FormularioVideos";
 import styled from "styled-components";
 import { GoBackIcon } from "../UI";
-import FloatingActionButton from "./FloatingButton";
 import { useTheme } from 'styled-components';
 import { amarillo } from "../UI/variables";
 import { VideoDataContext } from "../Context";
+import { FloatingActionButton } from "./FloatingButton";
+
 
 
 const ContenedorCategorias = styled.div`
@@ -34,23 +35,27 @@ const Box = styled.div`
 
 const ListaCategoriasComponent = () => {
 
-    const videoDataContext = useContext(VideoDataContext);
-    const categorias = videoDataContext.categorias;
-    const isFormCategoriasVisible = videoDataContext.isFormCategoriasVisible
-    const isFormVideosVisible = videoDataContext.isFormVideosVisible
-    const toggleFormCategorias  = videoDataContext.toggleFormCategorias 
-    const toggleFormVideos = videoDataContext.toggleFormVideos
-    const setFormCategoriasVisible  = videoDataContext.setFormCategoriasVisible 
-    const setFormVideosVisible = videoDataContext.setFormVideosVisible
-    
+    const { categorias, 
+        isFormCategoriasVisible, 
+        isFormVideosVisible,
+        toggleFormCategorias, 
+        toggleFormVideos, 
+        setFormCategoriasVisible,
+        setFormVideosVisible, 
+        fetchData, 
+        setVideos
+    } = useContext(VideoDataContext);
 
     const navigate = useNavigate();
     const theme = useTheme();
 
+    const handleReloadVideos = (event) => {
+        //console.log("click")
+        fetchData("", setVideos);
+      };
+            
     const handleGoBack = () => {
-        toggleFormCategorias (false)
-        toggleFormVideos(false)
-        setFormCategoriasVisible (false)
+        setFormCategoriasVisible(false)
         setFormVideosVisible(false)
         navigate('/');
     };
@@ -69,13 +74,13 @@ const ListaCategoriasComponent = () => {
 
             <Ul className="ListaCategorias">
 
-                <FloatingActionButton categoria={catZero} color={theme.text} amarillo={amarillo} />
+                <FloatingActionButton categoria={catZero} color={theme.text} handleReloadVideos={handleReloadVideos} />
 
                 {categorias.map(categoria => (
                     <Fragment key={categoria.id}>
-                        <FloatingActionButton categoria={categoria}
+                        <FloatingActionButton
+                            categoria={categoria}
                             color={theme.text}
-                            amarillo={amarillo}
                             isFormCategoriasVisible={isFormCategoriasVisible}
                         >
                         </FloatingActionButton>
@@ -90,7 +95,7 @@ const ListaCategoriasComponent = () => {
                         categorias={categorias.map((categoria) => ({
                             id: categoria.id,
                             nombre: categoria.nombre,
-                        }))} 
+                        }))}
                         toggleFormVideos={toggleFormVideos}
                     />
 
@@ -104,7 +109,7 @@ const ListaCategoriasComponent = () => {
             {isFormCategoriasVisible && (
                 <>
                     <FormularioCategorias
-                        toggleFormCategorias ={toggleFormCategorias }
+                        toggleFormCategorias={toggleFormCategorias}
                     />
 
                     <Box>

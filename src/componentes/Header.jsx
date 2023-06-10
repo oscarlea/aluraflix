@@ -6,7 +6,7 @@ import { amarillo } from "../UI/variables";
 import MenuComponent from "./MenuComponent";
 
 
-const HeaderContainer = styled.header`
+const SHeader = styled.header`
     display: flex;
     justify-content: center; 
     align-items: center; 
@@ -17,43 +17,51 @@ const HeaderContainer = styled.header`
     padding: min(2rem, 2vw);
     box-sizing: border-box;
     gap: min(2rem, 2vw);
+    
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }  
 `
 
 const Container = styled.div`
     background-color: ${amarillo};
-    border-radius: 10px;
+    border-radius: 5px;
     display: flex;
     flex-grow: 5;
     position: relative;
     padding: 0 min(2rem, 2vw);
+    height: 50px;
+    width: 100%;
+
 `;
 
 const LogoContainer = styled.div`
-    flex-direction: 1;
-    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+     flex-grow: 1; 
 `;
 
 function Header() {
 
     const navigate = useNavigate();
-
     const heandleClick = () => {
         navigate("/")
     }
 
-
     return (
-        <HeaderContainer >
+        <SHeader >
             <Container className="container">
                 <LogoContainer className="logolink" >
-                    <div onClick={heandleClick}>
+                    <div onClick={heandleClick}   >
                         <Logo src="/img/header-negro.png" alt="AluraFlix" />
                     </div>
                 </LogoContainer>
                 <SearchBar />
             </Container>
             <MenuComponent />
-        </HeaderContainer >
+        </SHeader >
     );
 }
 

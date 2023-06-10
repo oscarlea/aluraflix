@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import { buscar } from "../api/api"
 import ReactPlayer from "react-player";
 import styled from "styled-components"
-import { GoBackIcon  } from "../UI";
+import { GoBackIcon } from "../UI";
 
 
 const PlayerWrapper = styled.main`
@@ -26,19 +26,7 @@ const StyledReactPlayer = styled(ReactPlayer)`
     right: 0;
     margin: auto;
 `
-/* const StyledVideoContainer = styled.div`
-    padding: 2rem;
-    position: absolute;
-    top: 0;
-    text-align: center;
-    left: 0;
-    right: 0;
 
-      @media (max-width: 1023px) {
-        display: none;
-    }  
-`
- */
 const Div = styled.div`
     position: relative;
     max-width: 1440px;
@@ -70,28 +58,17 @@ const PaginaVideoPlayer = ({ url }) => {
 
 
     const goBack = () => {
-        navigate(-1); 
+        navigate(-1);
     };
 
     return (
         <Div >
 
+            <GoBackIcon onClick={goBack} style={{ position: "absolute", bottom: "50%", left: "0" }} />
 
+            <PlayerWrapper className="PlayerWrapper">
 
-             <GoBackIcon onClick={goBack} style={{ position: "absolute", bottom: "50%", left: "0" }} />
-
-            <PlayerWrapper className="PlayerWrapper"> 
-
-{/*             <StyledVideoContainer className="StyledVideoContainer" >
-
-                <TituloVideo className="TituloVideo">
-                    {video.author_name + " : " + video.titulo}
-                </TituloVideo>
-
-            </StyledVideoContainer>
-*/}
-
-                 <StyledReactPlayer
+                <StyledReactPlayer
                     url={video.videoUrl}
                     config={{
                         youtube: {
@@ -105,7 +82,7 @@ const PaginaVideoPlayer = ({ url }) => {
                     muted={true}
                 />
 
-            </PlayerWrapper> 
+            </PlayerWrapper>
         </Div>
     );
 }

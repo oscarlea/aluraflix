@@ -31,9 +31,9 @@ export default function AlertDialog({ dialogTitle, dialogContent, onDelete, Canc
     return (
         <div>
 
-            <Tooltip title={<Typography fontSize={12}>Eliminar</Typography>} placement="top" sx={{ fontSize: 20 }}> 
+            <Tooltip title={<Typography fontSize={12}>Eliminar</Typography>} placement="top" sx={{ fontSize: "2rem" }}> 
                 <CancelSharpIcon
-                    style={{ fontSize: 40, color: amarillo }}
+                    style={{ fontSize: "4rem", color: amarillo }}
                     sx={{ mr: 1, ...CancelStyles }}
                     onClick={handleClickOpen} />
             </Tooltip>
@@ -44,19 +44,19 @@ export default function AlertDialog({ dialogTitle, dialogContent, onDelete, Canc
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title" style={{ fontSize: 18 }} >
+                <DialogTitle id="alert-dialog-title" style={{ fontSize: "1.8rem" }} >
                     {dialogTitle}
                 </DialogTitle>
 
                 <DialogContent  >
-                    <DialogContentText id="alert-dialog-description" style={{ fontSize: 15 }} >
+                    <DialogContentText id="alert-dialog-description" style={{ fontSize: "1.5rem" }} >
                         {dialogContent}
                     </DialogContentText>
                 </DialogContent>
 
                 <DialogActions>
-                    <Button onClick={handleDelete} style={{ fontSize: 12 }} >Eliminar</Button>
-                    <Button onClick={handleCancel} style={{ fontSize: 12 }} autoFocus>
+                    <Button onClick={handleDelete} style={{ fontSize: "1.2rem" }} >Eliminar</Button>
+                    <Button onClick={handleCancel} style={{ fontSize: "1.2rem" }} autoFocus>
                         Cancelar
                     </Button>
                 </DialogActions>

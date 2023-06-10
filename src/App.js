@@ -15,54 +15,72 @@ import styled from 'styled-components';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { VideoDataContext } from './Context';
+import { SimpleSlider } from './componentes/SimpleSlider';
+
+
 const SToast = styled(ToastContainer)`
-    font-size: 16px;
+    font-size: 1.8rem;
     `
+
+const Div = styled.div`
+    background-color: ${({ theme }) => theme.body};
+    padding: 3rem 0;
+`
+
 
 function App() {
 
-    const videoDataContext = useContext(VideoDataContext)
-    const tema = videoDataContext.tema
+    const { tema } = useContext(VideoDataContext)
+
+    
 
     return (
 
         <ThemeProvider theme={tema ? temaClaro : temaOscuro}>
 
-                <div className="App">
+            <div className="App">
 
-                    <SToast
-                        position="top-center"
-                        autoClose={4000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                        theme={tema ? "light" : "dark"}
-                    />
+                <SToast
+                    position="top-center"
+                    autoClose={4000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme={tema ? "light" : "dark"}
+                />
 
-                    <GlobaStyle />
+                <GlobaStyle />
 
-                    <Router>
 
-                        <Header />
+                <Router>
 
-                        <Routes>
-                            <Route path='*' element={<PaginaCategoria />} />
-                            <Route path='/videos' element={<FormularioVideos />} />
-                            <Route path='/videos/:id' element={<PaginaVideoPlayer />} />
-                            <Route path='/categorias/*' element={<PaginaCategoria />} />
-                            <Route path='/categoria/:id?/*' element={<PaginaCategoria />} />
-                            <Route path='*' element={<NoPage />} />
-                        </Routes>
+                    <Header />
 
-                        <Footer />
+                    
+                    <Div>
+                        <SimpleSlider initialSlide={1} />
+                    </Div>
+                    <hr />
 
-                    </Router>
+                    <Routes>
+                        <Route path='*' element={<PaginaCategoria />} />
+                        <Route path='/videos' element={<FormularioVideos />} />
+                        <Route path='/videos/:id' element={<PaginaVideoPlayer />} />
+                        <Route path='/categorias/*' element={<PaginaCategoria />} />
+                        <Route path='/categoria/:id?/*' element={<PaginaCategoria />} />
+                        <Route path='*' element={<NoPage />} />
+                    </Routes>
 
-                </div>            
+
+                    <Footer />
+
+                </Router>
+
+            </div>
 
         </ThemeProvider>
 

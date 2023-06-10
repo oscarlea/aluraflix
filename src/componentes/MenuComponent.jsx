@@ -13,9 +13,14 @@ const NavContainer = styled.div`
     justify-content: center;
     flex-grow: 1;
     background-color: red;
-    border-radius: 10px;
+    border-radius: 5px;
     height: 50px;
-    padding: 3rem 0;
+
+    @media (max-width: 768px) {
+        height: auto;
+        padding: 0 0;
+    }  
+    
 `;
 
 const Ul = styled.ul`
@@ -50,13 +55,12 @@ const SLink = styled(Link)`
 
 const MenuComponent = () => {
 
-    const videoDataContext = useContext(VideoDataContext)
-    const toggleTheme = videoDataContext.toggleTheme
-    const toggleFormCategorias  = videoDataContext.toggleFormCategorias 
-    const toggleFormVideos = videoDataContext.toggleFormVideos
-    const tema = videoDataContext.tema
-    const setFormVideosVisible = videoDataContext.setFormVideosVisible
-    const setFormCategoriasVisible  = videoDataContext.setFormCategoriasVisible 
+    const {toggleTheme, 
+        toggleFormCategorias, 
+        toggleFormVideos, 
+        tema, 
+        setFormVideosVisible, 
+        setFormCategoriasVisible  } = useContext(VideoDataContext)
 
     return (
 
@@ -64,8 +68,8 @@ const MenuComponent = () => {
             <Ul>
 
                 <Li>
-                    <SLink to="/categorias" onClick={ () => {
-                        toggleFormCategorias ();
+                    <SLink to="/categorias" onClick={() => {
+                        toggleFormCategorias();
                         setFormVideosVisible(false);
                     }}>
                         Categorias
@@ -74,16 +78,14 @@ const MenuComponent = () => {
 
                 <Li>
                     <FormatoHeader onClick={() => {
-                        toggleFormVideos(); 
-                        setFormCategoriasVisible (false)
+                        toggleFormVideos();
+                        setFormCategoriasVisible(false)
                     }}>
                         Videos
                     </FormatoHeader>
                 </Li>
 
-
                 <BotonTema tema={tema} toggleTheme={toggleTheme} />
-
 
             </Ul>
         </NavContainer>

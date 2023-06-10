@@ -17,13 +17,13 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.App {
+/* .App {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
+ */
 `;
 
 

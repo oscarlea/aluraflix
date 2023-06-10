@@ -15,9 +15,7 @@ const TemaIcono = styled.div`
 
 function BotonTema() {
 
-  const videoDataContext = useContext(VideoDataContext)
-  const toggleTheme = videoDataContext.toggleTheme
-  const tema = videoDataContext.tema
+  const { toggleTheme, tema} = useContext(VideoDataContext)
 
   return (
     <li>

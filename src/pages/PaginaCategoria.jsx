@@ -22,23 +22,13 @@ const Div = styled(StyledCategoria)`
 
 const PaginaCategoria = () => {
 
-    const videoDataContext = useContext(VideoDataContext);
-    const categorias = videoDataContext.categorias;
-    const actualizarColor = videoDataContext.actualizarColor
+    const {categorias, actualizarColor} = useContext(VideoDataContext);
 
     //const { id } = useParams()
     const [categoria, setCategoria] = useState({});
     const { id = "0" } = useParams()
     const navigate = useNavigate()
 
-
-    /*     useEffect(() => {
-            buscar(`/categorias?id=${id}`, (data) => {
-                setData(data[0] || {});
-            }).catch(() => {
-                navigate("/not-found");
-            });
-        }, [id, navigate]); */
 
     //----
     useEffect(() => {
@@ -88,7 +78,6 @@ const PaginaCategoria = () => {
                             <DescripcionCategoria>{categoria.descripcion}</DescripcionCategoria>
                         </CategoriaEncabezado>
 
-
                         <Routes>  {/* /falta Reformular y eliminar ruta. pasar "videos" por props y filtrar el ListaVideos / */}
                             <Route path='/' element={<ListaVideos url={`/videos?id_categoria=${id}`}
                                 colorPrimario={categoria.colorPrimario}
@@ -107,7 +96,7 @@ const PaginaCategoria = () => {
                                 {'Todos los Videos'}
                             </TituloCategoria>
                             <DescripcionCategoria>
-                                {'asdasd asd asd asd '}    {/* <-- indicar cant de videos uy cant categorias */}
+                                {'Lorem ipsum dolor sit amet, adipiscing.'}    {/* <-- indicar cant de videos y cant categorias */}
                             </DescripcionCategoria>
                         </CategoriaEncabezado>
 

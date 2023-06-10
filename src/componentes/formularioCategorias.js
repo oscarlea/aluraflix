@@ -16,8 +16,8 @@ const Div = styled.div`
 
 const FormularioCategorias = () => {
 
-    const videoDataContext = useContext(VideoDataContext)
-    const nuevaCategoria = videoDataContext.nuevaCategoria
+    const {nuevaCategoria} = useContext(VideoDataContext)
+    
 
     const [nombre, setNombre] = useState("");
     const [descripcion, setDescripcion] = useState("");

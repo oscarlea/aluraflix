@@ -19,8 +19,7 @@ const Div = styled.div`
 `
 const FormularioVideos = () => {
 
-    const videoDataContext = useContext(VideoDataContext);
-    const actualizarVideos = videoDataContext.actualizarVideos
+    const {actualizarVideos} = useContext(VideoDataContext);
 
     const navigate = useNavigate();
     const formRef = useRef(null);
