@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/aluraflix/static/css/main.6849b789.css",
+    "main.js": "/aluraflix/static/js/main.ea2cc4a1.js",
+    "static/js/787.a582c3f2.chunk.js": "/aluraflix/static/js/787.a582c3f2.chunk.js",
+    "static/media/jj-ying-unsplash.jpg": "/aluraflix/static/media/jj-ying-unsplash.e22de9cfe172a138cd80.jpg",
+    "index.html": "/aluraflix/index.html",
+    "main.6849b789.css.map": "/aluraflix/static/css/main.6849b789.css.map",
+    "main.ea2cc4a1.js.map": "/aluraflix/static/js/main.ea2cc4a1.js.map",
+    "787.a582c3f2.chunk.js.map": "/aluraflix/static/js/787.a582c3f2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6849b789.css",
+    "static/js/main.ea2cc4a1.js"
+  ]
+}
