@@ -24,6 +24,7 @@ export const Logo = styled.img`
     height: 40px;
     margin: 10px;
 
+
     @media (max-width: 768px) {
         width: 70%;
         height: 70%;

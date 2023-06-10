@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { Logo, LogoContainer } from "../UI"
+import logoImagen from '../assets/header_n.png'
 
 const FooterContainer = styled.footer`
     width: 100%;
@@ -21,7 +22,7 @@ function Footer(props) {
 
         <FooterContainer>
             <LogoContainer>
-                <Logo src="/img/header_n.png" alt='AluraFlix' />
+                <Logo src={logoImagen} alt='AluraFlix' />
             </LogoContainer>
         </FooterContainer>
 

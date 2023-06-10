@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { Logo } from "../UI"
 import { amarillo } from "../UI/variables";
 import MenuComponent from "./MenuComponent";
-
+import logoImagen from '../assets/header_n.png'
 
 const SHeader = styled.header`
     display: flex;
@@ -55,7 +55,7 @@ function Header() {
             <Container className="container">
                 <LogoContainer className="logolink" >
                     <div onClick={heandleClick}   >
-                        <Logo src="/img/header_n.png" alt="AluraFlix" />
+                        <Logo src={logoImagen} alt="AluraFlix" />
                     </div>
                 </LogoContainer>
                 <SearchBar />

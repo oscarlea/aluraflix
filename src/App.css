@@ -1,20 +1,18 @@
 html {
     font-size: 10px;
     background-color: grey;
-    background-image: url(../public/img/jj-ying-unsplash.jpg);
+        background-image: url(../src/assets/jj-ying-unsplash.jpg);
     background-size: cover;
     background-attachment: fixed;
   }
   
-  /* Media query para resolución 1024px */
-  @media (max-width: 1024px) {
+    @media (max-width: 1024px) {
     html {
       font-size: 9px;
     }
   }
   
-  /* Media query para resolución 768px */
-  @media (max-width: 768px) {
+    @media (max-width: 768px) {
     html {
       font-size: 8px;
     }
